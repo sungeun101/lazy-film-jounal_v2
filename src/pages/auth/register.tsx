@@ -105,11 +105,11 @@ export default function Register() {
               <Box sx={{ mb: 5, display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography variant="h4" gutterBottom>
-                    Get started absolutely free.
+                    Welcome to Lazy Film Journal
                   </Typography>
-                  <Typography sx={{ color: 'text.secondary' }}>
+                  {/* <Typography sx={{ color: 'text.secondary' }}>
                     Free forever. No credit card needed.
-                  </Typography>
+                  </Typography> */}
                 </Box>
                 <Tooltip title={capitalCase(method)}>
                   <>
@@ -124,18 +124,6 @@ export default function Register() {
               </Box>
 
               <RegisterForm />
-
-              <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
-                By registering, I agree to Minimal&nbsp;
-                <Link underline="always" color="text.primary" href="#">
-                  Terms of Service
-                </Link>
-                {''}and{''}
-                <Link underline="always" color="text.primary" href="#">
-                  Privacy Policy
-                </Link>
-                .
-              </Typography>
 
               {!smUp && (
                 <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>

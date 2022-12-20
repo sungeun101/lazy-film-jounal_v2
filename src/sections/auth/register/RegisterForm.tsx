@@ -12,18 +12,20 @@ import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
+import useMutation from 'src/libs/client/useMutation';
 
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
   email: string;
-  password: string;
   firstName: string;
   lastName: string;
   afterSubmit?: string;
 };
 
 export default function RegisterForm() {
+  const [enter, { loading, data }] = useMutation('/api/users/enter');
+
   const { register } = useAuth();
 
   const isMountedRef = useIsMountedRef();
@@ -34,14 +36,12 @@ export default function RegisterForm() {
     firstName: Yup.string().required('First name required'),
     lastName: Yup.string().required('Last name required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required'),
   });
 
   const defaultValues = {
     firstName: '',
     lastName: '',
     email: '',
-    password: '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -51,24 +51,25 @@ export default function RegisterForm() {
 
   const {
     reset,
-
     setError,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
-    try {
-      await register(data.email, data.password, data.firstName, data.lastName);
-    } catch (error) {
-      console.error(error);
+    console.log('data', data);
+    enter(data);
+    // try {
+    //   await register(data.email, data.password, data.firstName, data.lastName);
+    // } catch (error) {
+    //   console.error(error);
 
-      reset();
+    //   reset();
 
-      if (isMountedRef.current) {
-        setError('afterSubmit', { ...error, message: error.message });
-      }
-    }
+    //   if (isMountedRef.current) {
+    //     setError('afterSubmit', { ...error, message: error.message });
+    //   }
+    // }
   };
 
   return (
@@ -83,21 +84,6 @@ export default function RegisterForm() {
 
         <RHFTextField name="email" label="Email address" />
 
-        <RHFTextField
-          name="password"
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton edge="end" onClick={() => setShowPassword(!showPassword)}>
-                  <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-
         <LoadingButton
           fullWidth
           size="large"
@@ -105,7 +91,7 @@ export default function RegisterForm() {
           variant="contained"
           loading={isSubmitting}
         >
-          Register
+          Get one-time password
         </LoadingButton>
       </Stack>
     </FormProvider>
