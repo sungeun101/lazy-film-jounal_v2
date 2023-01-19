@@ -17,6 +17,7 @@ import Logo from '../../components/Logo';
 import Image from '../../components/Image';
 // sections
 import { LoginForm } from '../../sections/auth/login';
+import useUser from 'src/libs/client/useUser';
 
 // ----------------------------------------------------------------------
 
@@ -67,8 +68,10 @@ export default function Login() {
   const { method } = useAuth();
 
   const smUp = useResponsive('up', 'sm');
-
   const mdUp = useResponsive('up', 'md');
+
+  const { user } = useUser();
+  console.log('user', user);
 
   return (
     <GuestGuard>
@@ -76,14 +79,14 @@ export default function Login() {
         <RootStyle>
           <HeaderStyle>
             <Logo />
-            {smUp && (
+            {/* {smUp && (
               <Typography variant="body2" sx={{ mt: { md: -2 } }}>
                 Don’t have an account? {''}
                 <NextLink href={PATH_AUTH.register} passHref>
                   <Link variant="subtitle2">Get started</Link>
                 </NextLink>
               </Typography>
-            )}
+            )} */}
           </HeaderStyle>
 
           {mdUp && (
@@ -91,12 +94,12 @@ export default function Login() {
               <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
                 Hi, Welcome Back
               </Typography>
-              <Image
+              {/* <Image
                 visibleByDefault
                 disabledEffect
                 src="https://minimal-assets-api.vercel.app/assets/illustrations/illustration_login.png"
                 alt="login"
-              />
+              /> */}
             </SectionStyle>
           )}
 
@@ -109,7 +112,7 @@ export default function Login() {
                   </Typography>
                 </Box>
 
-                <Tooltip title={capitalCase(method)} placement="right">
+                {/* <Tooltip title={capitalCase(method)} placement="right">
                   <>
                     <Image
                       disabledEffect
@@ -118,23 +121,23 @@ export default function Login() {
                       sx={{ width: 32, height: 32 }}
                     />
                   </>
-                </Tooltip>
+                </Tooltip> */}
               </Stack>
 
               <Alert severity="info" sx={{ mb: 3 }}>
-                Use email : <strong>demo@minimals.cc</strong> / password :<strong> demo1234</strong>
+                Use email : <strong>demo@email.com</strong> / password :<strong> 123456</strong>
               </Alert>
 
               <LoginForm />
 
-              {!smUp && (
+              {/* {!smUp && (
                 <Typography variant="body2" align="center" sx={{ mt: 3 }}>
                   Don’t have an account?{' '}
                   <NextLink href={PATH_AUTH.register} passHref>
                     <Link variant="subtitle2">Get started</Link>
                   </NextLink>
                 </Typography>
-              )}
+              )} */}
             </ContentStyle>
           </Container>
         </RootStyle>

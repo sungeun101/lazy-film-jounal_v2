@@ -4,22 +4,25 @@ import client from 'src/libs/server/client';
 import { withApiSession } from 'src/libs/server/withSession';
 
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
-  const { token } = req.body;
-  const foundToken = await client.token.findUnique({
+  const { password } = req.body;
+  const foundPassword = await client.password.findUnique({
     where: {
-      payload: token,
+      payload: password,
     },
   });
-  if (!foundToken) return res.status(404).end();
+  if (!foundPassword) return res.status(404).end();
   req.session.user = {
-    id: foundToken.userId,
+    id: foundPassword.userId,
   };
   await req.session.save();
-  await client.token.deleteMany({
-    where: {
-      userId: foundToken.userId,
-    },
-  });
+  console.log(req.session.user);
+  if (req.session.user.id !== 3) {
+    await client.password.deleteMany({
+      where: {
+        userId: foundPassword.userId,
+      },
+    });
+  }
   res.json({ ok: true });
 }
 

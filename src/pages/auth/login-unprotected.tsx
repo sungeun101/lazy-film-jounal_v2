@@ -120,7 +120,7 @@ export default function Login() {
             </Stack>
 
             <Alert severity="info" sx={{ mb: 3 }}>
-              Use email : <strong>demo@minimals.cc</strong> / password :<strong> demo1234</strong>
+              Use email : <strong>demo@email.com</strong> / Token :<strong> 123456</strong>
             </Alert>
 
             <LoginForm />

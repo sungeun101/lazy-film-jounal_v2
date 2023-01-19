@@ -7,7 +7,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
   const { firstName, lastName, email } = req.body;
   if (!email) return res.status(400).json({ ok: false });
   const payload = Math.floor(100000 + Math.random() * 900000) + '';
-  const token = await client.token.create({
+  await client.password.create({
     data: {
       payload,
       user: {
@@ -16,8 +16,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
             email,
           },
           create: {
-            firstName,
-            lastName,
+            firstName: firstName ?? 'Anonymous',
+            lastName: lastName ?? '',
             email,
           },
         },
@@ -38,7 +38,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
   //   }
   // });
   // smtpTransport.close();
-  // // console.log(result);
+  // console.log(result);
 
   return res.json({
     ok: true,

@@ -1,5 +1,5 @@
 import { useSnackbar } from 'notistack';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // next
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
@@ -15,6 +15,9 @@ import useIsMountedRef from '../../../hooks/useIsMountedRef';
 import MyAvatar from '../../../components/MyAvatar';
 import MenuPopover from '../../../components/MenuPopover';
 import { IconButtonAnimate } from '../../../components/animate';
+import useUser from 'src/libs/client/useUser';
+import useSWR from 'swr';
+import axios from 'axios';
 
 // ----------------------------------------------------------------------
 
@@ -38,13 +41,36 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const router = useRouter();
 
-  const { user, logout } = useAuth();
-
   const isMountedRef = useIsMountedRef();
 
   const { enqueueSnackbar } = useSnackbar();
 
   const [open, setOpen] = useState<HTMLElement | null>(null);
+  const [logoutClick, setLogoutClick] = useState(false);
+
+  const { data: logoutResult } = useSWR('/api/users/logout');
+
+  // useEffect(() => {
+  //   if (logoutResult?.ok) {
+  //     router.replace(PATH_AUTH.login);
+  //   }
+  // }, [logoutResult, router]);
+
+  // const [user, setUser] = useState();
+  // useEffect(() => {
+  //   fetch('/api/users/me')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log('me data', data);
+  //       if (!data.ok) {
+  //         return router.replace('/auth/login');
+  //       }
+  //       setUser(data.profile);
+  //     });
+  // }, [router]);
+  // useEffect(() => {
+  //   console.log('user', user);
+  // }, [user]);
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setOpen(event.currentTarget);
@@ -55,17 +81,18 @@ export default function AccountPopover() {
   };
 
   const handleLogout = async () => {
-    try {
-      await logout();
-      router.replace(PATH_AUTH.login);
+    setLogoutClick(true);
 
-      if (isMountedRef.current) {
-        handleClose();
-      }
-    } catch (error) {
-      console.error(error);
-      enqueueSnackbar('Unable to logout!', { variant: 'error' });
-    }
+    // try {
+    //   router.replace(PATH_AUTH.login);
+
+    //   if (isMountedRef.current) {
+    //     handleClose();
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    //   enqueueSnackbar('Unable to logout!', { variant: 'error' });
+    // }
   };
 
   return (
@@ -104,14 +131,14 @@ export default function AccountPopover() {
           },
         }}
       >
-        <Box sx={{ my: 1.5, px: 2.5 }}>
+        {/* <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
             {user?.displayName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {user?.email}
           </Typography>
-        </Box>
+        </Box> */}
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 

@@ -30,7 +30,7 @@ export default function ResetPasswordForm({ onSent, onGetEmail }: Props) {
 
   const methods = useForm<FormValuesProps>({
     resolver: yupResolver(ResetPasswordSchema),
-    defaultValues: { email: 'demo@minimals.cc' },
+    defaultValues: { email: 'demo@email.com' },
   });
 
   const {

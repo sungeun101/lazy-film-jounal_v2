@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -28,10 +28,6 @@ export default function RegisterForm() {
 
   const { register } = useAuth();
 
-  const isMountedRef = useIsMountedRef();
-
-  const [showPassword, setShowPassword] = useState(false);
-
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().required('First name required'),
     lastName: Yup.string().required('Last name required'),
@@ -59,17 +55,6 @@ export default function RegisterForm() {
   const onSubmit = async (data: FormValuesProps) => {
     console.log('data', data);
     enter(data);
-    // try {
-    //   await register(data.email, data.password, data.firstName, data.lastName);
-    // } catch (error) {
-    //   console.error(error);
-
-    //   reset();
-
-    //   if (isMountedRef.current) {
-    //     setError('afterSubmit', { ...error, message: error.message });
-    //   }
-    // }
   };
 
   return (
@@ -84,13 +69,7 @@ export default function RegisterForm() {
 
         <RHFTextField name="email" label="Email address" />
 
-        <LoadingButton
-          fullWidth
-          size="large"
-          type="submit"
-          variant="contained"
-          loading={isSubmitting}
-        >
+        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={loading}>
           Get one-time password
         </LoadingButton>
       </Stack>
