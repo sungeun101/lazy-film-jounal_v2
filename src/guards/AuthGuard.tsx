@@ -20,27 +20,22 @@ export default function AuthGuard({ children }: Props) {
   const { isInitialized } = useAuth();
   // const { isAuthenticated, isInitialized } = useAuth();
 
-  const addressdata = useSWR('/api/hello');
-  console.log('address', addressdata);
-
-  const { user, isLoading } = useUser();
-  const { data, error } = useSWR('/api/users/me');
-  // console.log('me', data, isLoading);
-
   const { pathname, push } = useRouter();
 
-  const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
+  const { user } = useUser();
 
-  useEffect(() => {
-    if (requestedLocation && pathname !== requestedLocation) {
-      setRequestedLocation(null);
-      push(requestedLocation);
-    }
-  }, [pathname, push, requestedLocation]);
+  // const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
 
-  if (!isInitialized) {
-    return <LoadingScreen />;
-  }
+  // useEffect(() => {
+  //   if (requestedLocation && pathname !== requestedLocation) {
+  //     setRequestedLocation(null);
+  //     push(requestedLocation);
+  //   }
+  // }, [pathname, push, requestedLocation]);
+
+  // if (!isInitialized) {
+  //   return <LoadingScreen />;
+  // }
 
   // if (!user) {
   //   if (pathname !== requestedLocation) {

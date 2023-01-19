@@ -65,6 +65,7 @@ import MotionLazyContainer from '../components/animate/MotionLazyContainer';
 // https://docs-minimals.vercel.app/authentication/ts-version
 
 import { AuthProvider } from '../contexts/JWTContext';
+import { SWRConfig } from 'swr/_internal';
 // import { AuthProvider } from '../contexts/Auth0Context';
 // import { AuthProvider } from '../contexts/FirebaseContext';
 // import { AuthProvider } from '../contexts/AwsCognitoContext';
@@ -91,34 +92,40 @@ export default function MyApp(props: MyAppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
 
-      <AuthProvider>
-        <ReduxProvider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <CollapseDrawerProvider>
-                <SettingsProvider defaultSettings={settings}>
-                  <ThemeProvider>
-                    <NotistackProvider>
-                      <MotionLazyContainer>
-                        <ThemeColorPresets>
-                          <ThemeLocalization>
-                            <RtlLayout>
-                              <ChartStyle />
-                              <Settings />
-                              <ProgressBar />
-                              {getLayout(<Component {...pageProps} />)}
-                            </RtlLayout>
-                          </ThemeLocalization>
-                        </ThemeColorPresets>
-                      </MotionLazyContainer>
-                    </NotistackProvider>
-                  </ThemeProvider>
-                </SettingsProvider>
-              </CollapseDrawerProvider>
-            </LocalizationProvider>
-          </PersistGate>
-        </ReduxProvider>
-      </AuthProvider>
+      <SWRConfig
+        value={{
+          fetcher: (url: string) => fetch(url).then((response) => response.json()),
+        }}
+      >
+        <AuthProvider>
+          <ReduxProvider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <CollapseDrawerProvider>
+                  <SettingsProvider defaultSettings={settings}>
+                    <ThemeProvider>
+                      <NotistackProvider>
+                        <MotionLazyContainer>
+                          <ThemeColorPresets>
+                            <ThemeLocalization>
+                              <RtlLayout>
+                                <ChartStyle />
+                                <Settings />
+                                <ProgressBar />
+                                {getLayout(<Component {...pageProps} />)}
+                              </RtlLayout>
+                            </ThemeLocalization>
+                          </ThemeColorPresets>
+                        </MotionLazyContainer>
+                      </NotistackProvider>
+                    </ThemeProvider>
+                  </SettingsProvider>
+                </CollapseDrawerProvider>
+              </LocalizationProvider>
+            </PersistGate>
+          </ReduxProvider>
+        </AuthProvider>
+      </SWRConfig>
     </>
   );
 }

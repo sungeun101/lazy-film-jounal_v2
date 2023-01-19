@@ -70,9 +70,6 @@ export default function Login() {
   const smUp = useResponsive('up', 'sm');
   const mdUp = useResponsive('up', 'md');
 
-  const { user } = useUser();
-  console.log('user', user);
-
   return (
     <GuestGuard>
       <Page title="Login">

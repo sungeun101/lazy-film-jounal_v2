@@ -21,7 +21,6 @@ export default function LoginForm() {
   const [register, { loading: registerLoading, data: registerResult }] =
     useMutation('/api/users/enter');
   const [login, { loading: loginLoading, data: loginResult }] = useMutation('/api/users/confirm');
-  console.log('registerResult', registerResult);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -47,6 +46,7 @@ export default function LoginForm() {
 
   const onSubmit = async (data: FormValuesProps) => {
     console.log('data', data);
+    console.log('registerResult', registerResult);
     if (!registerResult) {
       register(data);
     } else {
@@ -54,15 +54,16 @@ export default function LoginForm() {
     }
   };
   const { user } = useUser();
+
   const router = useRouter();
 
   useEffect(() => {
+    // console.log('loginResult', loginResult);
     console.log('login user', user);
-    console.log('loginResult', loginResult);
-    if (loginResult?.ok) {
-      router.push('/dashboard/app');
+    if (loginResult?.ok || user) {
+      router.replace('/dashboard/app');
     }
-  }, [loginResult, user, router]);
+  }, [loginResult, router, user]);
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

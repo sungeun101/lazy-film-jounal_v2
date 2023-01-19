@@ -48,7 +48,7 @@ export default function AccountPopover() {
   const [open, setOpen] = useState<HTMLElement | null>(null);
   const [logoutClick, setLogoutClick] = useState(false);
 
-  const { data: logoutResult } = useSWR('/api/users/logout');
+  // const { data: logoutResult } = useSWR('/api/users/logout');
 
   // useEffect(() => {
   //   if (logoutResult?.ok) {
