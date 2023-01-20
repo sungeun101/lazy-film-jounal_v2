@@ -17,12 +17,18 @@ type Props = {
 };
 
 export default function AuthGuard({ children }: Props) {
-  const { isInitialized } = useAuth();
+  // const { isInitialized } = useAuth();
   // const { isAuthenticated, isInitialized } = useAuth();
 
-  const { pathname, push } = useRouter();
+  const { pathname, push, replace } = useRouter();
 
   const { user } = useUser();
+  console.log('auth guard user', user);
+  useEffect(() => {
+    if (!user) {
+      replace('/auth/login');
+    }
+  }, [user, replace]);
 
   // const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
 

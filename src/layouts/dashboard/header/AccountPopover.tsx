@@ -48,13 +48,13 @@ export default function AccountPopover() {
   const [open, setOpen] = useState<HTMLElement | null>(null);
   const [logoutClick, setLogoutClick] = useState(false);
 
-  // const { data: logoutResult } = useSWR('/api/users/logout');
+  const { data: logoutResult } = useSWR(logoutClick ? '/api/users/logout' : null);
 
-  // useEffect(() => {
-  //   if (logoutResult?.ok) {
-  //     router.replace(PATH_AUTH.login);
-  //   }
-  // }, [logoutResult, router]);
+  useEffect(() => {
+    if (logoutResult?.ok) {
+      router.replace('/auth/login');
+    }
+  }, [logoutResult, router]);
 
   // const [user, setUser] = useState();
   // useEffect(() => {
