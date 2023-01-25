@@ -24,11 +24,13 @@ export default function LoginForm() {
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+    name: Yup.string().required('Name is required'),
     // password: Yup.string().required('Password is required'),
   });
 
   const defaultValues = {
     email: '',
+    name: '',
     password: '',
   };
 
@@ -71,7 +73,7 @@ export default function LoginForm() {
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
         <RHFTextField name="email" label="Email address" />
-
+        <RHFTextField name="name" label="Name" />
         {registerResult && <RHFTextField name="password" label="Password" type="password" />}
       </Stack>
 

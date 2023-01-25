@@ -4,7 +4,7 @@ import smtpTransport from 'src/libs/server/email';
 import withHandler, { ResponseType } from 'src/libs/server/withHandler';
 
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
-  const { firstName, lastName, email } = req.body;
+  const { name, email } = req.body;
   if (!email) return res.status(400).json({ ok: false });
   const payload = Math.floor(100000 + Math.random() * 900000) + '';
   await client.password.create({
@@ -16,8 +16,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
             email,
           },
           create: {
-            firstName: firstName ?? 'Anonymous',
-            lastName: lastName ?? '',
+            name,
             email,
           },
         },

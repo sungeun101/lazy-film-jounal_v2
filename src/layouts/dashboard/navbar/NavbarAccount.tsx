@@ -9,6 +9,7 @@ import useAuth from '../../../hooks/useAuth';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
 import MyAvatar from '../../../components/MyAvatar';
+import useUser from 'src/libs/client/useUser';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +31,7 @@ type Props = {
 };
 
 export default function NavbarAccount({ isCollapse }: Props) {
-  const { user } = useAuth();
+  const { user } = useUser();
 
   return (
     <NextLink href={PATH_DASHBOARD.user.account} passHref>
@@ -58,11 +59,11 @@ export default function NavbarAccount({ isCollapse }: Props) {
             }}
           >
             <Typography variant="subtitle2" noWrap>
-              {user?.displayName}
+              {user?.name}
             </Typography>
-            <Typography variant="body2" noWrap sx={{ color: 'text.secondary' }}>
+            {/* <Typography variant="body2" noWrap sx={{ color: 'text.secondary' }}>
               {user?.role}
-            </Typography>
+            </Typography> */}
           </Box>
         </RootStyle>
       </Link>

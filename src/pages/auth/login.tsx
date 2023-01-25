@@ -17,7 +17,6 @@ import Logo from '../../components/Logo';
 import Image from '../../components/Image';
 // sections
 import { LoginForm } from '../../sections/auth/login';
-import useUser from 'src/libs/client/useUser';
 
 // ----------------------------------------------------------------------
 
@@ -122,7 +121,8 @@ export default function Login() {
               </Stack>
 
               <Alert severity="info" sx={{ mb: 3 }}>
-                Use email : <strong>demo@email.com</strong> / password :<strong> 123456</strong>
+                Use email : <strong>admin@email.com</strong> / name : <strong>Admin</strong> /
+                password :<strong> 123456</strong>
               </Alert>
 
               <LoginForm />
