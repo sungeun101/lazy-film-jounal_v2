@@ -27,6 +27,19 @@ const ICONS = {
 };
 
 const navConfig = [
+  // REAL
+  // ----------------------------------------------------------------------
+  {
+    subheader: 'real',
+    items: [
+      { title: 'workout', path: PATH_DASHBOARD.real.workout, icon: ICONS.dashboard },
+      { title: 'board', path: PATH_DASHBOARD.real.board, icon: ICONS.ecommerce },
+      { title: 'schedule', path: PATH_DASHBOARD.real.schedule, icon: ICONS.analytics },
+      { title: 'profile', path: PATH_DASHBOARD.real.profile, icon: ICONS.banking },
+      { title: 'users', path: PATH_DASHBOARD.real.users, icon: ICONS.booking },
+    ],
+  },
+
   // GENERAL
   // ----------------------------------------------------------------------
   {

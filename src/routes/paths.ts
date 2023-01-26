@@ -34,6 +34,13 @@ export const PATH_PAGE = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
+  real: {
+    workout: path(ROOTS_DASHBOARD, '/workout'),
+    board: path(ROOTS_DASHBOARD, '/board'),
+    schedule: path(ROOTS_DASHBOARD, '/schedule'),
+    profile: path(ROOTS_DASHBOARD, '/profile'),
+    users: path(ROOTS_DASHBOARD, '/users'),
+  },
   general: {
     app: path(ROOTS_DASHBOARD, '/app'),
     ecommerce: path(ROOTS_DASHBOARD, '/ecommerce'),

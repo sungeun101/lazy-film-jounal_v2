@@ -2,6 +2,7 @@
 import { styled } from '@mui/material/styles';
 import { Typography, Button, Card, CardContent, CardProps } from '@mui/material';
 import { SeoIllustration } from '../../../../assets';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 
@@ -43,7 +44,9 @@ export default function AppWelcome({ displayName }: AppWelcomeProps) {
           If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
         </Typography>
 
-        <Button variant="contained">Go Now</Button>
+        <Button variant="contained" startIcon={<Iconify icon={'eva:plus-fill'} />}>
+          New Record
+        </Button>
       </CardContent>
 
       <SeoIllustration
