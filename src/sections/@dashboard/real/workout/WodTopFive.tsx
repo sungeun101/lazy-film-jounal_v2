@@ -1,3 +1,5 @@
+// next
+import NextLink from 'next/link';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -24,15 +26,26 @@ import Label from '../../../../components/Label';
 import Image from '../../../../components/Image';
 import Scrollbar from '../../../../components/Scrollbar';
 import Iconify from 'src/components/Iconify';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceBestSalesman() {
+export default function WodTopFive() {
   const theme = useTheme();
 
   return (
     <Card>
-      <CardHeader title="Today's Top 5" sx={{ mb: 3 }} />
+      <CardHeader
+        title="Today's Top 5"
+        sx={{ mb: 3 }}
+        action={
+          <NextLink href={PATH_DASHBOARD.blog.new} passHref>
+            <Button variant="contained" startIcon={<Iconify icon={'eva:plus-fill'} />}>
+              New Record
+            </Button>
+          </NextLink>
+        }
+      />
       <Scrollbar>
         <TableContainer sx={{ minWidth: 720 }}>
           <Table>

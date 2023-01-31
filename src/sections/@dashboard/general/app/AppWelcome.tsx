@@ -49,13 +49,13 @@ export default function AppWelcome({ displayName }: AppWelcomeProps) {
         </Button>
       </CardContent>
 
-      <SeoIllustration
+      {/* <SeoIllustration
         sx={{
           p: 3,
           width: 360,
           margin: { xs: 'auto', md: 'inherit' },
         }}
-      />
+      /> */}
     </RootStyle>
   );
 }

@@ -14,7 +14,7 @@ import { ColorPreview } from '../../../../components/color-utils';
 export default function EcommerceLatestProducts() {
   return (
     <Card>
-      <CardHeader title="Latest Products" />
+      <CardHeader title="Featured(누적 제일 순위 높은 5명)" />
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3, pr: 0 }}>
           {_ecommerceLatestProducts.map((product) => (
