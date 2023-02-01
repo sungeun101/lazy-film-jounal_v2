@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 // @mui
 import { useTheme } from '@mui/material/styles';
@@ -22,13 +22,23 @@ import { _bookingReview } from '../../../../_mock';
 import Iconify from '../../../../components/Iconify';
 import { DialogAnimate } from 'src/components/animate';
 import WodNewForm from './WodNewForm';
+import useSWR from 'swr';
+import dayjs from 'dayjs';
 
+const date = dayjs().format('YYYY-MM-DD');
+console.log('date', date);
 //----------------------------------------------------------------------
 
 export default function WodBoard() {
   const theme = useTheme();
   const carouselRef = useRef<Slider | null>(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const { data: wodData } = useSWR(date ? `/api/wods/${date}` : null);
+
+  useEffect(() => {
+    console.log('wodData', wodData);
+  }, [wodData]);
 
   const settings = {
     dots: false,
@@ -59,7 +69,7 @@ export default function WodBoard() {
     <Card>
       <CardHeader
         title="Workout of the day"
-        subheader={'오늘 날짜'}
+        subheader={date}
         action={
           <Button
             variant="contained"

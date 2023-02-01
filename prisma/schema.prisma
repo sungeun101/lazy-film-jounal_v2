@@ -14,7 +14,7 @@ datasource db {
 model User {
   id        Int         @id @default(autoincrement())
   email     String      @unique
-  name  String
+  name      String
   avatar    String?
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
@@ -28,4 +28,12 @@ model Password {
   userId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Wod {
+  id           Int      @id @default(autoincrement())
+  createDate   String   @unique
+  type         String
+  title        String
+  content      String  
 }
