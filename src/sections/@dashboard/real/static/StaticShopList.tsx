@@ -4,13 +4,10 @@ import StaticShopCard from './StaticShopCard';
 // ----------------------------------------------------------------------
 
 type Props = {
-  products: any;
-  // products: Product[];
-  loading: boolean;
+  shops: any;
 };
 
-export default function ShopProductList({ products, loading }: Props) {
-  console.log('shops', products);
+export default function StaticShopList({ shops }: Props) {
   return (
     <Box
       sx={{
@@ -24,17 +21,9 @@ export default function ShopProductList({ products, loading }: Props) {
         },
       }}
     >
-      {products.map((product: any, index: any) => (
+      {shops.map((product: any) => (
         <StaticShopCard key={product.id} product={product} />
       ))}
-
-      {/* {(loading ? [...Array(12)] : products).map((product: any, index: any) =>
-        product ? (
-          <ShopProductCard key={product.id} product={product} />
-        ) : (
-          <SkeletonProductItem key={index} />
-        )
-      )} */}
     </Box>
   );
 }
