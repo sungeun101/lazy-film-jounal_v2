@@ -77,7 +77,7 @@ export default function WodNewForm({ onCancel }: Props) {
   };
 
   const methods = useForm<FormValuesProps>({
-    resolver: yupResolver(NewWodSchema),
+    // resolver: yupResolver(NewWodSchema),
     defaultValues,
   });
 
@@ -131,7 +131,10 @@ export default function WodNewForm({ onCancel }: Props) {
   //   );
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider
+      methods={methods}
+      // onSubmit={handleSubmit(onSubmit)}
+    >
       <DialogActions>
         <Button variant="outlined" color="inherit" onClick={onCancel}>
           Cancel

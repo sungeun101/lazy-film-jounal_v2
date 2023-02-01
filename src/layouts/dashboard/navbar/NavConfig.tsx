@@ -32,6 +32,7 @@ const navConfig = [
   {
     subheader: 'real',
     items: [
+      { title: 'static', path: PATH_DASHBOARD.real.static, icon: ICONS.booking },
       { title: 'workout', path: PATH_DASHBOARD.real.workout, icon: ICONS.dashboard },
       { title: 'board', path: PATH_DASHBOARD.real.board, icon: ICONS.ecommerce },
       { title: 'schedule', path: PATH_DASHBOARD.real.schedule, icon: ICONS.analytics },

@@ -40,6 +40,7 @@ export const PATH_DASHBOARD = {
     schedule: path(ROOTS_DASHBOARD, '/schedule'),
     profile: path(ROOTS_DASHBOARD, '/profile'),
     users: path(ROOTS_DASHBOARD, '/users'),
+    static: path(ROOTS_DASHBOARD, '/static'),
   },
   general: {
     app: path(ROOTS_DASHBOARD, '/app'),
