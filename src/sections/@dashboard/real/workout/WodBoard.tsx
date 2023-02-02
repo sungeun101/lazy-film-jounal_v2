@@ -13,6 +13,7 @@ import {
   Typography,
   Grid,
   DialogTitle,
+  TextField,
 } from '@mui/material';
 // utils
 import { fDateTime } from '../../../../utils/formatTime';
@@ -24,37 +25,31 @@ import { DialogAnimate } from 'src/components/animate';
 import WodNewForm from './WodNewForm';
 import useSWR from 'swr';
 import dayjs from 'dayjs';
+import { CarouselArrows } from 'src/components/carousel';
+import { DatePicker } from '@mui/lab';
 
-const date = dayjs().format('YYYY-MM-DD');
-console.log('date', date);
 //----------------------------------------------------------------------
 
 export default function WodBoard() {
-  const theme = useTheme();
-  const carouselRef = useRef<Slider | null>(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [searchDate, setSearchDate] = useState<Date | null>(new Date());
 
-  const { data: wodData } = useSWR(date ? `/api/wods/${date}` : null);
+  const { data: wodData } = useSWR(
+    searchDate ? `/api/wods/${dayjs(searchDate).format('YYYY-MM-DD')}` : null
+  );
 
   useEffect(() => {
     console.log('wodData', wodData);
   }, [wodData]);
 
-  const settings = {
-    dots: false,
-    arrows: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    rtl: Boolean(theme.direction === 'rtl'),
-    adaptiveHeight: true,
-  };
-
   const handlePrevious = () => {
-    carouselRef.current?.slickPrev();
+    const prevDay = dayjs(searchDate).subtract(1, 'day').toDate();
+    setSearchDate(prevDay);
   };
 
   const handleNext = () => {
-    carouselRef.current?.slickNext();
+    const nextDay = dayjs(searchDate).add(1, 'day').toDate();
+    setSearchDate(nextDay);
   };
 
   const handleOpenModal = () => {
@@ -69,14 +64,22 @@ export default function WodBoard() {
     <Card>
       <CardHeader
         title="Workout of the day"
-        subheader={date}
+        subheader={
+          <DatePicker
+            value={searchDate}
+            onChange={(newValue) => {
+              setSearchDate(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} size="small" helperText={null} />}
+          />
+        }
         action={
           <Button
             variant="contained"
             startIcon={<Iconify icon={'eva:plus-fill'} />}
             onClick={handleOpenModal}
           >
-            New Workout
+            {wodData?.wod ? 'Edit' : 'New'} Workout
           </Button>
         }
         sx={{
@@ -86,18 +89,30 @@ export default function WodBoard() {
         }}
       />
 
-      <Slider ref={carouselRef} {...settings}>
-        {_bookingReview.map((item) => (
-          <WodItem key={item.id} item={item} />
-        ))}
-      </Slider>
+      <Stack p={4}>
+        {wodData?.wod ? (
+          <>
+            <Typography
+              variant="h6"
+              gutterBottom
+              dangerouslySetInnerHTML={{ __html: wodData?.wod?.title }}
+            />
+            <Typography dangerouslySetInnerHTML={{ __html: wodData?.wod?.type }} />
+            <Typography dangerouslySetInnerHTML={{ __html: wodData?.wod?.content }} />
+          </>
+        ) : (
+          <Typography>No workout has been registered yet!</Typography>
+        )}
+      </Stack>
 
-      {/* <CarouselArrows
-        customIcon={'ic:round-keyboard-arrow-right'}
-        onNext={handleNext}
-        onPrevious={handlePrevious}
-        sx={{ '& .arrow': { width: 28, height: 28, p: 0 } }}
-    /> */}
+      <Stack direction="row" justifyContent="center" pb={2}>
+        <CarouselArrows
+          customIcon={'ic:round-keyboard-arrow-right'}
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+          sx={{ '& .arrow': { width: 36, height: 36, p: 0 } }}
+        />
+      </Stack>
 
       {/* new wod modal */}
       <DialogAnimate open={isOpenModal} onClose={handleCloseModal} fullScreen>
@@ -106,76 +121,5 @@ export default function WodBoard() {
         <WodNewForm onCancel={handleCloseModal} />
       </DialogAnimate>
     </Card>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-type WodItemProps = {
-  id: string;
-  name: string;
-  description: string;
-  avatar: string;
-  rating: number;
-  postedAt: Date | string | number;
-  tags: string[];
-};
-
-function WodItem({ item }: { item: WodItemProps }) {
-  const { avatar, name, description, rating, postedAt, tags } = item;
-
-  return (
-    <Grid container spacing={3} sx={{ minHeight: 402, position: 'relative', p: 3 }}>
-      <Grid item xs={12} md={6} lg={4}>
-        video
-      </Grid>
-
-      <Grid item xs={12} md={6} lg={8}>
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <Avatar alt={name} src={avatar} />
-          <div>
-            <Typography variant="subtitle2">{name}</Typography>
-            <Typography
-              variant="caption"
-              sx={{ color: 'text.secondary', mt: 0.5, display: 'block' }}
-            >
-              Posted {fDateTime(postedAt)}
-            </Typography>
-          </div>
-        </Stack>
-
-        <Rating value={rating} size="small" readOnly precision={0.5} />
-        <Typography variant="body2">{description}</Typography>
-
-        <Stack direction="row" flexWrap="wrap">
-          {tags.map((tag) => (
-            <Chip
-              size="small"
-              key={tag}
-              label={tag}
-              sx={{ mr: 1, mb: 1, color: 'text.secondary' }}
-            />
-          ))}
-        </Stack>
-
-        <Stack direction="row" spacing={2} alignItems="flex-end" sx={{ flexGrow: 1 }}>
-          <Button
-            fullWidth
-            variant="contained"
-            endIcon={<Iconify icon={'eva:checkmark-circle-2-fill'} />}
-          >
-            Accept
-          </Button>
-          <Button
-            fullWidth
-            variant="contained"
-            color="error"
-            endIcon={<Iconify icon={'eva:close-circle-fill'} />}
-          >
-            Reject
-          </Button>
-        </Stack>
-      </Grid>
-    </Grid>
   );
 }
