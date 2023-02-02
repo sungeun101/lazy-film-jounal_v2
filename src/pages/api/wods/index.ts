@@ -5,6 +5,21 @@ import { withApiSession } from 'src/libs/server/withSession';
 
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
   const { body: data } = req;
+  const alreadyExists = await client.wod.findFirst({
+    where: {
+      createDate: data.createDate,
+    },
+    select: {
+      id: true,
+    },
+  });
+  if (alreadyExists) {
+    await client.wod.delete({
+      where: {
+        id: alreadyExists.id,
+      },
+    });
+  }
   const wod = await client.wod.create({
     data,
   });

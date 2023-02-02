@@ -22,11 +22,16 @@ import { _bookingReview } from '../../../../_mock';
 // components
 import Iconify from '../../../../components/Iconify';
 import { DialogAnimate } from 'src/components/animate';
-import WodNewForm from './WodNewForm';
+import WodNewForm, { WodFormValuesProps } from './WodNewForm';
 import useSWR from 'swr';
 import dayjs from 'dayjs';
 import { CarouselArrows } from 'src/components/carousel';
 import { DatePicker } from '@mui/lab';
+
+interface WodData {
+  ok: boolean;
+  wod: WodFormValuesProps | null;
+}
 
 //----------------------------------------------------------------------
 
@@ -34,7 +39,7 @@ export default function WodBoard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [searchDate, setSearchDate] = useState<Date | null>(new Date());
 
-  const { data: wodData } = useSWR(
+  const { data: wodData } = useSWR<WodData>(
     searchDate ? `/api/wods/${dayjs(searchDate).format('YYYY-MM-DD')}` : null
   );
 
@@ -97,7 +102,7 @@ export default function WodBoard() {
               gutterBottom
               dangerouslySetInnerHTML={{ __html: wodData?.wod?.title }}
             />
-            <Typography dangerouslySetInnerHTML={{ __html: wodData?.wod?.type }} />
+            <Typography dangerouslySetInnerHTML={{ __html: wodData?.wod?.type + ':' }} />
             <Typography dangerouslySetInnerHTML={{ __html: wodData?.wod?.content }} />
           </>
         ) : (
@@ -116,9 +121,7 @@ export default function WodBoard() {
 
       {/* new wod modal */}
       <DialogAnimate open={isOpenModal} onClose={handleCloseModal} fullScreen>
-        <DialogTitle>New Workout</DialogTitle>
-
-        <WodNewForm onCancel={handleCloseModal} />
+        <WodNewForm onCancel={handleCloseModal} currentWod={wodData?.wod} searchDate={searchDate} />
       </DialogAnimate>
     </Card>
   );
