@@ -34,6 +34,17 @@ model Wod {
   id           Int      @id @default(autoincrement())
   createDate   String   @unique
   type         String
+  oneRound     Int?
   title        String
-  content      String  
+  content      String   @db.LongText
+  records      Record[]
+}
+
+model Record {
+  id           Int      @id @default(autoincrement())
+  round        Int
+  rep          Int
+  finishAt     String
+  wod          Wod      @relation(fields: [wodId], references: [id], onDelete: Cascade)
+  wodId        Int
 }

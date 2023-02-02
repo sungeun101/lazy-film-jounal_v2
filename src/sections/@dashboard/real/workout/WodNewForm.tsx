@@ -19,6 +19,7 @@ import { useSWRConfig } from 'swr';
 export type WodFormValuesProps = {
   createDate: Date | null;
   type: string;
+  oneRound: number | null;
   title: string;
   content: string;
 };
@@ -35,7 +36,7 @@ const LabelStyle = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
-const WOD_TYPE_OPTIONS = ['As many rounds as possible', 'For time'];
+const WOD_TYPE_OPTIONS = ['As Many Rounds As Possible', 'For Time'];
 
 // ----------------------------------------------------------------------
 
@@ -44,12 +45,20 @@ export default function WodNewForm({ onCancel, currentWod, searchDate }: Props) 
 
   const NewWodSchema = Yup.object().shape({
     title: Yup.string().required('Title is required'),
-    // content: Yup.string().min(1000).required('Content is required'),
+    content: Yup.string().min(1).required('Content is required'),
+    oneRound: Yup.number()
+      .transform((value) => (isNaN(value) ? undefined : value))
+      .nullable()
+      .when('type', {
+        is: 'As Many Rounds As Possible',
+        then: Yup.number().required('Reps of one round is required to measure records'),
+      }),
   });
 
   const defaultValues = {
     createDate: searchDate,
-    type: currentWod?.type || 'As many rounds as possible',
+    type: currentWod?.type || 'As Many Rounds As Possible',
+    oneRound: currentWod?.oneRound || null,
     title: currentWod?.title || '',
     content: currentWod?.content || '',
   };
@@ -62,6 +71,7 @@ export default function WodNewForm({ onCancel, currentWod, searchDate }: Props) 
   const {
     reset,
     handleSubmit,
+    watch,
     formState: { isSubmitting },
   } = methods;
 
@@ -129,6 +139,10 @@ export default function WodNewForm({ onCancel, currentWod, searchDate }: Props) 
               </MenuItem>
             ))}
           </RHFSelect>
+
+          {watch('type') === 'As Many Rounds As Possible' && (
+            <RHFTextField name="oneRound" label="Repetitions in one round" />
+          )}
 
           <RHFTextField name="title" label="Title" />
 

@@ -17,21 +17,32 @@ import {
   Divider,
   Button,
 } from '@mui/material';
-// utils
-import { fCurrency } from '../../../../utils/formatNumber';
 // _mock_
 import { _ecommerceBestSalesman } from '../../../../_mock';
 // components
 import Label from '../../../../components/Label';
-import Image from '../../../../components/Image';
 import Scrollbar from '../../../../components/Scrollbar';
 import Iconify from 'src/components/Iconify';
 import { PATH_DASHBOARD } from 'src/routes/paths';
+import { useState } from 'react';
+import { DialogAnimate } from 'src/components/animate';
+import WodNewRecordForm from './WodNewRecordForm';
+import WodNewForm from './WodNewForm';
 
 // ----------------------------------------------------------------------
 
 export default function WodTopFive() {
   const theme = useTheme();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    console.log('hi');
+    setIsOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
 
   return (
     <Card>
@@ -39,11 +50,13 @@ export default function WodTopFive() {
         title="Today's Top 5"
         sx={{ mb: 3 }}
         action={
-          <NextLink href={PATH_DASHBOARD.blog.new} passHref>
-            <Button variant="contained" startIcon={<Iconify icon={'eva:plus-fill'} />}>
-              New Record
-            </Button>
-          </NextLink>
+          <Button
+            variant="contained"
+            startIcon={<Iconify icon={'eva:plus-fill'} />}
+            onClick={handleOpenModal}
+          >
+            New Record
+          </Button>
         }
       />
       <Scrollbar>
@@ -51,10 +64,8 @@ export default function WodTopFive() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Seller</TableCell>
-                <TableCell>Product</TableCell>
-                <TableCell>Country</TableCell>
-                <TableCell>Total</TableCell>
+                <TableCell>Athelete</TableCell>
+                <TableCell>Score</TableCell>
                 <TableCell align="right">Rank</TableCell>
               </TableRow>
             </TableHead>
@@ -73,10 +84,6 @@ export default function WodTopFive() {
                     </Box>
                   </TableCell>
                   <TableCell>{row.category}</TableCell>
-                  <TableCell>
-                    <Image src={row.flag} alt="country flag" sx={{ maxWidth: 28 }} />
-                  </TableCell>
-                  <TableCell>{fCurrency(row.total)}</TableCell>
                   <TableCell align="right">
                     <Label
                       variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
@@ -109,6 +116,11 @@ export default function WodTopFive() {
           View All
         </Button>
       </Box>
+
+      {/* new record modal */}
+      <DialogAnimate open={isOpenModal} onClose={handleCloseModal} fullScreen>
+        <WodNewRecordForm onCancel={handleCloseModal} />
+      </DialogAnimate>
     </Card>
   );
 }

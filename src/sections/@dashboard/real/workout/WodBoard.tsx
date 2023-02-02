@@ -2,23 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import {
-  Card,
-  Chip,
-  Stack,
-  Avatar,
-  Rating,
-  Button,
-  CardHeader,
-  Typography,
-  Grid,
-  DialogTitle,
-  TextField,
-} from '@mui/material';
-// utils
-import { fDateTime } from '../../../../utils/formatTime';
-// _mock_
-import { _bookingReview } from '../../../../_mock';
+import { Card, Stack, Button, CardHeader, Typography, TextField } from '@mui/material';
 // components
 import Iconify from '../../../../components/Iconify';
 import { DialogAnimate } from 'src/components/animate';
@@ -27,6 +11,7 @@ import useSWR from 'swr';
 import dayjs from 'dayjs';
 import { CarouselArrows } from 'src/components/carousel';
 import { DatePicker } from '@mui/lab';
+import WodNewRecordForm from './WodNewRecordForm';
 
 interface WodData {
   ok: boolean;
