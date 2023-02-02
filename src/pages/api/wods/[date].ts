@@ -10,7 +10,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
   console.log('req', req?.query);
   if (date) {
     const wod = await client.wod.findUnique({
-      where: { createDate: date.toString().slice(0, 10) },
+      where: { createDate: date.toString() },
     });
     res.json({
       ok: true,

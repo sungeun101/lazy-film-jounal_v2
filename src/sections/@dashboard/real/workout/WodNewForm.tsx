@@ -1,39 +1,25 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 // form
 import * as Yup from 'yup';
-import { Controller, useForm, useFormContext } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Typography, Stack, Button, DialogActions, MenuItem, TextField } from '@mui/material';
 // components
-import {
-  FormProvider,
-  RHFEditor,
-  RHFSelect,
-  RHFTextField,
-  RHFUploadSingleFile,
-} from 'src/components/hook-form';
+import { FormProvider, RHFEditor, RHFSelect, RHFTextField } from 'src/components/hook-form';
 import { DatePicker, LoadingButton } from '@mui/lab';
 import { useSnackbar } from 'notistack';
 import useMutation from 'src/libs/client/useMutation';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
-  createDate: Dayjs;
+  createDate: Date | null;
   type: string;
   title: string;
   content: string;
-  //   description: string;
-  //   cover: File | any;
-  //   tags: string[];
-  //   publish: boolean;
-  //   comments: boolean;
-  //   metaTitle: string;
-  //   metaDescription: string;
-  //   metaKeywords: string[];
 };
 
 type Props = {
@@ -46,9 +32,8 @@ const LabelStyle = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
-const WOD_TYPE_OPTIONS = ['for time', 'as many rounds as possible'];
+const WOD_TYPE_OPTIONS = ['as many rounds as possible', 'for time'];
 
-const now = dayjs();
 // ----------------------------------------------------------------------
 
 export default function WodNewForm({ onCancel }: Props) {
@@ -56,43 +41,28 @@ export default function WodNewForm({ onCancel }: Props) {
 
   const NewWodSchema = Yup.object().shape({
     title: Yup.string().required('Title is required'),
-    // description: Yup.string().required('Description is required'),
-    // cover: Yup.mixed().required('Cover is required'),
     // content: Yup.string().min(1000).required('Content is required'),
   });
 
   const defaultValues = {
-    createDate: now,
-    type: 'for time',
+    createDate: new Date(),
+    type: 'as many rounds as possible',
     title: '',
     content: '',
-    // description: '',
-    // cover: null,
-    // tags: ['Logan'],
-    // publish: true,
-    // comments: true,
-    // metaTitle: '',
-    // metaDescription: '',
-    // metaKeywords: ['Logan'],
   };
 
   const methods = useForm<FormValuesProps>({
-    // resolver: yupResolver(NewWodSchema),
+    resolver: yupResolver(NewWodSchema),
     defaultValues,
   });
 
   const {
     reset,
     watch,
-    setValue,
     handleSubmit,
     formState: { isSubmitting },
     control,
   } = methods;
-
-  //   const { control } = useFormContext();
-
-  const values = watch();
 
   const [uploadWod, { data: wodResult }] = useMutation('/api/wods');
 
@@ -106,35 +76,18 @@ export default function WodNewForm({ onCancel }: Props) {
   }, [wodResult]);
 
   const onSubmit = async (data: FormValuesProps) => {
-    // console.log('submit data', data);
+    console.log('submit data', data);
+    const { createDate } = data;
+    const stringDate = dayjs(createDate).format('YYYY-MM-DD');
     try {
-      uploadWod(data);
+      uploadWod({ ...data, createDate: stringDate });
     } catch (error) {
       console.error(error);
     }
   };
 
-  //   const handleDrop = useCallback(
-  //     (acceptedFiles) => {
-  //       const file = acceptedFiles[0];
-
-  //       if (file) {
-  //         setValue(
-  //           'cover',
-  //           Object.assign(file, {
-  //             preview: URL.createObjectURL(file),
-  //           })
-  //         );
-  //       }
-  //     },
-  //     [setValue]
-  //   );
-
   return (
-    <FormProvider
-      methods={methods}
-      // onSubmit={handleSubmit(onSubmit)}
-    >
+    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <DialogActions>
         <Button variant="outlined" color="inherit" onClick={onCancel}>
           Cancel
