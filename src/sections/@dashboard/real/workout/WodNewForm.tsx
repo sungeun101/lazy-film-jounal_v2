@@ -14,6 +14,7 @@ import useMutation from 'src/libs/client/useMutation';
 import dayjs from 'dayjs';
 import { useSWRConfig } from 'swr';
 import { useWodStore } from 'src/zustand/useWodStore';
+import { RecordFormValuesProps } from './WodNewRecordForm';
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +24,16 @@ export type WodFormValuesProps = {
   oneRound: number | null;
   title: string;
   content: string;
+  records: IRecord[];
 };
+
+export interface IRecord extends RecordFormValuesProps {
+  user: {
+    id: number;
+    name: string;
+    avatar?: string | null;
+  };
+}
 
 interface Props {
   onCancel: VoidFunction;

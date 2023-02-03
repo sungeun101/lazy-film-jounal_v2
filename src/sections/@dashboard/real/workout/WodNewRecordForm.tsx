@@ -4,26 +4,19 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { styled } from '@mui/material/styles';
+
 import { Typography, Stack, Button, DialogActions, DialogTitle } from '@mui/material';
 // components
-import { FormProvider, RHFEditor, RHFTextField } from 'src/components/hook-form';
+import { FormProvider, RHFTextField } from 'src/components/hook-form';
 import { LoadingButton } from '@mui/lab';
 import { useSnackbar } from 'notistack';
 import useMutation from 'src/libs/client/useMutation';
-import dayjs from 'dayjs';
 import { useSWRConfig } from 'swr';
 import { useWodStore } from 'src/zustand/useWodStore';
-import { Box } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-export type FormValuesProps = {
-  // createDate: Date | null;
-  // type: string;
-  // oneRound: number | null;
-  // title: string;
-  // content: string;
+export type RecordFormValuesProps = {
   amrapRound?: number | null;
   amrapRep?: number | null;
   forTimeMinute?: number | null;
@@ -34,31 +27,14 @@ interface Props {
   onCancel: VoidFunction;
 }
 
-const LabelStyle = styled(Typography)(({ theme }) => ({
-  ...theme.typography.subtitle2,
-  color: theme.palette.text.secondary,
-  marginBottom: theme.spacing(1),
-}));
-
 // ----------------------------------------------------------------------
 
 export default function WodNewRecordForm({ onCancel }: Props) {
   const { wod: currentWod } = useWodStore();
-  console.log('currentWod', currentWod);
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewRecordSchema = Yup.object().shape({
-    // title: Yup.string().required('Title is required'),
-    // content: Yup.string().min(1).required('Content is required'),
-    // oneRound: Yup.number()
-    //   .transform((value) => (isNaN(value) ? undefined : value))
-    //   .nullable()
-    //   .when('type', {
-    //     is: 'As Many Rounds As Possible',
-    //     then: Yup.number().required('Reps of one round is required to measure records'),
-    //   }),
-  });
+  const NewRecordSchema = Yup.object().shape({});
 
   const defaultValues = {
     type: currentWod?.type || 'As Many Rounds As Possible',
@@ -68,7 +44,7 @@ export default function WodNewRecordForm({ onCancel }: Props) {
     forTimeSecond: null,
   };
 
-  const methods = useForm<FormValuesProps>({
+  const methods = useForm<RecordFormValuesProps>({
     resolver: yupResolver(NewRecordSchema),
     defaultValues,
   });
@@ -76,27 +52,25 @@ export default function WodNewRecordForm({ onCancel }: Props) {
   const {
     reset,
     handleSubmit,
-    watch,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = methods;
-  console.log('error', errors);
 
   const { mutate } = useSWRConfig();
-  const [uploadRecord, { data: wodResult }] = useMutation(
+  const [uploadRecord, { data: recordResult }] = useMutation(
     `/api/wods/${currentWod?.createDate}/record`
   );
 
   useEffect(() => {
-    if (wodResult?.ok) {
-      console.log('wodResult', wodResult);
-      // mutate(`/api/wods/${dayjs(searchDate).format('YYYY-MM-DD')}`);
+    if (recordResult?.ok) {
+      console.log('recordResult', recordResult);
+      mutate(`/api/wods/${currentWod?.createDate}`);
       enqueueSnackbar('Saved!');
       onCancel();
       reset();
     }
-  }, [wodResult]);
+  }, [recordResult]);
 
-  const onSubmit = async (data: FormValuesProps) => {
+  const onSubmit = async (data: RecordFormValuesProps) => {
     console.log('submit data', data);
     try {
       uploadRecord(data);

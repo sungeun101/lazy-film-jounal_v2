@@ -11,6 +11,31 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
   if (date) {
     const wod = await client.wod.findUnique({
       where: { createDate: date.toString() },
+      include: {
+        records: {
+          select: {
+            id: true,
+            amrapRep: true,
+            amrapRound: true,
+            forTimeMinute: true,
+            forTimeSecond: true,
+            user: {
+              select: {
+                id: true,
+                name: true,
+                avatar: true,
+              },
+            },
+          },
+          // take: 10,
+          // skip: 20,
+        },
+        _count: {
+          select: {
+            records: true,
+          },
+        },
+      },
     });
     res.json({
       ok: true,
