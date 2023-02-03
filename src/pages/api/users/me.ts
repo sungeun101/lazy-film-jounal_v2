@@ -4,10 +4,16 @@ import client from 'src/libs/server/client';
 import { withApiSession } from 'src/libs/server/withSession';
 
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
-  console.log('users/me');
+  const {
+    session: { user },
+  } = req;
+
+  if (!user) return res.status(403).json({ ok: false });
+
   const profile = await client.user.findUnique({
-    where: { id: req.session.user?.id },
+    where: { id: user.id },
   });
+
   res.json({
     ok: true,
     profile,

@@ -1,6 +1,11 @@
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import useSWR from 'swr';
 
 export default function useUser() {
   const { data, error } = useSWR('/api/users/me');
-  return { user: data?.profile, isLoading: !data && !error };
+
+  const isLoggedOut = data && !data.ok;
+
+  return { user: data?.profile, isLoading: !data && !error, isLoggedOut };
 }

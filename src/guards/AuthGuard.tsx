@@ -20,15 +20,15 @@ export default function AuthGuard({ children }: Props) {
   // const { isInitialized } = useAuth();
   // const { isAuthenticated, isInitialized } = useAuth();
 
-  const { pathname, push, replace } = useRouter();
+  const { replace } = useRouter();
 
-  const { user } = useUser();
-  console.log('auth guard user', user);
+  const { isLoggedOut } = useUser();
+
   useEffect(() => {
-    if (!user) {
+    if (isLoggedOut) {
       replace('/auth/login');
     }
-  }, [user, replace]);
+  }, [isLoggedOut, replace]);
 
   // const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
 
