@@ -17,6 +17,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
   await req.session.save();
   console.log(req.session.user);
   if (req.session.user.id !== 1) {
+    // admin user
     await client.password.deleteMany({
       where: {
         userId: foundPassword.userId,

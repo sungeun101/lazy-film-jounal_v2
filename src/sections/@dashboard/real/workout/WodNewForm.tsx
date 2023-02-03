@@ -13,6 +13,7 @@ import { useSnackbar } from 'notistack';
 import useMutation from 'src/libs/client/useMutation';
 import dayjs from 'dayjs';
 import { useSWRConfig } from 'swr';
+import { useWodStore } from 'src/zustand/useWodStore';
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +27,7 @@ export type WodFormValuesProps = {
 
 interface Props {
   onCancel: VoidFunction;
-  currentWod: WodFormValuesProps | null | undefined;
+  // currentWod: WodFormValuesProps | null | undefined;
   searchDate: Date | null;
 }
 
@@ -40,7 +41,13 @@ const WOD_TYPE_OPTIONS = ['As Many Rounds As Possible', 'For Time'];
 
 // ----------------------------------------------------------------------
 
-export default function WodNewForm({ onCancel, currentWod, searchDate }: Props) {
+export default function WodNewForm({
+  onCancel,
+  // currentWod,
+  searchDate,
+}: Props) {
+  const { wod: currentWod } = useWodStore();
+
   const { enqueueSnackbar } = useSnackbar();
 
   const NewWodSchema = Yup.object().shape({

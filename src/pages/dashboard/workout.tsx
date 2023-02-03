@@ -12,6 +12,7 @@ import { EcommerceLatestProducts } from '../../sections/@dashboard/general/e-com
 import useUser from 'src/libs/client/useUser';
 import WodBoard from 'src/sections/@dashboard/real/workout/WodBoard';
 import WodTopFive from 'src/sections/@dashboard/real/workout/WodTopFive';
+import { useWodStore } from 'src/zustand/useWodStore';
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +27,8 @@ export default function GeneralApp() {
 
   const { themeStretch } = useSettings();
 
+  const { wod } = useWodStore();
+
   return (
     <Page title="General: App">
       <Container maxWidth={themeStretch ? false : 'xl'}>
@@ -38,9 +41,11 @@ export default function GeneralApp() {
             <AppWelcome displayName={user?.name} />
           </Grid> */}
 
-          <Grid item xs={12} md={6} lg={8}>
-            <WodTopFive />
-          </Grid>
+          {wod && (
+            <Grid item xs={12} md={6} lg={8}>
+              <WodTopFive />
+            </Grid>
+          )}
 
           <Grid item xs={12} md={6} lg={4}>
             <EcommerceLatestProducts />

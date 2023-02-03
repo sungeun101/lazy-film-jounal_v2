@@ -23,11 +23,9 @@ import { _ecommerceBestSalesman } from '../../../../_mock';
 import Label from '../../../../components/Label';
 import Scrollbar from '../../../../components/Scrollbar';
 import Iconify from 'src/components/Iconify';
-import { PATH_DASHBOARD } from 'src/routes/paths';
 import { useState } from 'react';
 import { DialogAnimate } from 'src/components/animate';
 import WodNewRecordForm from './WodNewRecordForm';
-import WodNewForm from './WodNewForm';
 
 // ----------------------------------------------------------------------
 
@@ -36,7 +34,6 @@ export default function WodTopFive() {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const handleOpenModal = () => {
-    console.log('hi');
     setIsOpenModal(true);
   };
 
@@ -118,7 +115,11 @@ export default function WodTopFive() {
       </Box>
 
       {/* new record modal */}
-      <DialogAnimate open={isOpenModal} onClose={handleCloseModal} fullScreen>
+      <DialogAnimate
+        open={isOpenModal}
+        onClose={handleCloseModal}
+        // fullScreen
+      >
         <WodNewRecordForm onCancel={handleCloseModal} />
       </DialogAnimate>
     </Card>

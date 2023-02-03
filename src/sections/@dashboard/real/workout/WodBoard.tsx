@@ -11,9 +11,9 @@ import useSWR from 'swr';
 import dayjs from 'dayjs';
 import { CarouselArrows } from 'src/components/carousel';
 import { DatePicker } from '@mui/lab';
-import WodNewRecordForm from './WodNewRecordForm';
+import { useWodStore } from 'src/zustand/useWodStore';
 
-interface WodData {
+export interface WodData {
   ok: boolean;
   wod: WodFormValuesProps | null;
 }
@@ -28,9 +28,15 @@ export default function WodBoard() {
     searchDate ? `/api/wods/${dayjs(searchDate).format('YYYY-MM-DD')}` : null
   );
 
+  const { add } = useWodStore();
+
   useEffect(() => {
-    console.log('wodData', wodData);
-  }, [wodData]);
+    if (wodData?.wod) {
+      add(wodData.wod);
+    } else {
+      add(null);
+    }
+  }, [add, wodData]);
 
   const handlePrevious = () => {
     const prevDay = dayjs(searchDate).subtract(1, 'day').toDate();
@@ -106,7 +112,11 @@ export default function WodBoard() {
 
       {/* new wod modal */}
       <DialogAnimate open={isOpenModal} onClose={handleCloseModal} fullScreen>
-        <WodNewForm onCancel={handleCloseModal} currentWod={wodData?.wod} searchDate={searchDate} />
+        <WodNewForm
+          onCancel={handleCloseModal}
+          //  currentWod={wodData?.wod}
+          searchDate={searchDate}
+        />
       </DialogAnimate>
     </Card>
   );

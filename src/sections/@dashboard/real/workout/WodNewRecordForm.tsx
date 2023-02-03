@@ -13,6 +13,8 @@ import { useSnackbar } from 'notistack';
 import useMutation from 'src/libs/client/useMutation';
 import dayjs from 'dayjs';
 import { useSWRConfig } from 'swr';
+import { useWodStore } from 'src/zustand/useWodStore';
+import { Box } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +24,10 @@ export type FormValuesProps = {
   // oneRound: number | null;
   // title: string;
   // content: string;
+  amrapRound?: number | null;
+  amrapRep?: number | null;
+  forTimeMinute?: number | null;
+  forTimeSecond?: number | null;
 };
 
 interface Props {
@@ -37,6 +43,9 @@ const LabelStyle = styled(Typography)(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function WodNewRecordForm({ onCancel }: Props) {
+  const { wod: currentWod } = useWodStore();
+  console.log('currentWod', currentWod);
+
   const { enqueueSnackbar } = useSnackbar();
 
   const NewRecordSchema = Yup.object().shape({
@@ -52,11 +61,11 @@ export default function WodNewRecordForm({ onCancel }: Props) {
   });
 
   const defaultValues = {
-    // createDate: searchDate,
-    // type: currentWod?.type || 'As Many Rounds As Possible',
-    // oneRound: currentWod?.oneRound || null,
-    // title: currentWod?.title || '',
-    // content: currentWod?.content || '',
+    type: currentWod?.type || 'As Many Rounds As Possible',
+    amrapRound: null,
+    amrapRep: null,
+    forTimeMinute: null,
+    forTimeSecond: null,
   };
 
   const methods = useForm<FormValuesProps>({
@@ -68,11 +77,14 @@ export default function WodNewRecordForm({ onCancel }: Props) {
     reset,
     handleSubmit,
     watch,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = methods;
+  console.log('error', errors);
 
   const { mutate } = useSWRConfig();
-  const [uploadWod, { data: wodResult }] = useMutation('/api/wods');
+  const [uploadRecord, { data: wodResult }] = useMutation(
+    `/api/wods/${currentWod?.createDate}/record`
+  );
 
   useEffect(() => {
     if (wodResult?.ok) {
@@ -85,14 +97,12 @@ export default function WodNewRecordForm({ onCancel }: Props) {
   }, [wodResult]);
 
   const onSubmit = async (data: FormValuesProps) => {
-    // console.log('submit data', data);
-    // const { createDate } = data;
-    // const stringDate = dayjs(createDate).format('YYYY-MM-DD');
-    // try {
-    //   uploadWod({ ...data, createDate: stringDate });
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    console.log('submit data', data);
+    try {
+      uploadRecord(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -111,11 +121,29 @@ export default function WodNewRecordForm({ onCancel }: Props) {
       </Stack>
 
       <Stack spacing={3} sx={{ p: 3 }}>
-        <Stack spacing={3}>
-          <RHFTextField name="round" label="Rounds" />
-          <RHFTextField name="rep" label="Repetitions" />
+        <Typography variant="h6" sx={{ color: 'text.disabled' }}>
+          {currentWod?.type === 'As Many Rounds As Possible' ? 'Score:' : 'Finish At:'}
+        </Typography>
 
-          <RHFTextField name="finishAt" label="Finish At" />
+        <Stack
+          spacing={2}
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems="center"
+          sx={{ p: 2, bgcolor: 'background.neutral' }}
+        >
+          {currentWod?.type === 'As Many Rounds As Possible' ? (
+            <>
+              <RHFTextField name="amrapRound" label="Rounds" type="number" />
+              <Typography sx={{ color: 'text.disabled' }}>and</Typography>
+              <RHFTextField name="amrapRep" label="Repetitions" type="number" />
+            </>
+          ) : (
+            <>
+              <RHFTextField name="forTimeMinute" label="Minitue" type="number" />
+              <Typography sx={{ color: 'text.disabled' }}>:</Typography>
+              <RHFTextField name="forTimeSecond" label="Second" type="number" />
+            </>
+          )}
         </Stack>
       </Stack>
     </FormProvider>
