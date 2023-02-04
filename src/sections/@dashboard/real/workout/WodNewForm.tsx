@@ -31,6 +31,7 @@ export interface IRecord extends RecordFormValuesProps {
   user: {
     id: number;
     name: string;
+    email: string;
     avatar?: string | null;
   };
 }

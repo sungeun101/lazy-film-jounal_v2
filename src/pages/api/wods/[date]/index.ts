@@ -15,20 +15,28 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
         records: {
           select: {
             id: true,
-            amrapRep: true,
             amrapRound: true,
+            amrapRep: true,
             forTimeMinute: true,
             forTimeSecond: true,
             user: {
               select: {
                 id: true,
                 name: true,
+                email: true,
                 avatar: true,
               },
             },
           },
-          // take: 10,
-          // skip: 20,
+          take: 5,
+          orderBy: [
+            {
+              amrapRound: 'desc',
+            },
+            {
+              forTimeMinute: 'asc',
+            },
+          ],
         },
         _count: {
           select: {

@@ -9,7 +9,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     session: { user },
     body: { amrapRound, amrapRep, forTimeMinute, forTimeSecond },
   } = req;
-
   const newRecord = await client.record.create({
     data: {
       user: {
@@ -23,9 +22,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
         },
       },
       amrapRound: amrapRound ? parseInt(amrapRound) : null,
-      amrapRep: amrapRound ? parseInt(amrapRep) : null,
+      amrapRep: amrapRound && amrapRep ? parseInt(amrapRep) : amrapRound && !amrapRep ? 0 : null,
       forTimeMinute: forTimeMinute ? parseInt(forTimeMinute) : null,
-      forTimeSecond: forTimeSecond ? parseInt(forTimeSecond) : null,
+      forTimeSecond:
+        forTimeMinute && forTimeSecond
+          ? parseInt(forTimeSecond)
+          : forTimeMinute && !forTimeSecond
+          ? 0
+          : null,
     },
   });
   console.log('newRecord', newRecord);

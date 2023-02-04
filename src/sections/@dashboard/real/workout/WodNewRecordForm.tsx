@@ -5,7 +5,14 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 
-import { Typography, Stack, Button, DialogActions, DialogTitle } from '@mui/material';
+import {
+  Typography,
+  Stack,
+  Button,
+  DialogActions,
+  DialogTitle,
+  FormHelperText,
+} from '@mui/material';
 // components
 import { FormProvider, RHFTextField } from 'src/components/hook-form';
 import { LoadingButton } from '@mui/lab';
@@ -34,14 +41,34 @@ export default function WodNewRecordForm({ onCancel }: Props) {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewRecordSchema = Yup.object().shape({});
+  const NewRecordSchema = Yup.object().shape({
+    amrapRound: Yup.number()
+      .transform((value) => (isNaN(value) ? null : value))
+      .nullable()
+      .when('type', {
+        is: 'As Many Rounds As Possible',
+        then: Yup.number().required('required'),
+      }),
+    forTimeMinute: Yup.number()
+      .transform((value) => (isNaN(value) ? null : value))
+      .nullable()
+      .when('type', {
+        is: 'For Time',
+        then: Yup.number().required(''),
+      }),
+    forTimeSecond: Yup.number()
+      .transform((value) => (isNaN(value) ? null : value))
+      .nullable()
+      .min(0, 'This must be at least 0')
+      .max(59, 'This must be less than 60'),
+  });
 
   const defaultValues = {
     type: currentWod?.type || 'As Many Rounds As Possible',
-    amrapRound: null,
-    amrapRep: null,
-    forTimeMinute: null,
-    forTimeSecond: null,
+    amrapRound: undefined,
+    amrapRep: undefined,
+    forTimeMinute: undefined,
+    forTimeSecond: undefined,
   };
 
   const methods = useForm<RecordFormValuesProps>({
@@ -99,26 +126,43 @@ export default function WodNewRecordForm({ onCancel }: Props) {
           {currentWod?.type === 'As Many Rounds As Possible' ? 'Score:' : 'Finish At:'}
         </Typography>
 
-        <Stack
-          spacing={2}
-          direction={{ xs: 'column', sm: 'row' }}
-          alignItems="center"
-          sx={{ p: 2, bgcolor: 'background.neutral' }}
-        >
-          {currentWod?.type === 'As Many Rounds As Possible' ? (
-            <>
-              <RHFTextField name="amrapRound" label="Rounds" type="number" />
-              <Typography sx={{ color: 'text.disabled' }}>and</Typography>
-              <RHFTextField name="amrapRep" label="Repetitions" type="number" />
-            </>
-          ) : (
-            <>
+        {currentWod?.type === 'As Many Rounds As Possible' ? (
+          <Stack
+            spacing={2}
+            direction={{ xs: 'column', sm: 'row' }}
+            sx={{ p: 2, bgcolor: 'background.neutral' }}
+          >
+            <RHFTextField
+              name="amrapRound"
+              label="Rounds"
+              type="number"
+              helperText="The number of complete rounds you were able to perform"
+            />
+            <Typography sx={{ color: 'text.disabled', pt: 2 }}>and</Typography>
+            <RHFTextField
+              name="amrapRep"
+              label="Repetitions"
+              type="number"
+              helperText="Any additional reps completed in the final round"
+            />
+          </Stack>
+        ) : (
+          <Stack spacing={1} direction="column" sx={{ p: 2, bgcolor: 'background.neutral' }}>
+            <Stack
+              spacing={2}
+              direction={{ xs: 'column', sm: 'row' }}
+              alignItems="center"
+              sx={{ bgcolor: 'background.neutral' }}
+            >
               <RHFTextField name="forTimeMinute" label="Minitue" type="number" />
               <Typography sx={{ color: 'text.disabled' }}>:</Typography>
               <RHFTextField name="forTimeSecond" label="Second" type="number" />
-            </>
-          )}
-        </Stack>
+            </Stack>
+            <FormHelperText>
+              The amount of time it took you to complete the entire workout
+            </FormHelperText>
+          </Stack>
+        )}
       </Stack>
     </FormProvider>
   );
