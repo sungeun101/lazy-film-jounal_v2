@@ -2,7 +2,7 @@ import { m } from 'framer-motion';
 // @mui
 import { Box, Paper } from '@mui/material';
 // components
-import { MotionContainer } from '../../../../../components/animate';
+import { MotionContainer } from 'src/../components/animate';
 //
 import getVariant from '../getVariant';
 

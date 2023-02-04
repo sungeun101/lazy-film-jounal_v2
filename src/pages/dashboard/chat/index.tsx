@@ -2,19 +2,19 @@ import { useEffect } from 'react';
 // @mui
 import { Card, Container } from '@mui/material';
 // redux
-import { useDispatch } from '../../../redux/store';
-import { getConversations, getContacts } from '../../../redux/slices/chat';
+import { useDispatch } from 'src/redux/store';
+import { getConversations, getContacts } from 'src/redux/slices/chat';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useSettings from '../../../hooks/useSettings';
+import useSettings from 'src/hooks/useSettings';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import { ChatSidebar, ChatWindow } from '../../../sections/@dashboard/chat';
+import { ChatSidebar, ChatWindow } from 'src/sections/@dashboard/chat';
 
 // ----------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ export default function Chat() {
           links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Chat' }]}
         />
         <Card sx={{ height: '72vh', display: 'flex' }}>
-          <ChatSidebar />
+          {/* <ChatSidebar /> */}
           <ChatWindow />
         </Card>
       </Container>

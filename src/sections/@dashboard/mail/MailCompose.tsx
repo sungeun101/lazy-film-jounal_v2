@@ -12,10 +12,10 @@ import {
   Typography,
 } from '@mui/material';
 // hooks
-import useResponsive from '../../../hooks/useResponsive';
+import useResponsive from 'src/hooks/useResponsive';
 // components
-import Iconify from '../../../components/Iconify';
-import Editor from '../../../components/editor';
+import Iconify from 'src/components/Iconify';
+import Editor from 'src/components/editor';
 
 // ----------------------------------------------------------------------
 

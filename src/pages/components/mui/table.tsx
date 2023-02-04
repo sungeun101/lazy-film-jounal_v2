@@ -2,17 +2,17 @@
 import { styled } from '@mui/material/styles';
 import { Box, Card, Container, CardHeader, Stack } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import BasicTable from '../../../sections/overview/mui/table/BasicTable';
-import CollapsibleTable from '../../../sections/overview/mui/table/collapsible-table';
-import SortingSelecting from '../../../sections/overview/mui/table/sorting-selecting';
-import GroupingFixedHeader from '../../../sections/overview/mui/table/GroupingFixedHeader';
+import BasicTable from 'src/sections/overview/mui/table/BasicTable';
+import CollapsibleTable from 'src/sections/overview/mui/table/collapsible-table';
+import SortingSelecting from 'src/sections/overview/mui/table/sorting-selecting';
+import GroupingFixedHeader from 'src/sections/overview/mui/table/GroupingFixedHeader';
 
 // ----------------------------------------------------------------------
 

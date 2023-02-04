@@ -1,11 +1,11 @@
 // @mui
 import { Stack, Button, Typography } from '@mui/material';
 // hooks
-import useAuth from '../../../hooks/useAuth';
+import useAuth from 'src/hooks/useAuth';
 // routes
-import { PATH_DOCS } from '../../../routes/paths';
+import { PATH_DOCS } from 'src/routes/paths';
 // assets
-import { DocIllustration } from '../../../assets';
+import { DocIllustration } from 'src/assets';
 
 // ----------------------------------------------------------------------
 

@@ -5,15 +5,15 @@ import { Box, Rating, Container } from '@mui/material';
 import { Masonry } from '@mui/lab';
 import { IconContainerProps } from '@mui/material/Rating';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Iconify from '../../../components/Iconify';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Iconify from 'src/components/Iconify';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import { Block } from '../../../sections/overview/Block';
+import { Block } from 'src/sections/overview/Block';
 
 // ----------------------------------------------------------------------
 

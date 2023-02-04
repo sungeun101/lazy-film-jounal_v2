@@ -2,14 +2,14 @@ import { useState, useCallback } from 'react';
 import MapGL, { FlyToInterpolator } from 'react-map-gl';
 import { InteractiveMapProps } from 'react-map-gl/src/components/interactive-map';
 // @types
-import { CityData } from '../../../../../components/map/type';
+import { CityData } from 'src/../components/map/type';
 // components
 import {
   MapControlScale,
   MapControlGeolocate,
   MapControlNavigation,
   MapControlFullscreen,
-} from '../../../../../components/map';
+} from 'src/../components/map';
 //
 import ControlPanel from './ControlPanel';
 

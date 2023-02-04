@@ -9,13 +9,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Card, Stack } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // @types
-import { Invoice, InvoiceItem, InvoiceAddress } from '../../../../@types/invoice';
+import { Invoice, InvoiceItem, InvoiceAddress } from 'src/@types/invoice';
 // mock
-import { _invoiceAddressFrom } from '../../../../_mock';
+import { _invoiceAddressFrom } from 'src/_mock';
 // components
-import { FormProvider } from '../../../../components/hook-form';
+import { FormProvider } from 'src/components/hook-form';
 //
 import InvoiceNewEditDetails from './InvoiceNewEditDetails';
 import InvoiceNewEditAddress from './InvoiceNewEditAddress';

@@ -2,7 +2,7 @@
 import { styled } from '@mui/material/styles';
 import { Tooltip, IconButton } from '@mui/material';
 // components
-import Iconify from '../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

@@ -5,12 +5,12 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 // @mui
 import { Paper, Stack, Button } from '@mui/material';
 // redux
-import { RootState, useDispatch } from '../../../redux/store';
-import { deleteColumn, updateColumn, addTask, deleteTask } from '../../../redux/slices/kanban';
+import { RootState, useDispatch } from 'src/redux/store';
+import { deleteColumn, updateColumn, addTask, deleteTask } from 'src/redux/slices/kanban';
 // @types
-import { KanbanColumn as Column } from '../../../@types/kanban';
+import { KanbanColumn as Column } from 'src/@types/kanban';
 // components
-import Iconify from '../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 //
 import KanbanAddTask from './KanbanTaskAdd';
 import KanbanTaskCard from './KanbanTaskCard';

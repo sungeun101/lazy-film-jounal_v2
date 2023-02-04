@@ -16,14 +16,14 @@ import {
   ListItemButton,
 } from '@mui/material';
 // utils
-import { fToNow } from '../../../utils/formatTime';
+import { fToNow } from 'src/utils/formatTime';
 // _mock_
-import { _notifications } from '../../../_mock';
+import { _notifications } from 'src/_mock';
 // components
-import Iconify from '../../../components/Iconify';
-import Scrollbar from '../../../components/Scrollbar';
-import MenuPopover from '../../../components/MenuPopover';
-import { IconButtonAnimate } from '../../../components/animate';
+import Iconify from 'src/components/Iconify';
+import Scrollbar from 'src/components/Scrollbar';
+import MenuPopover from 'src/components/MenuPopover';
+import { IconButtonAnimate } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 

@@ -3,14 +3,14 @@ import { sentenceCase } from 'change-case';
 import { useTheme } from '@mui/material/styles';
 import { TableRow, Checkbox, TableCell, Typography } from '@mui/material';
 // utils
-import { fDate } from '../../../../utils/formatTime';
-import { fCurrency } from '../../../../utils/formatNumber';
+import { fDate } from 'src/utils/formatTime';
+import { fCurrency } from 'src/utils/formatNumber';
 // @types
-import { Product } from '../../../../@types/product';
+import { Product } from 'src/@types/product';
 // components
-import Label from '../../../../components/Label';
-import Image from '../../../../components/Image';
-import { TableMoreMenu } from '../../../../components/table';
+import Label from 'src/components/Label';
+import Image from 'src/components/Image';
+import { TableMoreMenu } from 'src/components/table';
 //
 
 // ----------------------------------------------------------------------

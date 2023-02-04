@@ -3,16 +3,16 @@ import { Masonry } from '@mui/lab';
 import { styled } from '@mui/material/styles';
 import { Box, Fab, Zoom, Fade, Button, Tooltip, Container, IconButton } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Iconify from '../../../components/Iconify';
-import { FabButtonAnimate } from '../../../components/animate';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Iconify from 'src/components/Iconify';
+import { FabButtonAnimate } from 'src/components/animate';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import { Block } from '../../../sections/overview/Block';
+import { Block } from 'src/sections/overview/Block';
 
 // ----------------------------------------------------------------------
 

@@ -20,9 +20,9 @@ import {
   Autocomplete,
 } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // @types
-import { NewPostFormValues } from '../../../@types/blog';
+import { NewPostFormValues } from 'src/@types/blog';
 //components
 import {
   RHFSwitch,
@@ -30,7 +30,7 @@ import {
   FormProvider,
   RHFTextField,
   RHFUploadSingleFile,
-} from '../../../components/hook-form';
+} from 'src/components/hook-form';
 //
 import BlogNewPostPreview from './BlogNewPostPreview';
 

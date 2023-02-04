@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 // @mui
 import { Box, Link } from '@mui/material';
 // config
-import { ICON } from '../../../config';
+import { ICON } from 'src/config';
 // type
 import { NavItemProps } from '../type';
 //

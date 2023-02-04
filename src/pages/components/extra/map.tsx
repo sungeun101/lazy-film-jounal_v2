@@ -3,45 +3,37 @@ import { Suspense, lazy } from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, Card, Stack, Container, CardHeader, CardContent } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // config
-import { MAPBOX_API } from '../../../config';
+import { MAPBOX_API } from 'src/config';
 // _mock_
-import { cities as CITIES } from '../../../_mock/map/cities';
-import { countries as COUNTRIES } from '../../../_mock/map/countries';
+import { cities as CITIES } from 'src/_mock/map/cities';
+import { countries as COUNTRIES } from 'src/_mock/map/countries';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import { SkeletonMap } from '../../../components/skeleton';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import { SkeletonMap } from 'src/components/skeleton';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-const MapHeatmap = lazy(() => import('../../../sections/overview/extra/map/heatmap'));
-const MapGeojson = lazy(() => import('../../../sections/overview/extra/map/geojson'));
-const MapClusters = lazy(() => import('../../../sections/overview/extra/map/MapClusters'));
-const MapInteraction = lazy(() => import('../../../sections/overview/extra/map/interaction'));
-const MapChangeTheme = lazy(() => import('../../../sections/overview/extra/map/change-theme'));
-const MapZoomToBounds = lazy(() => import('../../../sections/overview/extra/map/MapZoomToBounds'));
-const MapMarkersPopups = lazy(
-  () => import('../../../sections/overview/extra/map/MapMarkersPopups')
-);
-const MapDeckglOverlay = lazy(
-  () => import('../../../sections/overview/extra/map/MapDeckglOverlay')
-);
-const MapDynamicStyling = lazy(
-  () => import('../../../sections/overview/extra/map/dynamic-styling')
-);
-const MapDraggableMarkers = lazy(
-  () => import('../../../sections/overview/extra/map/draggable-markers')
-);
+const MapHeatmap = lazy(() => import('src/sections/overview/extra/map/heatmap'));
+const MapGeojson = lazy(() => import('src/sections/overview/extra/map/geojson'));
+const MapClusters = lazy(() => import('src/sections/overview/extra/map/MapClusters'));
+const MapInteraction = lazy(() => import('src/sections/overview/extra/map/interaction'));
+const MapChangeTheme = lazy(() => import('src/sections/overview/extra/map/change-theme'));
+const MapZoomToBounds = lazy(() => import('src/sections/overview/extra/map/MapZoomToBounds'));
+const MapMarkersPopups = lazy(() => import('src/sections/overview/extra/map/MapMarkersPopups'));
+const MapDeckglOverlay = lazy(() => import('src/sections/overview/extra/map/MapDeckglOverlay'));
+const MapDynamicStyling = lazy(() => import('src/sections/overview/extra/map/dynamic-styling'));
+const MapDraggableMarkers = lazy(() => import('src/sections/overview/extra/map/draggable-markers'));
 const MapGeoJSONAnimation = lazy(
-  () => import('../../../sections/overview/extra/map/MapGeoJSONAnimation')
+  () => import('src/sections/overview/extra/map/MapGeoJSONAnimation')
 );
 const MapViewportAnimation = lazy(
-  () => import('../../../sections/overview/extra/map/viewport-animation')
+  () => import('src/sections/overview/extra/map/viewport-animation')
 );
 const MapHighlightByFilter = lazy(
-  () => import('../../../sections/overview/extra/map/MapHighlightByFilter')
+  () => import('src/sections/overview/extra/map/MapHighlightByFilter')
 );
 
 // ----------------------------------------------------------------------

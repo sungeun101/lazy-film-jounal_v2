@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack, Alert } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { FormProvider, RHFTextField } from '../../../components/hook-form';
+import { FormProvider, RHFTextField } from 'src/components/hook-form';
 import useMutation from 'src/libs/client/useMutation';
 import { useRouter } from 'next/router';
 import useUser from 'src/libs/client/useUser';

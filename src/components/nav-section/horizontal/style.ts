@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { alpha, styled } from '@mui/material/styles';
 import { Button, Popover, ButtonProps, LinkProps } from '@mui/material';
 // config
-import { NAVBAR } from '../../../config';
+import { NAVBAR } from 'src/config';
 
 // ----------------------------------------------------------------------
 

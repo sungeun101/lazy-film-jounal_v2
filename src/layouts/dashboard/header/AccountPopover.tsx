@@ -7,13 +7,13 @@ import { useRouter } from 'next/router';
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem } from '@mui/material';
 // routes
-import { PATH_DASHBOARD, PATH_AUTH } from '../../../routes/paths';
+import { PATH_DASHBOARD, PATH_AUTH } from 'src/routes/paths';
 // hooks
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 // components
-import MyAvatar from '../../../components/MyAvatar';
-import MenuPopover from '../../../components/MenuPopover';
-import { IconButtonAnimate } from '../../../components/animate';
+import MyAvatar from 'src/components/MyAvatar';
+import MenuPopover from 'src/components/MenuPopover';
+import { IconButtonAnimate } from 'src/components/animate';
 import useUser from 'src/libs/client/useUser';
 import useSWR from 'swr';
 import axios from 'axios';

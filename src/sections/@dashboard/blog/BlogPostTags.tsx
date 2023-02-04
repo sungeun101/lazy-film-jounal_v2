@@ -1,11 +1,11 @@
 // @mui
 import { Box, Chip, Avatar, Checkbox, AvatarGroup, FormControlLabel } from '@mui/material';
 // utils
-import { fShortenNumber } from '../../../utils/formatNumber';
+import { fShortenNumber } from 'src/utils/formatNumber';
 // @types
-import { Post } from '../../../@types/blog';
+import { Post } from 'src/@types/blog';
 // components
-import Iconify from '../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

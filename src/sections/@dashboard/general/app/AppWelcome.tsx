@@ -1,7 +1,7 @@
 // @mui
 import { styled } from '@mui/material/styles';
 import { Typography, Button, Card, CardContent, CardProps } from '@mui/material';
-import { SeoIllustration } from '../../../../assets';
+import { SeoIllustration } from 'src/assets';
 import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------

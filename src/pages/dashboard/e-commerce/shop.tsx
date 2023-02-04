@@ -5,20 +5,20 @@ import { useForm } from 'react-hook-form';
 // @mui
 import { Container, Typography, Stack } from '@mui/material';
 // redux
-import { useDispatch, useSelector } from '../../../redux/store';
-import { getProducts, filterProducts } from '../../../redux/slices/product';
+import { useDispatch, useSelector } from 'src/redux/store';
+import { getProducts, filterProducts } from 'src/redux/slices/product';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // @types
-import { Product, ProductFilter } from '../../../@types/product';
+import { Product, ProductFilter } from 'src/@types/product';
 // hooks
-import useSettings from '../../../hooks/useSettings';
+import useSettings from 'src/hooks/useSettings';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
-import { FormProvider } from '../../../components/hook-form';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
+import { FormProvider } from 'src/components/hook-form';
 // sections
 import {
   ShopTagFiltered,
@@ -26,8 +26,8 @@ import {
   ShopProductList,
   ShopFilterSidebar,
   ShopProductSearch,
-} from '../../../sections/@dashboard/e-commerce/shop';
-import CartWidget from '../../../sections/@dashboard/e-commerce/CartWidget';
+} from 'src/sections/@dashboard/e-commerce/shop';
+import CartWidget from 'src/sections/@dashboard/e-commerce/CartWidget';
 
 // ----------------------------------------------------------------------
 

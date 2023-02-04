@@ -4,17 +4,17 @@ import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
 import { Box, Link, Tooltip, Typography, IconButton } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useResponsive from '../../../hooks/useResponsive';
+import useResponsive from 'src/hooks/useResponsive';
 // utils
-import createAvatar from '../../../utils/createAvatar';
-import { fDateTimeSuffix } from '../../../utils/formatTime';
+import createAvatar from 'src/utils/createAvatar';
+import { fDateTimeSuffix } from 'src/utils/formatTime';
 // @types
-import { Mail } from '../../../@types/mail';
+import { Mail } from 'src/@types/mail';
 // components
-import Avatar from '../../../components/Avatar';
-import Iconify from '../../../components/Iconify';
+import Avatar from 'src/components/Avatar';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

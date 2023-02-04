@@ -2,13 +2,13 @@
 import { styled } from '@mui/material/styles';
 import { Card, CardHeader, Typography, Stack, StackProps } from '@mui/material';
 // utils
-import { fShortenNumber } from '../../../../utils/formatNumber';
+import { fShortenNumber } from 'src/utils/formatNumber';
 // _mock_
-import { _appInstalled } from '../../../../_mock';
+import { _appInstalled } from 'src/_mock';
 // components
-import Image from '../../../../components/Image';
-import Iconify from '../../../../components/Iconify';
-import Scrollbar from '../../../../components/Scrollbar';
+import Image from 'src/components/Image';
+import Iconify from 'src/components/Iconify';
+import Scrollbar from 'src/components/Scrollbar';
 
 // ----------------------------------------------------------------------
 

@@ -15,15 +15,11 @@ import {
   FormControlLabel,
 } from '@mui/material';
 // hooks
-import useTable, { getComparator, emptyRows } from '../../../../../hooks/useTable';
+import useTable, { getComparator, emptyRows } from 'src/../hooks/useTable';
 // components
-import Iconify from '../../../../../components/Iconify';
-import Scrollbar from '../../../../../components/Scrollbar';
-import {
-  TableEmptyRows,
-  TableHeadCustom,
-  TableSelectedActions,
-} from '../../../../../components/table';
+import Iconify from 'src/../components/Iconify';
+import Scrollbar from 'src/../components/Scrollbar';
+import { TableEmptyRows, TableHeadCustom, TableSelectedActions } from 'src/../components/table';
 //
 import SortingSelectingToolbar from './SortingSelectingToolbar';
 

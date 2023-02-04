@@ -3,13 +3,13 @@ import Masonry from '@mui/lab/Masonry';
 import { styled } from '@mui/material/styles';
 import { Box, Card, CardHeader, Container, CardContent } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import TextMaxLine from '../../../components/TextMaxLine';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import TextMaxLine from 'src/components/TextMaxLine';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 
 // ----------------------------------------------------------------------
 

@@ -1,9 +1,9 @@
 // @mui
 import { Box } from '@mui/material';
 // @type
-import { Product } from '../../../../@types/product';
+import { Product } from 'src/@types/product';
 // components
-import { SkeletonProductItem } from '../../../../components/skeleton';
+import { SkeletonProductItem } from 'src/components/skeleton';
 //
 import ShopProductCard from './ShopProductCard';
 

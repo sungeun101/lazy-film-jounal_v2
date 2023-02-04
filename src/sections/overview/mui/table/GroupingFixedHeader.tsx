@@ -9,9 +9,9 @@ import {
   TablePagination,
 } from '@mui/material';
 // hooks
-import useTable from '../../../../hooks/useTable';
+import useTable from 'src/hooks/useTable';
 // components
-import Scrollbar from '../../../../components/Scrollbar';
+import Scrollbar from 'src/components/Scrollbar';
 
 // ----------------------------------------------------------------------
 

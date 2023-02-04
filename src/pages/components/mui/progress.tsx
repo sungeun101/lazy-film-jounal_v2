@@ -3,16 +3,16 @@ import { useState, useEffect, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, Container, Stack } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import ProgressLinear from '../../../sections/overview/mui/progress/ProgressLinear';
-import ProgressCircular from '../../../sections/overview/mui/progress/ProgressCircular';
-import { Block } from '../../../sections/overview/Block';
+import ProgressLinear from 'src/sections/overview/mui/progress/ProgressLinear';
+import ProgressCircular from 'src/sections/overview/mui/progress/ProgressCircular';
+import { Block } from 'src/sections/overview/Block';
 
 // ----------------------------------------------------------------------
 

@@ -13,15 +13,15 @@ import {
   FormControlLabel,
 } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // utils
-import { fData } from '../../../utils/formatNumber';
+import { fData } from 'src/utils/formatNumber';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
-import { UploadAvatar, UploadMultiFile, UploadSingleFile } from '../../../components/upload';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
+import { UploadAvatar, UploadMultiFile, UploadSingleFile } from 'src/components/upload';
 
 // ----------------------------------------------------------------------
 

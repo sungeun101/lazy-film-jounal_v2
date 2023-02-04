@@ -20,9 +20,9 @@ import {
   InputAdornment,
 } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // @types
-import { Product } from '../../../@types/product';
+import { Product } from 'src/@types/product';
 // components
 import {
   FormProvider,
@@ -32,7 +32,7 @@ import {
   RHFTextField,
   RHFRadioGroup,
   RHFUploadMultiFile,
-} from '../../../components/hook-form';
+} from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 

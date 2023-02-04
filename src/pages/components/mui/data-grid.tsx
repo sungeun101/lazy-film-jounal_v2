@@ -2,15 +2,15 @@
 import { styled } from '@mui/material/styles';
 import { Box, Container, Stack, Card, CardHeader } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import DataGridBasic from '../../../sections/overview/mui/data-grid/DataGridBasic';
-import DataGridCustom from '../../../sections/overview/mui/data-grid/DataGridCustom';
+import DataGridBasic from 'src/sections/overview/mui/data-grid/DataGridBasic';
+import DataGridCustom from 'src/sections/overview/mui/data-grid/DataGridCustom';
 
 // ----------------------------------------------------------------------
 

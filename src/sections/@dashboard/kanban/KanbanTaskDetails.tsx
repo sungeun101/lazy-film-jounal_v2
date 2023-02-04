@@ -16,13 +16,13 @@ import {
   OutlinedInput,
 } from '@mui/material';
 // hooks
-import useResponsive from '../../../hooks/useResponsive';
+import useResponsive from 'src/hooks/useResponsive';
 // /@types
-import { KanbanCard } from '../../../@types/kanban';
+import { KanbanCard } from 'src/@types/kanban';
 // components
-import Iconify from '../../../components/Iconify';
-import Scrollbar from '../../../components/Scrollbar';
-import { IconButtonAnimate } from '../../../components/animate';
+import Iconify from 'src/components/Iconify';
+import Scrollbar from 'src/components/Scrollbar';
+import { IconButtonAnimate } from 'src/components/animate';
 //
 import KanbanTaskCommentList from './KanbanTaskCommentList';
 import KanbanTaskAttachments from './KanbanTaskAttachments';

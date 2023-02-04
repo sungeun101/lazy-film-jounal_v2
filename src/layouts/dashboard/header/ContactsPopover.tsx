@@ -3,15 +3,15 @@ import { useState } from 'react';
 import { alpha } from '@mui/material/styles';
 import { Avatar, Typography, ListItemText, ListItemAvatar, MenuItem } from '@mui/material';
 // utils
-import { fToNow } from '../../../utils/formatTime';
+import { fToNow } from 'src/utils/formatTime';
 // _mock_
-import { _contacts } from '../../../_mock';
+import { _contacts } from 'src/_mock';
 // components
-import Iconify from '../../../components/Iconify';
-import Scrollbar from '../../../components/Scrollbar';
-import MenuPopover from '../../../components/MenuPopover';
-import BadgeStatus from '../../../components/BadgeStatus';
-import { IconButtonAnimate } from '../../../components/animate';
+import Iconify from 'src/components/Iconify';
+import Scrollbar from 'src/components/Scrollbar';
+import MenuPopover from 'src/components/MenuPopover';
+import BadgeStatus from 'src/components/BadgeStatus';
+import { IconButtonAnimate } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 

@@ -7,29 +7,29 @@ import { alpha, styled } from '@mui/material/styles';
 import { Box, Tab, Card, Grid, Divider, Container, Typography } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 // redux
-import { useDispatch, useSelector } from '../../../../redux/store';
-import { getProduct, addCart, onGotoStep } from '../../../../redux/slices/product';
+import { useDispatch, useSelector } from 'src/redux/store';
+import { getProduct, addCart, onGotoStep } from 'src/redux/slices/product';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // @types
-import { CartItem } from '../../../../@types/product';
+import { CartItem } from 'src/@types/product';
 // hooks
-import useSettings from '../../../../hooks/useSettings';
+import useSettings from 'src/hooks/useSettings';
 // layouts
-import Layout from '../../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../../components/Page';
-import Iconify from '../../../../components/Iconify';
-import Markdown from '../../../../components/Markdown';
-import { SkeletonProduct } from '../../../../components/skeleton';
-import HeaderBreadcrumbs from '../../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Iconify from 'src/components/Iconify';
+import Markdown from 'src/components/Markdown';
+import { SkeletonProduct } from 'src/components/skeleton';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
 import {
   ProductDetailsSummary,
   ProductDetailsReview,
   ProductDetailsCarousel,
-} from '../../../../sections/@dashboard/e-commerce/product-details';
-import CartWidget from '../../../../sections/@dashboard/e-commerce/CartWidget';
+} from 'src/sections/@dashboard/e-commerce/product-details';
+import CartWidget from 'src/sections/@dashboard/e-commerce/CartWidget';
 
 // ----------------------------------------------------------------------
 

@@ -14,16 +14,16 @@ import {
   FormControlLabel,
 } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // hooks
-import useLocales from '../../../hooks/useLocales';
+import useLocales from 'src/hooks/useLocales';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Image from '../../../components/Image';
-import TextIconLabel from '../../../components/TextIconLabel';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Image from 'src/components/Image';
+import TextIconLabel from 'src/components/TextIconLabel';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 
 // ----------------------------------------------------------------------
 

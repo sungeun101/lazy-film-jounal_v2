@@ -4,18 +4,18 @@ import { useRouter } from 'next/router';
 // @mui
 import { Container } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useSettings from '../../../../hooks/useSettings';
+import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userList } from '../../../../_mock';
+import { _userList } from 'src/_mock';
 // layouts
-import Layout from '../../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../../components/Page';
-import HeaderBreadcrumbs from '../../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import UserNewEditForm from '../../../../sections/@dashboard/user/UserNewEditForm';
+import UserNewEditForm from 'src/sections/@dashboard/user/UserNewEditForm';
 
 // ----------------------------------------------------------------------
 

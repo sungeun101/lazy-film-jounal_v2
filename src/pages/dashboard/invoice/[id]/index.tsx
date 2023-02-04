@@ -3,18 +3,18 @@ import { useRouter } from 'next/router';
 // @mui
 import { Container } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // _mock_
-import { _invoices } from '../../../../_mock';
+import { _invoices } from 'src/_mock';
 // hooks
-import useSettings from '../../../../hooks/useSettings';
+import useSettings from 'src/hooks/useSettings';
 // layouts
-import Layout from '../../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../../components/Page';
-import HeaderBreadcrumbs from '../../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import Invoice from '../../../../sections/@dashboard/invoice/details';
+import Invoice from 'src/sections/@dashboard/invoice/details';
 
 // ----------------------------------------------------------------------
 

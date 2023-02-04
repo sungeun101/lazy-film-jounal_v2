@@ -3,16 +3,16 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, Card, Container } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // _mock
-import _mock from '../../../_mock';
+import _mock from 'src/_mock';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Image from '../../../components/Image';
-import LightboxModal from '../../../components/LightboxModal';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Image from 'src/components/Image';
+import LightboxModal from 'src/components/LightboxModal';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 
 // ----------------------------------------------------------------------
 

@@ -20,33 +20,33 @@ import {
   FormControlLabel,
 } from '@mui/material';
 // redux
-import { useDispatch, useSelector } from '../../../redux/store';
-import { getProducts } from '../../../redux/slices/product';
+import { useDispatch, useSelector } from 'src/redux/store';
+import { getProducts } from 'src/redux/slices/product';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useSettings from '../../../hooks/useSettings';
-import useTable, { getComparator, emptyRows } from '../../../hooks/useTable';
+import useSettings from 'src/hooks/useSettings';
+import useTable, { getComparator, emptyRows } from 'src/hooks/useTable';
 // @types
-import { Product } from '../../../@types/product';
+import { Product } from 'src/@types/product';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Iconify from '../../../components/Iconify';
-import Scrollbar from '../../../components/Scrollbar';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Iconify from 'src/components/Iconify';
+import Scrollbar from 'src/components/Scrollbar';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 import {
   TableEmptyRows,
   TableHeadCustom,
   TableSearchNotFound,
   TableSelectedActions,
-} from '../../../components/table';
+} from 'src/components/table';
 // sections
 import {
   ProductTableRow,
   ProductTableToolbar,
-} from '../../../sections/@dashboard/e-commerce/product-list';
+} from 'src/sections/@dashboard/e-commerce/product-list';
 
 // ----------------------------------------------------------------------
 

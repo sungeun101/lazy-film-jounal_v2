@@ -11,16 +11,16 @@ import {
   AccordionDetails,
 } from '@mui/material';
 // _mock_
-import { _accordions } from '../../../_mock';
+import { _accordions } from 'src/_mock';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Iconify from '../../../components/Iconify';
-import { PATH_PAGE } from '../../../routes/paths';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Iconify from 'src/components/Iconify';
+import { PATH_PAGE } from 'src/routes/paths';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import { Block } from '../../../sections/overview/Block';
+import { Block } from 'src/sections/overview/Block';
 
 // ----------------------------------------------------------------------
 

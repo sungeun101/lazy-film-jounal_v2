@@ -23,30 +23,30 @@ import {
   FormControlLabel,
 } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useTabs from '../../../hooks/useTabs';
-import useSettings from '../../../hooks/useSettings';
-import useTable, { getComparator, emptyRows } from '../../../hooks/useTable';
+import useTabs from 'src/hooks/useTabs';
+import useSettings from 'src/hooks/useSettings';
+import useTable, { getComparator, emptyRows } from 'src/hooks/useTable';
 // @types
-import { UserManager } from '../../../@types/user';
+import { UserManager } from 'src/@types/user';
 // _mock_
-import { _userList } from '../../../_mock';
+import { _userList } from 'src/_mock';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Iconify from '../../../components/Iconify';
-import Scrollbar from '../../../components/Scrollbar';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Iconify from 'src/components/Iconify';
+import Scrollbar from 'src/components/Scrollbar';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 import {
   TableEmptyRows,
   TableHeadCustom,
   TableSearchNotFound,
   TableSelectedActions,
-} from '../../../components/table';
+} from 'src/components/table';
 // sections
-import { UserTableToolbar, UserTableRow } from '../../../sections/@dashboard/user/list';
+import { UserTableToolbar, UserTableRow } from 'src/sections/@dashboard/user/list';
 
 // ----------------------------------------------------------------------
 

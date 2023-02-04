@@ -3,17 +3,17 @@ import { useTheme, styled } from '@mui/material/styles';
 import { Box, Badge, Container, AvatarGroup } from '@mui/material';
 import { Masonry } from '@mui/lab';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Avatar from '../../../components/Avatar';
-import Iconify from '../../../components/Iconify';
-import BadgeStatus from '../../../components/BadgeStatus';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Avatar from 'src/components/Avatar';
+import Iconify from 'src/components/Iconify';
+import BadgeStatus from 'src/components/BadgeStatus';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import { Block } from '../../../sections/overview/Block';
+import { Block } from 'src/sections/overview/Block';
 
 // ----------------------------------------------------------------------
 

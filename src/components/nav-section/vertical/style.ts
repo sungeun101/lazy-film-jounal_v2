@@ -9,7 +9,7 @@ import {
   ListItemButtonProps,
 } from '@mui/material';
 // config
-import { ICON, NAVBAR } from '../../../config';
+import { ICON, NAVBAR } from 'src/config';
 
 // ----------------------------------------------------------------------
 

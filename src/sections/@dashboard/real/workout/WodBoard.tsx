@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import { useTheme } from '@mui/material/styles';
 import { Card, Stack, Button, CardHeader, Typography, TextField } from '@mui/material';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 import { DialogAnimate } from 'src/components/animate';
 import WodNewForm, { WodFormValuesProps } from './WodNewForm';
 import useSWR from 'swr';

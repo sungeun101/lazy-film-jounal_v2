@@ -1,8 +1,8 @@
 // @mui
 import { Table, TableRow, TableBody, TableCell, TableContainer } from '@mui/material';
 // components
-import Scrollbar from '../../../../components/Scrollbar';
-import { TableHeadCustom } from '../../../../components/table';
+import Scrollbar from 'src/components/Scrollbar';
+import { TableHeadCustom } from 'src/components/table';
 
 // ----------------------------------------------------------------------
 

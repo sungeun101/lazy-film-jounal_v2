@@ -2,21 +2,21 @@
 import { styled } from '@mui/material/styles';
 import { Box, Card, Stack, Container, AppBar, Typography } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
-import { NAVBAR } from '../../../config';
+import { PATH_PAGE } from 'src/routes/paths';
+import { NAVBAR } from 'src/config';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Image from '../../../components/Image';
-import Iconify from '../../../components/Iconify';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Image from 'src/components/Image';
+import Iconify from 'src/components/Iconify';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 import {
   MenuConfig,
   MegaMenuMobile,
   MegaMenuDesktopHorizon,
   MegaMenuDesktopVertical,
-} from '../../../components/mega-menu';
+} from 'src/components/mega-menu';
 
 // ----------------------------------------------------------------------
 

@@ -19,10 +19,10 @@ import {
   Stack,
 } from '@mui/material';
 // _mock_
-import { _ecommerceBestSalesman } from '../../../../_mock';
+import { _ecommerceBestSalesman } from 'src/_mock';
 // components
-import Label from '../../../../components/Label';
-import Scrollbar from '../../../../components/Scrollbar';
+import Label from 'src/components/Label';
+import Scrollbar from 'src/components/Scrollbar';
 import Iconify from 'src/components/Iconify';
 import { useEffect, useState } from 'react';
 import { DialogAnimate } from 'src/components/animate';

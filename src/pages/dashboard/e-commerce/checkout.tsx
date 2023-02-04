@@ -3,26 +3,26 @@ import { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, Grid, Step, Stepper, Container, StepLabel, StepConnector } from '@mui/material';
 // redux
-import { useDispatch, useSelector } from '../../../redux/store';
-import { getCart, createBilling } from '../../../redux/slices/product';
+import { useDispatch, useSelector } from 'src/redux/store';
+import { getCart, createBilling } from 'src/redux/slices/product';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
-import useSettings from '../../../hooks/useSettings';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import useSettings from 'src/hooks/useSettings';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Iconify from '../../../components/Iconify';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Iconify from 'src/components/Iconify';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
 import {
   CheckoutCart,
   CheckoutPayment,
   CheckoutOrderComplete,
   CheckoutBillingAddress,
-} from '../../../sections/@dashboard/e-commerce/checkout';
+} from 'src/sections/@dashboard/e-commerce/checkout';
 
 // ----------------------------------------------------------------------
 

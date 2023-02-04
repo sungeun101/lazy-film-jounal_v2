@@ -2,8 +2,8 @@ import { useRef, useState, useEffect, ChangeEvent, KeyboardEvent } from 'react';
 // @mui
 import { Stack, OutlinedInput, MenuItem, IconButton } from '@mui/material';
 // components
-import Iconify from '../../../components/Iconify';
-import MenuPopover from '../../../components/MenuPopover';
+import Iconify from 'src/components/Iconify';
+import MenuPopover from 'src/components/MenuPopover';
 
 // ----------------------------------------------------------------------
 

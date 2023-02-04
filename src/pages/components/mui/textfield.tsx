@@ -4,16 +4,16 @@ import { styled } from '@mui/material/styles';
 import { Box, Container, Tab } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import Filled from '../../../sections/overview/mui/textfield/Filled';
-import Standard from '../../../sections/overview/mui/textfield/Standard';
-import Outlined from '../../../sections/overview/mui/textfield/Outlined';
+import Filled from 'src/sections/overview/mui/textfield/Filled';
+import Standard from 'src/sections/overview/mui/textfield/Standard';
+import Outlined from 'src/sections/overview/mui/textfield/Outlined';
 
 // ----------------------------------------------------------------------
 

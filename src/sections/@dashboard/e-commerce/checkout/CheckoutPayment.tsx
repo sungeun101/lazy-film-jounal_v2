@@ -6,18 +6,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Grid, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // @types
-import { CardOption, PaymentOption, DeliveryOption } from '../../../../@types/product';
+import { CardOption, PaymentOption, DeliveryOption } from 'src/@types/product';
 // redux
-import { useDispatch, useSelector } from '../../../../redux/store';
-import {
-  onGotoStep,
-  onBackStep,
-  onNextStep,
-  applyShipping,
-} from '../../../../redux/slices/product';
+import { useDispatch, useSelector } from 'src/redux/store';
+import { onGotoStep, onBackStep, onNextStep, applyShipping } from 'src/redux/slices/product';
 // components
-import Iconify from '../../../../components/Iconify';
-import { FormProvider } from '../../../../components/hook-form';
+import Iconify from 'src/components/Iconify';
+import { FormProvider } from 'src/components/hook-form';
 //
 import CheckoutSummary from './CheckoutSummary';
 import CheckoutDelivery from './CheckoutDelivery';

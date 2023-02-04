@@ -3,12 +3,12 @@ import { useFormContext } from 'react-hook-form';
 // @mui
 import { Stack, Divider, Typography, Button } from '@mui/material';
 // hooks
-import useResponsive from '../../../../hooks/useResponsive';
-import useToggle from '../../../../hooks/useToggle';
+import useResponsive from 'src/hooks/useResponsive';
+import useToggle from 'src/hooks/useToggle';
 // _mock
-import { _invoiceAddressFrom, _invoiceAddressTo } from '../../../../_mock';
+import { _invoiceAddressFrom, _invoiceAddressTo } from 'src/_mock';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 //
 import InvoiceAddressListDialog from './InvoiceAddressListDialog';
 

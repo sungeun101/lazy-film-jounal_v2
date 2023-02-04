@@ -2,9 +2,9 @@
 import { styled } from '@mui/material/styles';
 import { Link, Card, Typography, CardHeader, Stack } from '@mui/material';
 // @types
-import { Profile } from '../../../../@types/user';
+import { Profile } from 'src/@types/user';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

@@ -2,11 +2,11 @@
 import { alpha, styled } from '@mui/material/styles';
 import { Card, Typography } from '@mui/material';
 // utils
-import { fShortenNumber } from '../../../../utils/formatNumber';
+import { fShortenNumber } from 'src/utils/formatNumber';
 // theme
-import { ColorSchema } from '../../../../theme/palette';
+import { ColorSchema } from 'src/theme/palette';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

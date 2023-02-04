@@ -3,9 +3,9 @@ import { memo } from 'react';
 import { styled } from '@mui/material/styles';
 import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
 // @types
-import { CityData } from '../../../../../components/map/type';
+import { CityData } from 'src/../components/map/type';
 // utils
-import cssStyles from '../../../../../utils/cssStyles';
+import cssStyles from 'src/../utils/cssStyles';
 
 // ----------------------------------------------------------------------
 

@@ -5,23 +5,23 @@ import NextLink from 'next/link';
 // @mui
 import { Grid, Button, Container, Stack } from '@mui/material';
 // hooks
-import useSettings from '../../../hooks/useSettings';
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
+import useSettings from 'src/hooks/useSettings';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 // utils
-import axios from '../../../utils/axios';
+import axios from 'src/utils/axios';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // @types
-import { Post } from '../../../@types/blog';
+import { Post } from 'src/@types/blog';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Iconify from '../../../components/Iconify';
-import { SkeletonPostItem } from '../../../components/skeleton';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Iconify from 'src/components/Iconify';
+import { SkeletonPostItem } from 'src/components/skeleton';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../../../sections/@dashboard/blog';
+import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from 'src/sections/@dashboard/blog';
 
 // ----------------------------------------------------------------------
 

@@ -10,12 +10,12 @@ import {
   InputAdornment,
 } from '@mui/material';
 // @types
-import { Friend } from '../../../../@types/user';
+import { Friend } from 'src/@types/user';
 // components
-import Iconify from '../../../../components/Iconify';
-import InputStyle from '../../../../components/InputStyle';
-import SocialsButton from '../../../../components/SocialsButton';
-import SearchNotFound from '../../../../components/SearchNotFound';
+import Iconify from 'src/components/Iconify';
+import InputStyle from 'src/components/InputStyle';
+import SocialsButton from 'src/components/SocialsButton';
+import SearchNotFound from 'src/components/SearchNotFound';
 
 // ----------------------------------------------------------------------
 

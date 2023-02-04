@@ -2,11 +2,11 @@
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Checkbox, TableRow, TableCell, Typography } from '@mui/material';
 // @types
-import { UserManager } from '../../../../@types/user';
+import { UserManager } from 'src/@types/user';
 // components
-import Label from '../../../../components/Label';
-import Iconify from '../../../../components/Iconify';
-import { TableMoreMenu } from '../../../../components/table';
+import Label from 'src/components/Label';
+import Iconify from 'src/components/Iconify';
+import { TableMoreMenu } from 'src/components/table';
 
 // ----------------------------------------------------------------------
 

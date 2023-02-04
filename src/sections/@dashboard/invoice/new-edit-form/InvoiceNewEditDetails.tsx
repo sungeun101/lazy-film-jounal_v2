@@ -3,10 +3,10 @@ import { useFormContext, useFieldArray } from 'react-hook-form';
 // @mui
 import { Box, Stack, Button, Divider, Typography, InputAdornment, MenuItem } from '@mui/material';
 // utils
-import { fNumber } from '../../../../utils/formatNumber';
+import { fNumber } from 'src/utils/formatNumber';
 // components
-import Iconify from '../../../../components/Iconify';
-import { RHFSelect, RHFTextField } from '../../../../components/hook-form';
+import Iconify from 'src/components/Iconify';
+import { RHFSelect, RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 

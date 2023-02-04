@@ -18,12 +18,12 @@ import {
   FormControlLabel,
 } from '@mui/material';
 // hooks
-import useResponsive from '../../../../hooks/useResponsive';
+import useResponsive from 'src/hooks/useResponsive';
 // @types
-import { CardOption, PaymentOption } from '../../../../@types/product';
+import { CardOption, PaymentOption } from 'src/@types/product';
 // components
-import Image from '../../../../components/Image';
-import Iconify from '../../../../components/Iconify';
+import Image from 'src/components/Image';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

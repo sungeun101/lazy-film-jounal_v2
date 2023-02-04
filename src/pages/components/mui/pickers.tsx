@@ -4,17 +4,17 @@ import { TabPanel, TabContext, TabList } from '@mui/lab';
 import { styled } from '@mui/material/styles';
 import { Box, Container, Tab } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import PickerDate from '../../../sections/overview/mui/pickers/PickerDate';
-import PickerTime from '../../../sections/overview/mui/pickers/PickerTime';
-import PickerDateTime from '../../../sections/overview/mui/pickers/PickerDateTime';
-import PickerDateRange from '../../../sections/overview/mui/pickers/PickerDateRange';
+import PickerDate from 'src/sections/overview/mui/pickers/PickerDate';
+import PickerTime from 'src/sections/overview/mui/pickers/PickerTime';
+import PickerDateTime from 'src/sections/overview/mui/pickers/PickerDateTime';
+import PickerDateRange from 'src/sections/overview/mui/pickers/PickerDateRange';
 
 // ----------------------------------------------------------------------
 

@@ -4,24 +4,19 @@ import { useRouter } from 'next/router';
 // @mui
 import { Container, Card } from '@mui/material';
 // redux
-import { useDispatch } from '../../../../redux/store';
-import { getLabels } from '../../../../redux/slices/mail';
+import { useDispatch } from 'src/redux/store';
+import { getLabels } from 'src/redux/slices/mail';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useSettings from '../../../../hooks/useSettings';
+import useSettings from 'src/hooks/useSettings';
 // layouts
-import Layout from '../../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../../components/Page';
-import HeaderBreadcrumbs from '../../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import {
-  MailList,
-  MailDetails,
-  MailSidebar,
-  MailCompose,
-} from '../../../../sections/@dashboard/mail';
+import { MailList, MailDetails, MailSidebar, MailCompose } from 'src/sections/@dashboard/mail';
 
 // ----------------------------------------------------------------------
 

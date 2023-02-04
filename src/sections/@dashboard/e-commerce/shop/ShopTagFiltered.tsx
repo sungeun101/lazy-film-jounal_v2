@@ -3,11 +3,11 @@ import { sentenceCase } from 'change-case';
 import { useTheme, styled } from '@mui/material/styles';
 import { Chip, Typography, Stack, Button } from '@mui/material';
 // utils
-import getColorName from '../../../../utils/getColorName';
+import getColorName from 'src/utils/getColorName';
 // @type
-import { ProductFilter } from '../../../../@types/product';
+import { ProductFilter } from 'src/@types/product';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

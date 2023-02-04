@@ -3,14 +3,14 @@ import { useState } from 'react';
 import MapGL, { MapEvent, LinearInterpolator, WebMercatorViewport } from 'react-map-gl';
 import { InteractiveMapProps } from 'react-map-gl/src/components/interactive-map';
 // _mock_
-import MAP_STYLE from '../../../../_mock/map/map-style-basic-v8.json';
+import MAP_STYLE from 'src/_mock/map/map-style-basic-v8.json';
 // components
 import {
   MapControlScale,
   MapControlGeolocate,
   MapControlNavigation,
   MapControlFullscreen,
-} from '../../../../components/map';
+} from 'src/components/map';
 
 // ----------------------------------------------------------------------
 

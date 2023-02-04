@@ -3,12 +3,12 @@ import { styled } from '@mui/material/styles';
 import { Box, Stack, Card, Container, CardHeader, CardContent } from '@mui/material';
 import { Masonry } from '@mui/lab';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
 import {
   CarouselBasic1,
@@ -18,7 +18,7 @@ import {
   CarouselAnimation,
   CarouselThumbnail,
   CarouselCenterMode,
-} from '../../../sections/overview/extra/carousel';
+} from 'src/sections/overview/extra/carousel';
 
 // ----------------------------------------------------------------------
 

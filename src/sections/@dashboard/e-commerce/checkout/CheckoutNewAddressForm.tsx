@@ -15,16 +15,16 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // @types
-import { OnCreateBilling, BillingAddress } from '../../../../@types/product';
+import { OnCreateBilling, BillingAddress } from 'src/@types/product';
 // _mock
-import { countries } from '../../../../_mock';
+import { countries } from 'src/_mock';
 import {
   FormProvider,
   RHFCheckbox,
   RHFSelect,
   RHFTextField,
   RHFRadioGroup,
-} from '../../../../components/hook-form';
+} from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 

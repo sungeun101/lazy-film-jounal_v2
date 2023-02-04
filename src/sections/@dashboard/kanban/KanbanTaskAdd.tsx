@@ -14,11 +14,11 @@ import {
 } from '@mui/material';
 import { MobileDateRangePicker } from '@mui/lab';
 // utils
-import uuidv4 from '../../../utils/uuidv4';
+import uuidv4 from 'src/utils/uuidv4';
 // @types
-import { KanbanCard } from '../../../@types/kanban';
+import { KanbanCard } from 'src/@types/kanban';
 // components
-import Iconify from '../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

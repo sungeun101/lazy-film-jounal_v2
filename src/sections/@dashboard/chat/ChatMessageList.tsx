@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 // @types
-import { Conversation } from '../../../@types/chat';
+import { Conversation } from 'src/@types/chat';
 //
-import Scrollbar from '../../../components/Scrollbar';
-import LightboxModal from '../../../components/LightboxModal';
+import Scrollbar from 'src/components/Scrollbar';
+import LightboxModal from 'src/components/LightboxModal';
 import ChatMessageItem from './ChatMessageItem';
 
 // ----------------------------------------------------------------------

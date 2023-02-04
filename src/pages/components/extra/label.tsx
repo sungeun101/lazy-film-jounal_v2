@@ -3,13 +3,13 @@ import { ReactNode } from 'react';
 import { styled, alpha, Theme } from '@mui/material/styles';
 import { Box, Container, Stack, Paper, CardHeader, SxProps } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Label from '../../../components/Label';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Label from 'src/components/Label';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 
 // ----------------------------------------------------------------------
 

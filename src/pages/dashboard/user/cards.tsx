@@ -1,18 +1,18 @@
 // @mui
 import { Container, Box } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useSettings from '../../../hooks/useSettings';
+import useSettings from 'src/hooks/useSettings';
 // _mock_
-import { _userCards } from '../../../_mock';
+import { _userCards } from 'src/_mock';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import { UserCard } from '../../../sections/@dashboard/user/cards';
+import { UserCard } from 'src/sections/@dashboard/user/cards';
 
 // ----------------------------------------------------------------------
 

@@ -3,11 +3,11 @@ import sumBy from 'lodash/sumBy';
 import { styled } from '@mui/material/styles';
 import { Grid, Rating, Button, Typography, LinearProgress, Stack, Link } from '@mui/material';
 // utils
-import { fShortenNumber } from '../../../../utils/formatNumber';
+import { fShortenNumber } from 'src/utils/formatNumber';
 // @types
-import { Product } from '../../../../@types/product';
+import { Product } from 'src/@types/product';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

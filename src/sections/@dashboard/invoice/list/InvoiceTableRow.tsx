@@ -2,15 +2,15 @@
 import { useTheme } from '@mui/material/styles';
 import { Checkbox, TableRow, TableCell, Typography, Stack, Link } from '@mui/material';
 // utils
-import { fDate } from '../../../../utils/formatTime';
-import createAvatar from '../../../../utils/createAvatar';
-import { fCurrency } from '../../../../utils/formatNumber';
+import { fDate } from 'src/utils/formatTime';
+import createAvatar from 'src/utils/createAvatar';
+import { fCurrency } from 'src/utils/formatNumber';
 // @types
-import { Invoice } from '../../../../@types/invoice';
+import { Invoice } from 'src/@types/invoice';
 // components
-import Avatar from '../../../../components/Avatar';
-import Label from '../../../../components/Label';
-import { TableMoreMenu } from '../../../../components/table';
+import Avatar from 'src/components/Avatar';
+import Label from 'src/components/Label';
+import { TableMoreMenu } from 'src/components/table';
 
 // ----------------------------------------------------------------------
 

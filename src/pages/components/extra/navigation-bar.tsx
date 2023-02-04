@@ -2,16 +2,16 @@
 import { styled } from '@mui/material/styles';
 import { Box, Container } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // config
-import { NAVBAR } from '../../../config';
+import { NAVBAR } from 'src/config';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Iconify from '../../../components/Iconify';
-import { NavSectionVertical } from '../../../components/nav-section';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Iconify from 'src/components/Iconify';
+import { NavSectionVertical } from 'src/components/nav-section';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 
 // ----------------------------------------------------------------------
 

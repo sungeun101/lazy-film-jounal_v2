@@ -13,13 +13,13 @@ import {
   CircularProgress,
 } from '@mui/material';
 // hooks
-import useToggle from '../../../../hooks/useToggle';
+import useToggle from 'src/hooks/useToggle';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // @types
-import { Invoice } from '../../../../@types/invoice';
+import { Invoice } from 'src/@types/invoice';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 //
 import InvoicePDF from './InvoicePDF';
 

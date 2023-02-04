@@ -4,20 +4,20 @@ import { styled } from '@mui/material/styles';
 import { Box, Container, Tab } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import TextButtons from '../../../sections/overview/mui/buttons/TextButtons';
-import IconButtons from '../../../sections/overview/mui/buttons/IconButtons';
-import ButtonGroups from '../../../sections/overview/mui/buttons/ButtonGroups';
-import ToggleButtons from '../../../sections/overview/mui/buttons/ToggleButtons';
-import OutlinedButtons from '../../../sections/overview/mui/buttons/OutlinedButtons';
-import ContainedButtons from '../../../sections/overview/mui/buttons/ContainedButtons';
-import FloatingActionButton from '../../../sections/overview/mui/buttons/FloatingActionButton';
+import TextButtons from 'src/sections/overview/mui/buttons/TextButtons';
+import IconButtons from 'src/sections/overview/mui/buttons/IconButtons';
+import ButtonGroups from 'src/sections/overview/mui/buttons/ButtonGroups';
+import ToggleButtons from 'src/sections/overview/mui/buttons/ToggleButtons';
+import OutlinedButtons from 'src/sections/overview/mui/buttons/OutlinedButtons';
+import ContainedButtons from 'src/sections/overview/mui/buttons/ContainedButtons';
+import FloatingActionButton from 'src/sections/overview/mui/buttons/FloatingActionButton';
 
 // ----------------------------------------------------------------------
 

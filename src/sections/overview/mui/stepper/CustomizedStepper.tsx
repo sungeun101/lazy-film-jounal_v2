@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { StepIconProps } from '@mui/material/StepIcon';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

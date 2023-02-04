@@ -1,9 +1,9 @@
 // @mui
 import { Box, Grid, Card, Paper, Typography, CardHeader, CardContent } from '@mui/material';
 // utils
-import { fShortenNumber } from '../../../../utils/formatNumber';
+import { fShortenNumber } from 'src/utils/formatNumber';
 // _mock_
-import { _analyticTraffic } from '../../../../_mock';
+import { _analyticTraffic } from 'src/_mock';
 
 // ----------------------------------------------------------------------
 

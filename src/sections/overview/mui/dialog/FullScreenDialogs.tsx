@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

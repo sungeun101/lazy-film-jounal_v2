@@ -2,13 +2,13 @@
 import { styled } from '@mui/material/styles';
 import { Stack, Button, Tooltip, Typography, IconButton, ToggleButton } from '@mui/material';
 // utils
-import { fDate } from '../../../utils/formatTime';
+import { fDate } from 'src/utils/formatTime';
 // hooks
-import useResponsive from '../../../hooks/useResponsive';
+import useResponsive from 'src/hooks/useResponsive';
 // @types
-import { CalendarView } from '../../../@types/calendar';
+import { CalendarView } from 'src/@types/calendar';
 // components
-import Iconify from '../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

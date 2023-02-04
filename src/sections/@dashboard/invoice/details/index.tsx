@@ -14,14 +14,14 @@ import {
   TableContainer,
 } from '@mui/material';
 // utils
-import { fDate } from '../../../../utils/formatTime';
-import { fCurrency } from '../../../../utils/formatNumber';
+import { fDate } from 'src/utils/formatTime';
+import { fCurrency } from 'src/utils/formatNumber';
 // _mock_
-import { Invoice } from '../../../../@types/invoice';
+import { Invoice } from 'src/@types/invoice';
 // components
-import Label from '../../../../components/Label';
-import Image from '../../../../components/Image';
-import Scrollbar from '../../../../components/Scrollbar';
+import Label from 'src/components/Label';
+import Image from 'src/components/Image';
+import Scrollbar from 'src/components/Scrollbar';
 //
 import InvoiceToolbar from './InvoiceToolbar';
 

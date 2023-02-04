@@ -5,21 +5,21 @@ import { useRouter } from 'next/router';
 // @mui
 import { Box, Card, Divider, Container, Typography, Pagination } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useSettings from '../../../../hooks/useSettings';
-import useIsMountedRef from '../../../../hooks/useIsMountedRef';
+import useSettings from 'src/hooks/useSettings';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 // utils
-import axios from '../../../../utils/axios';
+import axios from 'src/utils/axios';
 // layouts
-import Layout from '../../../../layouts';
+import Layout from 'src/layouts';
 // @types
-import { Post } from '../../../../@types/blog';
+import { Post } from 'src/@types/blog';
 // components
-import Page from '../../../../components/Page';
-import Markdown from '../../../../components/Markdown';
-import HeaderBreadcrumbs from '../../../../components/HeaderBreadcrumbs';
-import { SkeletonPost } from '../../../../components/skeleton';
+import Page from 'src/components/Page';
+import Markdown from 'src/components/Markdown';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
+import { SkeletonPost } from 'src/components/skeleton';
 // sections
 import {
   BlogPostHero,
@@ -27,7 +27,7 @@ import {
   BlogPostRecent,
   BlogPostCommentList,
   BlogPostCommentForm,
-} from '../../../../sections/@dashboard/blog';
+} from 'src/sections/@dashboard/blog';
 
 // ----------------------------------------------------------------------
 

@@ -1,10 +1,10 @@
 // @mui
 import { Dialog, ListItemButton, Stack, Typography, Button } from '@mui/material';
 // @types
-import { InvoiceAddress } from '../../../../@types/invoice';
+import { InvoiceAddress } from 'src/@types/invoice';
 // components
-import Iconify from '../../../../components/Iconify';
-import Scrollbar from '../../../../components/Scrollbar';
+import Iconify from 'src/components/Iconify';
+import Scrollbar from 'src/components/Scrollbar';
 
 // ----------------------------------------------------------------------
 

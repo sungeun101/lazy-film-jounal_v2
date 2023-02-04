@@ -2,18 +2,18 @@
 import { styled } from '@mui/material/styles';
 import { Box, Paper, Container, Stack } from '@mui/material';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import { Block } from '../../../sections/overview/Block';
-import CustomizedStepper from '../../../sections/overview/mui/stepper/CustomizedStepper';
-import VerticalLinearStepper from '../../../sections/overview/mui/stepper/VerticalLinearStepper';
-import LinearAlternativeLabel from '../../../sections/overview/mui/stepper/LinearAlternativeLabel';
-import HorizontalLinearStepper from '../../../sections/overview/mui/stepper/HorizontalLinearStepper';
+import { Block } from 'src/sections/overview/Block';
+import CustomizedStepper from 'src/sections/overview/mui/stepper/CustomizedStepper';
+import VerticalLinearStepper from 'src/sections/overview/mui/stepper/VerticalLinearStepper';
+import LinearAlternativeLabel from 'src/sections/overview/mui/stepper/LinearAlternativeLabel';
+import HorizontalLinearStepper from 'src/sections/overview/mui/stepper/HorizontalLinearStepper';
 
 // ----------------------------------------------------------------------
 

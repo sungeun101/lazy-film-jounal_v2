@@ -2,7 +2,7 @@
 import { styled } from '@mui/material/styles';
 import { Typography, Button, Card, CardContent } from '@mui/material';
 //
-import { MotivationIllustration } from '../../../../assets';
+import { MotivationIllustration } from 'src/assets';
 
 // ----------------------------------------------------------------------
 
@@ -15,8 +15,8 @@ const RootStyle = styled(Card)(({ theme }) => ({
     display: 'flex',
     textAlign: 'left',
     alignItems: 'center',
-    justifyContent: 'space-between'
-  }
+    justifyContent: 'space-between',
+  },
 }));
 
 // ----------------------------------------------------------------------
@@ -28,7 +28,7 @@ export default function EcommerceWelcome() {
         sx={{
           color: 'grey.800',
           p: { md: 0 },
-          pl: { md: 5 }
+          pl: { md: 5 },
         }}
       >
         <Typography gutterBottom variant="h4">
@@ -47,7 +47,7 @@ export default function EcommerceWelcome() {
         sx={{
           p: 3,
           width: 360,
-          margin: { xs: 'auto', md: 'inherit' }
+          margin: { xs: 'auto', md: 'inherit' },
         }}
       />
     </RootStyle>

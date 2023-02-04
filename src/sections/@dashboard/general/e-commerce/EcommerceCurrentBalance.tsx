@@ -2,13 +2,13 @@
 import { styled } from '@mui/material/styles';
 import { Button, Card, Typography, Stack } from '@mui/material';
 // utils
-import { fCurrency } from '../../../../utils/formatNumber';
+import { fCurrency } from 'src/utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
 const RowStyle = styled('div')({
   display: 'flex',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
 });
 
 // ----------------------------------------------------------------------

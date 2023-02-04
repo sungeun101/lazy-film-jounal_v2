@@ -3,12 +3,12 @@ import merge from 'lodash/merge';
 import { styled, useTheme } from '@mui/material/styles';
 import { Card, Typography, Stack } from '@mui/material';
 // utils
-import { fCurrency, fPercent } from '../../../../utils/formatNumber';
+import { fCurrency, fPercent } from 'src/utils/formatNumber';
 // theme
-import { ColorSchema } from '../../../../theme/palette';
+import { ColorSchema } from 'src/theme/palette';
 // components
-import Iconify from '../../../../components/Iconify';
-import ReactApexChart, { BaseOptionChart } from '../../../../components/chart';
+import Iconify from 'src/components/Iconify';
+import ReactApexChart, { BaseOptionChart } from 'src/components/chart';
 
 // ----------------------------------------------------------------------
 

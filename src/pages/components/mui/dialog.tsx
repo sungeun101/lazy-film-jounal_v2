@@ -3,21 +3,21 @@ import { styled } from '@mui/material/styles';
 import { Box, Container } from '@mui/material';
 import { Masonry } from '@mui/lab';
 // routes
-import { PATH_PAGE } from '../../../routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 // sections
-import FormDialogs from '../../../sections/overview/mui/dialog/FormDialogs';
-import AlertDialog from '../../../sections/overview/mui/dialog/AlertDialog';
-import ScrollDialog from '../../../sections/overview/mui/dialog/ScrollDialog';
-import SimpleDialogs from '../../../sections/overview/mui/dialog/SimpleDialogs';
-import MaxWidthDialog from '../../../sections/overview/mui/dialog/MaxWidthDialog';
-import FullScreenDialogs from '../../../sections/overview/mui/dialog/FullScreenDialogs';
-import TransitionsDialogs from '../../../sections/overview/mui/dialog/TransitionsDialogs';
-import { Block } from '../../../sections/overview/Block';
+import FormDialogs from 'src/sections/overview/mui/dialog/FormDialogs';
+import AlertDialog from 'src/sections/overview/mui/dialog/AlertDialog';
+import ScrollDialog from 'src/sections/overview/mui/dialog/ScrollDialog';
+import SimpleDialogs from 'src/sections/overview/mui/dialog/SimpleDialogs';
+import MaxWidthDialog from 'src/sections/overview/mui/dialog/MaxWidthDialog';
+import FullScreenDialogs from 'src/sections/overview/mui/dialog/FullScreenDialogs';
+import TransitionsDialogs from 'src/sections/overview/mui/dialog/TransitionsDialogs';
+import { Block } from 'src/sections/overview/Block';
 
 // ----------------------------------------------------------------------
 

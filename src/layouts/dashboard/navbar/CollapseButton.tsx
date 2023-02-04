@@ -1,7 +1,7 @@
 // @mui
 import { Box } from '@mui/material';
 // components
-import { IconButtonAnimate } from '../../../components/animate';
+import { IconButtonAnimate } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 

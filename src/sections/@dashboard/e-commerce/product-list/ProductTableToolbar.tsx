@@ -1,7 +1,7 @@
 // @mui
 import { Tooltip, IconButton, Stack, InputAdornment, TextField } from '@mui/material';
 // components
-import Iconify from '../../../../components/Iconify';
+import Iconify from 'src/components/Iconify';
 
 // ----------------------------------------------------------------------
 

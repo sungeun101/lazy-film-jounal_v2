@@ -4,15 +4,15 @@ import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
 import { Box, Link, Button, Divider, Typography, Stack, DialogProps } from '@mui/material';
 // redux
-import { useDispatch } from '../../../../redux/store';
-import { resetCart } from '../../../../redux/slices/product';
+import { useDispatch } from 'src/redux/store';
+import { resetCart } from 'src/redux/slices/product';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // components
-import Iconify from '../../../../components/Iconify';
-import { DialogAnimate } from '../../../../components/animate';
+import Iconify from 'src/components/Iconify';
+import { DialogAnimate } from 'src/components/animate';
 // assets
-import { OrderCompleteIllustration } from '../../../../assets';
+import { OrderCompleteIllustration } from 'src/assets';
 
 // ----------------------------------------------------------------------
 

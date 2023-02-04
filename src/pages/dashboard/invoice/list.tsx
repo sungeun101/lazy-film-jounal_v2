@@ -25,32 +25,32 @@ import {
   FormControlLabel,
 } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // hooks
-import useTabs from '../../../hooks/useTabs';
-import useSettings from '../../../hooks/useSettings';
-import useTable, { getComparator, emptyRows } from '../../../hooks/useTable';
+import useTabs from 'src/hooks/useTabs';
+import useSettings from 'src/hooks/useSettings';
+import useTable, { getComparator, emptyRows } from 'src/hooks/useTable';
 // _mock_
-import { _invoices } from '../../../_mock';
+import { _invoices } from 'src/_mock';
 // @types
-import { Invoice } from '../../../@types/invoice';
+import { Invoice } from 'src/@types/invoice';
 // layouts
-import Layout from '../../../layouts';
+import Layout from 'src/layouts';
 // components
-import Page from '../../../components/Page';
-import Label from '../../../components/Label';
-import Iconify from '../../../components/Iconify';
-import Scrollbar from '../../../components/Scrollbar';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import Page from 'src/components/Page';
+import Label from 'src/components/Label';
+import Iconify from 'src/components/Iconify';
+import Scrollbar from 'src/components/Scrollbar';
+import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 import {
   TableEmptyRows,
   TableHeadCustom,
   TableSearchNotFound,
   TableSelectedActions,
-} from '../../../components/table';
+} from 'src/components/table';
 // sections
-import InvoiceAnalytic from '../../../sections/@dashboard/invoice/InvoiceAnalytic';
-import { InvoiceTableRow, InvoiceTableToolbar } from '../../../sections/@dashboard/invoice/list';
+import InvoiceAnalytic from 'src/sections/@dashboard/invoice/InvoiceAnalytic';
+import { InvoiceTableRow, InvoiceTableToolbar } from 'src/sections/@dashboard/invoice/list';
 
 // ----------------------------------------------------------------------
 

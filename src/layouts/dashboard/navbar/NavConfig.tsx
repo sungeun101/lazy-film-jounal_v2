@@ -1,8 +1,8 @@
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // components
-import Label from '../../../components/Label';
-import SvgIconStyle from '../../../components/SvgIconStyle';
+import Label from 'src/components/Label';
+import SvgIconStyle from 'src/components/SvgIconStyle';
 
 // ----------------------------------------------------------------------
 
