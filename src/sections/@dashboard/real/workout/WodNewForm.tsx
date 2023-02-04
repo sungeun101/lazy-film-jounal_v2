@@ -38,7 +38,6 @@ export interface IRecord extends RecordFormValuesProps {
 
 interface Props {
   onCancel: VoidFunction;
-  // currentWod: WodFormValuesProps | null | undefined;
   searchDate: Date | null;
 }
 
@@ -52,11 +51,7 @@ const WOD_TYPE_OPTIONS = ['As Many Rounds As Possible', 'For Time'];
 
 // ----------------------------------------------------------------------
 
-export default function WodNewForm({
-  onCancel,
-  // currentWod,
-  searchDate,
-}: Props) {
+export default function WodNewForm({ onCancel, searchDate }: Props) {
   const { wod: currentWod } = useWodStore();
 
   const { enqueueSnackbar } = useSnackbar();

@@ -109,7 +109,7 @@ export default function WodNewRecordForm({ onCancel }: Props) {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={2} direction="row" justifyContent="space-between">
-        <DialogTitle>Add your record</DialogTitle>
+        <DialogTitle>Submit your score</DialogTitle>
 
         <DialogActions>
           <Button variant="outlined" color="inherit" onClick={onCancel}>

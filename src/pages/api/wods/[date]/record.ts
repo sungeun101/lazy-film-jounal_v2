@@ -9,6 +9,26 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     session: { user },
     body: { amrapRound, amrapRep, forTimeMinute, forTimeSecond },
   } = req;
+
+  const alreadyExists = await client.record.findFirst({
+    where: {
+      user,
+      wod: {
+        createDate: date.toString(),
+      },
+    },
+    select: {
+      id: true,
+    },
+  });
+  if (alreadyExists) {
+    await client.record.delete({
+      where: {
+        id: alreadyExists.id,
+      },
+    });
+  }
+
   const newRecord = await client.record.create({
     data: {
       user: {
