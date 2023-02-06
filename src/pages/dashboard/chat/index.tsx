@@ -42,7 +42,7 @@ export default function Chat() {
           links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Chat' }]}
         />
         <Card sx={{ height: '72vh', display: 'flex' }}>
-          {/* <ChatSidebar /> */}
+          <ChatSidebar />
           <ChatWindow />
         </Card>
       </Container>

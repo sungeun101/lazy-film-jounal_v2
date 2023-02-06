@@ -27,7 +27,7 @@ import Iconify from 'src/components/Iconify';
 import { useEffect, useState } from 'react';
 import { DialogAnimate } from 'src/components/animate';
 import WodNewRecordForm from './WodNewRecordForm';
-import { useWodStore } from 'src/zustand/useWodStore';
+import { useWodStore } from 'src/zustand/useStore';
 import { IRecord } from './WodNewForm';
 
 // ----------------------------------------------------------------------

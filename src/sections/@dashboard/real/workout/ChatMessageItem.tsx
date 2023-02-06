@@ -38,9 +38,12 @@ const MessageImgStyle = styled('img')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 type ChatMessageItemProps = {
-  message: Message;
-  conversation: Conversation;
+  message: any;
+  conversation: any;
   onOpenLightbox: (value: string) => void;
+  // message: Message;
+  // conversation: Conversation;
+  // onOpenLightbox: (value: string) => void;
 };
 
 export default function ChatMessageItem({
@@ -49,7 +52,7 @@ export default function ChatMessageItem({
   onOpenLightbox,
 }: ChatMessageItemProps) {
   const sender = conversation.participants.find(
-    (participant) => participant.id === message.senderId
+    (participant: any) => participant.id === message.senderId
   );
   const senderDetails =
     message.senderId === '8864c717-587d-472a-929a-8e5f298024da-0'
@@ -101,7 +104,7 @@ export default function ChatMessageItem({
                 onClick={() => onOpenLightbox(message.body)}
               />
             ) : (
-              <Typography variant="body2">{message.body}</Typography>
+              <Typography variant="body2" dangerouslySetInnerHTML={{ __html: message.body }} />
             )}
           </ContentStyle>
         </Box>

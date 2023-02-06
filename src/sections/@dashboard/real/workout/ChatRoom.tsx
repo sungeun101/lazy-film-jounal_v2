@@ -40,8 +40,10 @@ const ToggleButtonStyle = styled((props) => (
 const SIDEBAR_WIDTH = 240;
 
 type Props = {
-  conversation: Conversation;
-  participants: Participant[];
+  // conversation: Conversation;
+  // participants: Participant[];
+  conversation: any;
+  participants: any;
 };
 
 export default function ChatRoom({ conversation, participants }: Props) {
@@ -62,11 +64,15 @@ export default function ChatRoom({ conversation, participants }: Props) {
   const isGroup = participants.length > 1;
 
   useEffect(() => {
-    if (!isDesktop) {
-      return handleCloseSidebar();
-    }
-    return handleOpenSidebar();
-  }, [isDesktop]);
+    handleOpenSidebar();
+  }, []);
+
+  // useEffect(() => {
+  //   if (!isDesktop) {
+  //     return handleCloseSidebar();
+  //   }
+  //   return handleOpenSidebar();
+  // }, [isDesktop]);
 
   const handleOpenSidebar = () => {
     setOpenSidebar(true);
@@ -82,7 +88,7 @@ export default function ChatRoom({ conversation, participants }: Props) {
 
   const renderContent = (
     <>
-      {isGroup ? (
+      {/* {isGroup ? (
         <ChatRoomGroupParticipant
           selectUserId={selectUser}
           participants={participants}
@@ -99,7 +105,7 @@ export default function ChatRoom({ conversation, participants }: Props) {
           />
         </div>
       )}
-      <Divider />
+      <Divider /> */}
 
       <ChatRoomAttachment
         conversation={conversation}

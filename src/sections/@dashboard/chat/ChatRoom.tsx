@@ -45,6 +45,8 @@ type Props = {
 };
 
 export default function ChatRoom({ conversation, participants }: Props) {
+  console.log('conversation', conversation);
+
   const theme = useTheme();
 
   const [openSidebar, setOpenSidebar] = useState(true);

@@ -19,7 +19,7 @@ import { LoadingButton } from '@mui/lab';
 import { useSnackbar } from 'notistack';
 import useMutation from 'src/libs/client/useMutation';
 import { useSWRConfig } from 'swr';
-import { useWodStore } from 'src/zustand/useWodStore';
+import { useWodStore } from 'src/zustand/useStore';
 
 // ----------------------------------------------------------------------
 

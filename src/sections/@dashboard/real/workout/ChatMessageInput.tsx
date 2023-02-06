@@ -10,6 +10,7 @@ import { SendMessage } from 'src/@types/chat';
 import Iconify from 'src/components/Iconify';
 import EmojiPicker from 'src/components/EmojiPicker';
 import useSWR from 'swr';
+import { useConversationStore } from 'src/zustand/useStore';
 
 // ----------------------------------------------------------------------
 
@@ -29,27 +30,47 @@ type Props = {
   onSend: (data: SendMessage) => void;
 };
 
+export interface ChatData {
+  ok: boolean;
+  wodCreated: string;
+}
+
 export default function ChatMessageInput({ disabled, conversationId, onSend }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');
   const [startSearch, setStartSearch] = useState(false);
 
-  const { data: chatData } = useSWR(
+  const { data: chatData } = useSWR<ChatData>(
     startSearch && message ? `/api/wods/chat?prompt=${message}` : null
   );
 
+  const { conversation, add } = useConversationStore();
+
   useEffect(() => {
-    if (chatData) {
-      console.log('chatData', chatData);
-      setMessage('');
+    if (chatData?.wodCreated) {
+      console.log('SWR chatData', chatData);
+      const newMessage = chatData.wodCreated.replaceAll('\n', '<br>');
+
+      add({
+        ...conversation,
+        messages: [
+          ...conversation.messages,
+          {
+            id: 'a',
+            body: newMessage,
+            contentType: 'text',
+            attachments: [],
+            createdAt: '2023-02-05T21:00:12.513Z',
+            senderId: 'e99f09a7-dd88-49d5-b1c8-1daf80c2d7b5',
+          },
+        ],
+      });
     }
   }, [chatData]);
+
   useEffect(() => {
     if (!message) {
       setStartSearch(false);
-    }
-    if (message) {
-      console.log('message', message);
     }
   }, [message]);
 
@@ -68,7 +89,7 @@ export default function ChatMessageInput({ disabled, conversationId, onSend }: P
       return '';
     }
     setStartSearch(true);
-    console.log('message(prompt) : ', message);
+    console.log('handleSend, message(prompt) : ', message);
     // if (onSend && conversationId) {
     //   onSend({
     //     conversationId,

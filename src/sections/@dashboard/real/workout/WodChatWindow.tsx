@@ -1,7 +1,7 @@
 // next
 import Router, { useRouter } from 'next/router';
 //
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // @mui
 import { Box, Divider } from '@mui/material';
 // redux
@@ -24,6 +24,7 @@ import ChatMessageList from './ChatMessageList';
 import ChatHeaderDetail from './ChatHeaderDetail';
 import ChatMessageInput from './ChatMessageInput';
 import ChatHeaderCompose from './ChatHeaderCompose';
+import { useConversationStore } from 'src/zustand/useStore';
 
 // ----------------------------------------------------------------------
 
@@ -50,11 +51,17 @@ export default function WodChatWindow() {
   const { contacts, recipients, participants, activeConversationId } = useSelector(
     (state: RootState) => state.chat
   );
-  const conversation = useSelector((state: RootState) => conversationSelector(state));
-  const mode = conversationKey ? 'DETAIL' : 'COMPOSE';
+  // const conversation = useSelector((state: RootState) => conversationSelector(state));
+  // const mode = conversationKey ? 'DETAIL' : 'COMPOSE';
   const displayParticipants = participants.filter(
     (item) => item.id !== '8864c717-587d-472a-929a-8e5f298024da-0'
   );
+
+  const { conversation } = useConversationStore();
+
+  useEffect(() => {
+    console.log('conversation', conversation);
+  }, [conversation]);
 
   useEffect(() => {
     const getDetails = async () => {
@@ -94,7 +101,7 @@ export default function WodChatWindow() {
 
   return (
     <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-      {mode === 'DETAIL' ? (
+      {/* {mode === 'DETAIL' ? (
         <ChatHeaderDetail participants={displayParticipants} />
       ) : (
         <ChatHeaderCompose
@@ -102,9 +109,9 @@ export default function WodChatWindow() {
           contacts={Object.values(contacts.byId)}
           onAddRecipients={handleAddRecipients}
         />
-      )}
+      )} */}
 
-      <Divider />
+      {/* <Divider /> */}
 
       <Box sx={{ flexGrow: 1, display: 'flex', overflow: 'hidden' }}>
         <Box sx={{ display: 'flex', flexGrow: 1, flexDirection: 'column' }}>
@@ -119,9 +126,11 @@ export default function WodChatWindow() {
           />
         </Box>
 
-        {mode === 'DETAIL' && (
+        <ChatRoom conversation={conversation} participants={displayParticipants} />
+
+        {/* {mode === 'DETAIL' && (
           <ChatRoom conversation={conversation} participants={displayParticipants} />
-        )}
+        )} */}
       </Box>
     </Box>
   );

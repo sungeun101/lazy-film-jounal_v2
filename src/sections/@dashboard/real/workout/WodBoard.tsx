@@ -11,7 +11,7 @@ import useSWR from 'swr';
 import dayjs from 'dayjs';
 import { CarouselArrows } from 'src/components/carousel';
 import { DatePicker } from '@mui/lab';
-import { useWodStore } from 'src/zustand/useWodStore';
+import { useWodStore } from 'src/zustand/useStore';
 
 export interface WodData {
   ok: boolean;
