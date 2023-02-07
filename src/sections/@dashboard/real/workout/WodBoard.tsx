@@ -11,7 +11,7 @@ import useSWR from 'swr';
 import dayjs from 'dayjs';
 import { CarouselArrows } from 'src/components/carousel';
 import { DatePicker } from '@mui/lab';
-import { useWodStore } from 'src/zustand/useStore';
+import { useMessageStore, useWodStore } from 'src/zustand/useStore';
 
 export interface WodData {
   ok: boolean;
@@ -28,15 +28,24 @@ export default function WodBoard() {
     searchDate ? `/api/wods/${dayjs(searchDate).format('YYYY-MM-DD')}` : null
   );
 
-  const { add } = useWodStore();
+  const { setWod } = useWodStore();
+  const { addMessage } = useMessageStore();
+
+  useEffect(() => {
+    addMessage({
+      body: "Hi! How would you like me to generate today's workout for you?",
+      buttons: ['Create a random workout', 'Help me create one'],
+      senderId: 'chatGPT',
+    });
+  }, []);
 
   useEffect(() => {
     if (wodData?.wod) {
-      add(wodData.wod);
+      setWod(wodData.wod);
     } else {
-      add(null);
+      setWod(null);
     }
-  }, [add, wodData]);
+  }, [wodData]);
 
   const handlePrevious = () => {
     const prevDay = dayjs(searchDate).subtract(1, 'day').toDate();
@@ -112,11 +121,7 @@ export default function WodBoard() {
 
       {/* new wod modal */}
       <DialogAnimate open={isOpenModal} onClose={handleCloseModal} fullScreen>
-        <WodNewForm
-          onCancel={handleCloseModal}
-          //  currentWod={wodData?.wod}
-          searchDate={searchDate}
-        />
+        <WodNewForm onCancel={handleCloseModal} searchDate={searchDate} />
       </DialogAnimate>
     </Card>
   );

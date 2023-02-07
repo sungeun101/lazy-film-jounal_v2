@@ -10,7 +10,7 @@ import { SendMessage } from 'src/@types/chat';
 import Iconify from 'src/components/Iconify';
 import EmojiPicker from 'src/components/EmojiPicker';
 import useSWR from 'swr';
-import { useConversationStore } from 'src/zustand/useStore';
+import { useMessageStore } from 'src/zustand/useStore';
 
 // ----------------------------------------------------------------------
 
@@ -26,8 +26,6 @@ const RootStyle = styled('div')(({ theme }) => ({
 
 type Props = {
   disabled: boolean;
-  conversationId: string | null;
-  onSend: (data: SendMessage) => void;
 };
 
 export interface ChatData {
@@ -35,7 +33,7 @@ export interface ChatData {
   wodCreated: string;
 }
 
-export default function ChatMessageInput({ disabled, conversationId, onSend }: Props) {
+export default function ChatMessageInput({ disabled }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');
   const [startSearch, setStartSearch] = useState(false);
@@ -44,26 +42,15 @@ export default function ChatMessageInput({ disabled, conversationId, onSend }: P
     startSearch && message ? `/api/wods/chat?prompt=${message}` : null
   );
 
-  const { conversation, add } = useConversationStore();
+  const { addMessage } = useMessageStore();
 
   useEffect(() => {
     if (chatData?.wodCreated) {
       console.log('SWR chatData', chatData);
-      const newMessage = chatData.wodCreated.replaceAll('\n', '<br>');
-
-      add({
-        ...conversation,
-        messages: [
-          ...conversation.messages,
-          {
-            id: 'a',
-            body: newMessage,
-            contentType: 'text',
-            attachments: [],
-            createdAt: '2023-02-05T21:00:12.513Z',
-            senderId: 'e99f09a7-dd88-49d5-b1c8-1daf80c2d7b5',
-          },
-        ],
+      const answer = chatData.wodCreated.replaceAll('\n', '<br>');
+      addMessage({
+        body: answer,
+        senderId: 'chatGPT',
       });
     }
   }, [chatData]);
@@ -88,6 +75,10 @@ export default function ChatMessageInput({ disabled, conversationId, onSend }: P
     if (!message) {
       return '';
     }
+    addMessage({
+      body: message,
+      senderId: 'admin',
+    });
     setStartSearch(true);
     console.log('handleSend, message(prompt) : ', message);
     // if (onSend && conversationId) {

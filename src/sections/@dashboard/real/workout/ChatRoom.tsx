@@ -42,11 +42,11 @@ const SIDEBAR_WIDTH = 240;
 type Props = {
   // conversation: Conversation;
   // participants: Participant[];
-  conversation: any;
+
   participants: any;
 };
 
-export default function ChatRoom({ conversation, participants }: Props) {
+export default function ChatRoom({ participants }: Props) {
   const theme = useTheme();
 
   const [openSidebar, setOpenSidebar] = useState(true);
@@ -108,7 +108,6 @@ export default function ChatRoom({ conversation, participants }: Props) {
       <Divider /> */}
 
       <ChatRoomAttachment
-        conversation={conversation}
         isCollapse={showAttachment}
         onCollapse={() => setShowAttachment((prev) => !prev)}
       />
@@ -130,7 +129,7 @@ export default function ChatRoom({ conversation, participants }: Props) {
         />
       </ToggleButtonStyle>
 
-      {isDesktop ? (
+      {/* {isDesktop ? (
         <Drawer
           open={openSidebar}
           anchor="right"
@@ -162,7 +161,7 @@ export default function ChatRoom({ conversation, participants }: Props) {
         >
           {renderContent}
         </Drawer>
-      )}
+      )} */}
     </Box>
   );
 }

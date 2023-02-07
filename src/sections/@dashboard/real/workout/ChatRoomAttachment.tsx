@@ -11,6 +11,7 @@ import { Conversation, Message } from 'src/@types/chat';
 // components
 import Iconify from 'src/components/Iconify';
 import Scrollbar from 'src/components/Scrollbar';
+import { useMessageStore } from 'src/zustand/useStore';
 
 // ----------------------------------------------------------------------
 
@@ -54,17 +55,16 @@ const CollapseButtonStyle = styled(Button)(({ theme }) => ({
 }));
 
 type Props = {
-  conversation: Conversation;
   isCollapse: boolean;
   onCollapse: VoidFunction;
 };
 
 // ----------------------------------------------------------------------
 
-export default function ChatRoomAttachment({ conversation, isCollapse, onCollapse }: Props) {
-  const totalAttachment = uniq(
-    flatten(conversation.messages.map((item) => item.attachments))
-  ).length;
+export default function ChatRoomAttachment({ isCollapse, onCollapse }: Props) {
+  const { messages } = useMessageStore();
+
+  const totalAttachment = uniq(flatten(messages.map((item: any) => item.attachments))).length;
 
   return (
     <RootStyle>
@@ -87,9 +87,9 @@ export default function ChatRoomAttachment({ conversation, isCollapse, onCollaps
 
       <Scrollbar>
         <Collapse in={isCollapse}>
-          {conversation.messages.map((file) => (
+          {messages.map((file: any) => (
             <div key={file.id}>
-              {file.attachments.map((fileUrl) => (
+              {file.attachments.map((fileUrl: any) => (
                 <AttachmentItem key={fileUrl} file={file} fileUrl={fileUrl} />
               ))}
             </div>

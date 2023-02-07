@@ -1,23 +1,21 @@
 import { useEffect, useState, useRef, Key } from 'react';
-// @types
-import { Conversation } from 'src/@types/chat';
+
 //
 import Scrollbar from 'src/components/Scrollbar';
 import LightboxModal from 'src/components/LightboxModal';
 import ChatMessageItem from './ChatMessageItem';
+import { Message, useMessageStore } from 'src/zustand/useStore';
 
 // ----------------------------------------------------------------------
 
-type Props = {
-  conversation: any;
-};
-
-export default function ChatMessageList({ conversation }: Props) {
+export default function ChatMessageList() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const [openLightbox, setOpenLightbox] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState<number>(0);
+
+  const { messages, addMessage } = useMessageStore();
 
   useEffect(() => {
     const scrollMessagesToBottom = () => {
@@ -26,9 +24,9 @@ export default function ChatMessageList({ conversation }: Props) {
       }
     };
     scrollMessagesToBottom();
-  }, [conversation.messages]);
+  }, [messages]);
 
-  const imagesLightbox = conversation.messages
+  const imagesLightbox = messages
     .filter((messages: { contentType: string }) => messages.contentType === 'image')
     .map((messages: { body: any }) => messages.body);
 
@@ -53,13 +51,8 @@ export default function ChatMessageList({ conversation }: Props) {
         <div>2-4. with KB/DB/Barbell/</div>
         <div>2-5. Focus - gymnastics/cardio/weightlifting</div>
 
-        {conversation.messages.map((message: { id: Key | null | undefined }) => (
-          <ChatMessageItem
-            key={message.id}
-            message={message}
-            conversation={conversation}
-            onOpenLightbox={handleOpenLightbox}
-          />
+        {messages.map((message: Message) => (
+          <ChatMessageItem key={message.id} message={message} onOpenLightbox={handleOpenLightbox} />
         ))}
       </Scrollbar>
 
