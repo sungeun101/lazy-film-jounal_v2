@@ -106,6 +106,11 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
               <Stack spacing={2}>
                 <Typography variant="body2" dangerouslySetInnerHTML={{ __html: message.body }} />
 
+                {/* 1. Create a random crossfit Wod and tell me if it's AMRAP or For Time 
+                2. If the WOD
+                you generated is AMRAP, tell me how many reps is 1 round. Show answer as a math
+                formula as a code snippet using Javascript. */}
+
                 {/* <Stack direction="row" spacing={2} alignItems="flex-end" sx={{ flexGrow: 1 }}> */}
                 {message?.buttons?.map((item: any) => (
                   <Button
