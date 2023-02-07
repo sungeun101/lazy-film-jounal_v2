@@ -28,7 +28,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     prompt: `Create a sample Crossfit Wod including this movement.\n
         Movement: ${prompt}\n
         Created Wod:`,
-    max_tokens: 500,
+    max_tokens: 100,
     temperature: 1,
     presence_penalty: 0,
     frequency_penalty: 0,

@@ -105,6 +105,10 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
             ) : (
               <Stack spacing={2}>
                 <Typography variant="body2" dangerouslySetInnerHTML={{ __html: message.body }} />
+                {/* 
+                chatGPT
+                q. how can i create a chatbot with buttons I can interact with with chatGPT?
+               q.  How can I send the selected option to the OpenAI API to generate a response? */}
 
                 {/* 1. Create a random crossfit Wod and tell me if it's AMRAP or For Time 
                 2. If the WOD
