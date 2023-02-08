@@ -23,20 +23,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     return res.status(400).json({ ok: false, error: 'Prompt too long' });
   }
 
-  const completion = await openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: `Create a sample Crossfit Wod including this movement.\n
-        Movement: ${prompt}\n
-        Created Wod:`,
-    max_tokens: 100,
-    temperature: 1,
-    presence_penalty: 0,
-    frequency_penalty: 0,
-  });
-
-  const wodCreated = completion.data.choices[0].text;
-
-  res.status(200).json({ ok: true, wodCreated });
+  if (prompt === 'Create A Random Workout') {
+    const completion = await openai.createCompletion({
+      model: 'text-davinci-003',
+      prompt: `Create a random crossfit Wod`,
+      max_tokens: 100,
+      temperature: 1,
+      presence_penalty: 0,
+      frequency_penalty: 0,
+    });
+    const wodCreated = completion.data.choices[0].text;
+    res.status(200).json({ ok: true, answer: wodCreated });
+  } else {
+    res.status(200).json({ ok: true, answer: 'Ok! What movements would you like to include?' });
+  }
 }
 
 export default withApiSession(

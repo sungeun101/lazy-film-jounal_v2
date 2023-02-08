@@ -30,24 +30,24 @@ type Props = {
 
 export interface ChatData {
   ok: boolean;
-  wodCreated: string;
+  answer: string;
 }
 
 export default function ChatMessageInput({ disabled }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [message, setMessage] = useState('');
+  const [prompt, setPrompt] = useState('');
   const [startSearch, setStartSearch] = useState(false);
 
   const { data: chatData } = useSWR<ChatData>(
-    startSearch && message ? `/api/wods/chat?prompt=${message}` : null
+    startSearch && prompt ? `/api/chat/movement?prompt=${prompt}` : null
   );
 
   const { addMessage } = useMessageStore();
 
   useEffect(() => {
-    if (chatData?.wodCreated) {
-      console.log('SWR chatData', chatData);
-      const answer = chatData.wodCreated.replaceAll('\n', '<br>');
+    if (chatData?.answer) {
+      setPrompt('');
+      const answer = chatData.answer.replaceAll('\n', '<br>');
       addMessage({
         body: answer,
         senderId: 'chatGPT',
@@ -56,10 +56,10 @@ export default function ChatMessageInput({ disabled }: Props) {
   }, [chatData]);
 
   useEffect(() => {
-    if (!message) {
+    if (!prompt) {
       setStartSearch(false);
     }
-  }, [message]);
+  }, [prompt]);
 
   const handleAttach = () => {
     fileInputRef.current?.click();
@@ -72,27 +72,15 @@ export default function ChatMessageInput({ disabled }: Props) {
   };
 
   const handleSend = () => {
-    if (!message) {
+    if (!prompt) {
       return '';
     }
     addMessage({
-      body: message,
+      body: prompt,
       senderId: 'admin',
     });
     setStartSearch(true);
-    console.log('handleSend, message(prompt) : ', message);
-    // if (onSend && conversationId) {
-    //   onSend({
-    //     conversationId,
-    //     messageId: uuidv4(),
-    //     message,
-    //     contentType: 'text',
-    //     attachments: [],
-    //     createdAt: new Date(),
-    //     senderId: '8864c717-587d-472a-929a-8e5f298024da-0',
-    //   });
-    // }
-    // return setMessage('');
+    console.log('handleSend, message(prompt) : ', prompt);
   };
 
   return (
@@ -100,14 +88,14 @@ export default function ChatMessageInput({ disabled }: Props) {
       <Input
         disabled={disabled}
         fullWidth
-        value={message}
+        value={prompt}
         disableUnderline
         onKeyUp={handleKeyUp}
-        onChange={(event) => setMessage(event.target.value)}
-        placeholder="Type a message"
+        onChange={(event) => setPrompt(event.target.value)}
+        placeholder="Type any crossfit movement"
         startAdornment={
           <InputAdornment position="start">
-            <EmojiPicker disabled={disabled} value={message} setValue={setMessage} />
+            <EmojiPicker disabled={disabled} value={prompt} setValue={setPrompt} />
           </InputAdornment>
         }
         endAdornment={
@@ -127,7 +115,7 @@ export default function ChatMessageInput({ disabled }: Props) {
 
       <Divider orientation="vertical" flexItem />
 
-      <IconButton color="primary" disabled={!message} onClick={handleSend} sx={{ mx: 1 }}>
+      <IconButton color="primary" disabled={!prompt} onClick={handleSend} sx={{ mx: 1 }}>
         <Iconify icon="ic:round-send" width={22} height={22} />
       </IconButton>
 

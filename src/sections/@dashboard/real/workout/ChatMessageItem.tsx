@@ -3,7 +3,10 @@ import { formatDistanceToNowStrict } from 'date-fns';
 import { styled } from '@mui/material/styles';
 import { Avatar, Box, Typography, Stack, Button } from '@mui/material';
 import Iconify from 'src/components/Iconify';
-import { Message } from 'src/zustand/useStore';
+import { Message, useMessageStore } from 'src/zustand/useStore';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
+import { ChatData } from './ChatMessageInput';
 
 // ----------------------------------------------------------------------
 
@@ -52,7 +55,35 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   const isImage = message.contentType === 'image';
   const firstName = senderDetails.name && senderDetails.name.split(' ')[0];
 
-  console.log('ChatMessageItem message', message);
+  // console.log('ChatMessageItem message', message);
+  const [prompt, setPrompt] = useState('');
+
+  const { data: chatData } = useSWR<ChatData>(
+    prompt ? `/api/chat/randomorhelp?prompt=${prompt}` : null
+  );
+
+  const handleButtonClick = (e: any) => {
+    const { innerText } = e.target;
+    setPrompt(innerText);
+    addMessage({
+      body: innerText,
+      senderId: 'admin',
+    });
+  };
+
+  const { addMessage } = useMessageStore();
+
+  useEffect(() => {
+    if (chatData?.answer) {
+      setPrompt('');
+      const answer = chatData.answer.replaceAll('\n', '<br>');
+      addMessage({
+        body: answer,
+        senderId: 'chatGPT',
+      });
+    }
+  }, [chatData]);
+
   return (
     <RootStyle>
       <Box
@@ -122,6 +153,7 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
                     fullWidth
                     variant="outlined"
                     // endIcon={<Iconify icon={'eva:checkmark-circle-2-fill'} />}
+                    onClick={handleButtonClick}
                   >
                     {item}
                   </Button>
