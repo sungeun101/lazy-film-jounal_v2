@@ -62,6 +62,8 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
     prompt ? `/api/chat/randomorhelp?prompt=${prompt}` : null
   );
 
+  const { addMessage, updateMessage } = useMessageStore();
+
   const handleButtonClick = (e: any) => {
     const { innerText } = e.target;
     setPrompt(innerText);
@@ -69,9 +71,14 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
       body: innerText,
       senderId: 'admin',
     });
+    // 버튼 클릭시 버튼 없어지게
+    const { parentNode } = e.currentTarget;
+    const messageBody = parentNode.getElementsByTagName('p')[0].innerText;
+    updateMessage({
+      body: messageBody,
+      senderId: 'chatGPT',
+    });
   };
-
-  const { addMessage } = useMessageStore();
 
   useEffect(() => {
     if (chatData?.answer) {

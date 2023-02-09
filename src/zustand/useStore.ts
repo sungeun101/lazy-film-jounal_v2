@@ -15,16 +15,20 @@ export interface Message {
   createdAt: string;
   senderId: string;
   attachments: string[];
+  answerTo?: number;
 }
 
 interface NewMessage {
   body: string;
   buttons?: string[];
   senderId: string;
+  answerTo?: number;
 }
 interface MessageStore {
   messages: Message[];
   addMessage: (newMessage: NewMessage) => void;
+  deleteMessage: (answerTo: number) => void;
+  updateMessage: (newMessage: NewMessage) => void;
 }
 
 export const useWodStore = create<WodStore>()((set) => ({
@@ -50,5 +54,26 @@ export const useMessageStore = create<MessageStore>()((set) => ({
         },
       ],
     }));
+  },
+  deleteMessage: (answerTo: number) => {
+    set((state: MessageStore) => ({
+      ...state,
+    }));
+  },
+  updateMessage: (prevMessage: NewMessage) => {
+    set((state: MessageStore) => {
+      const answerToIndex = state.messages.findIndex(
+        (message: Message) => message.body === prevMessage.body
+      );
+      const newArray = [...state.messages];
+      newArray[answerToIndex] = {
+        ...newArray[answerToIndex],
+        buttons: [],
+      };
+      return {
+        ...state,
+        messages: newArray,
+      };
+    });
   },
 }));
