@@ -1,10 +1,10 @@
 import { formatDistanceToNowStrict } from 'date-fns';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Avatar, Box, Typography, Stack, Button } from '@mui/material';
+import { Avatar, Box, Typography, Stack, Button, Chip } from '@mui/material';
 import Iconify from 'src/components/Iconify';
 import { Message, useMessageStore } from 'src/zustand/useStore';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 import { ChatData } from './ChatMessageInput';
 
@@ -56,40 +56,71 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   const firstName = senderDetails.name && senderDetails.name.split(' ')[0];
 
   // console.log('ChatMessageItem message', message);
-  const [prompt, setPrompt] = useState('');
+  const [randomOrHelpPrompt, setRandomOrHelpPrompt] = useState('');
+  const [movementPrompt, setMovementPrompt] = useState('');
 
-  const { data: chatData } = useSWR<ChatData>(
-    prompt ? `/api/chat/randomorhelp?prompt=${prompt}` : null
+  const { data: randomOrHelpData } = useSWR<ChatData>(
+    randomOrHelpPrompt ? `/api/chat/randomorhelp?prompt=${randomOrHelpPrompt}` : null
+  );
+
+  const { data: movementData } = useSWR<ChatData>(
+    movementPrompt ? `/api/chat/movement?prompt=${movementPrompt}` : null
   );
 
   const { addMessage, updateMessage } = useMessageStore();
 
+  const bodyRef = useRef<any>(null);
+
   const handleButtonClick = (e: any) => {
     const { innerText } = e.target;
-    setPrompt(innerText);
+    setRandomOrHelpPrompt(innerText);
     addMessage({
       body: innerText,
       senderId: 'admin',
     });
-    // 버튼 클릭시 버튼 없어지게
-    const { parentNode } = e.currentTarget;
-    const messageBody = parentNode.getElementsByTagName('p')[0].innerText;
+    hideButtonsOrTags();
+  };
+
+  const handleTagClick = (e: any) => {
+    const { innerText } = e.target;
+    setMovementPrompt(innerText);
+    addMessage({
+      body: innerText,
+      senderId: 'admin',
+    });
+    hideButtonsOrTags();
+  };
+
+  const hideButtonsOrTags = () => {
+    const parentMessageBody = bodyRef.current.innerText;
     updateMessage({
-      body: messageBody,
+      body: parentMessageBody,
       senderId: 'chatGPT',
     });
   };
 
   useEffect(() => {
-    if (chatData?.answer) {
-      setPrompt('');
-      const answer = chatData.answer.replaceAll('\n', '<br>');
+    if (randomOrHelpData?.answer) {
+      setRandomOrHelpPrompt('');
+      const answer = randomOrHelpData.answer.replaceAll('\n', '<br>');
+      addMessage({
+        body: answer,
+        tags: randomOrHelpData.tags,
+        senderId: 'chatGPT',
+      });
+    }
+  }, [randomOrHelpData]);
+
+  useEffect(() => {
+    if (movementData?.answer) {
+      setMovementPrompt('');
+      const answer = movementData.answer.replaceAll('\n', '<br>');
       addMessage({
         body: answer,
         senderId: 'chatGPT',
       });
     }
-  }, [chatData]);
+  }, [movementData]);
 
   return (
     <RootStyle>
@@ -142,19 +173,22 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
               />
             ) : (
               <Stack spacing={2}>
-                <Typography variant="body2" dangerouslySetInnerHTML={{ __html: message.body }} />
                 {/* 
                 chatGPT
                 q. how can i create a chatbot with buttons I can interact with with chatGPT?
                q.  How can I send the selected option to the OpenAI API to generate a response? */}
-
                 {/* 1. Create a random crossfit Wod and tell me if it's AMRAP or For Time 
                 2. If the WOD
                 you generated is AMRAP, tell me how many reps is 1 round. Show answer as a math
                 formula as a code snippet using Javascript. */}
 
-                {/* <Stack direction="row" spacing={2} alignItems="flex-end" sx={{ flexGrow: 1 }}> */}
-                {message?.buttons?.map((item: any) => (
+                <Typography
+                  variant="body2"
+                  dangerouslySetInnerHTML={{ __html: message.body }}
+                  ref={bodyRef}
+                />
+
+                {message?.buttons?.map((item: string) => (
                   <Button
                     key={item}
                     fullWidth
@@ -165,7 +199,14 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
                     {item}
                   </Button>
                 ))}
-                {/* </Stack> */}
+
+                {message?.tags && (
+                  <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.5 }}>
+                    {message.tags.map((item: string) => (
+                      <Chip key={item} label={item} variant="outlined" onClick={handleTagClick} />
+                    ))}
+                  </Stack>
+                )}
               </Stack>
             )}
           </ContentStyle>

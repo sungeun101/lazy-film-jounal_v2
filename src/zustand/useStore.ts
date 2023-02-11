@@ -11,6 +11,7 @@ export interface Message {
   id: string;
   body: string;
   buttons?: string[];
+  tags?: string[];
   contentType: string;
   createdAt: string;
   senderId: string;
@@ -21,6 +22,7 @@ export interface Message {
 interface NewMessage {
   body: string;
   buttons?: string[];
+  tags?: string[];
   senderId: string;
   answerTo?: number;
 }
@@ -51,6 +53,7 @@ export const useMessageStore = create<MessageStore>()((set) => ({
           senderId: newMessage.senderId,
           attachments: [],
           buttons: newMessage.buttons,
+          tags: newMessage.tags,
         },
       ],
     }));
@@ -69,6 +72,7 @@ export const useMessageStore = create<MessageStore>()((set) => ({
       newArray[answerToIndex] = {
         ...newArray[answerToIndex],
         buttons: [],
+        tags: [],
       };
       return {
         ...state,

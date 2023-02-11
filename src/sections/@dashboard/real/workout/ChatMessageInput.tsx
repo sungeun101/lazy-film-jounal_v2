@@ -31,6 +31,8 @@ type Props = {
 export interface ChatData {
   ok: boolean;
   answer: string;
+  buttons?: string[];
+  tags?: string[];
 }
 
 export default function ChatMessageInput({ disabled }: Props) {
@@ -38,22 +40,22 @@ export default function ChatMessageInput({ disabled }: Props) {
   const [prompt, setPrompt] = useState('');
   const [startSearch, setStartSearch] = useState(false);
 
-  const { data: chatData } = useSWR<ChatData>(
+  const { data: movementData } = useSWR<ChatData>(
     startSearch && prompt ? `/api/chat/movement?prompt=${prompt}` : null
   );
 
   const { addMessage } = useMessageStore();
 
   useEffect(() => {
-    if (chatData?.answer) {
+    if (movementData?.answer) {
       setPrompt('');
-      const answer = chatData.answer.replaceAll('\n', '<br>');
+      const answer = movementData.answer.replaceAll('\n', '<br>');
       addMessage({
         body: answer,
         senderId: 'chatGPT',
       });
     }
-  }, [chatData]);
+  }, [movementData]);
 
   useEffect(() => {
     if (!prompt) {

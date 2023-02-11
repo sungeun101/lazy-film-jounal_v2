@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import withHandler, { ResponseType } from 'src/libs/server/withHandler';
-import client from 'src/libs/server/client';
 import { withApiSession } from 'src/libs/server/withSession';
 import { Configuration, OpenAIApi } from 'openai';
 
@@ -34,7 +33,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     frequency_penalty: 0,
   });
 
-  const wodCreated = completion.data.choices[0].text;
+  const wodCreated = `How about this?${completion.data.choices[0].text}`;
 
   res.status(200).json({ ok: true, answer: wodCreated });
 }

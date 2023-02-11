@@ -35,7 +35,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     const wodCreated = completion.data.choices[0].text;
     res.status(200).json({ ok: true, answer: wodCreated });
   } else {
-    res.status(200).json({ ok: true, answer: 'Ok! What movements would you like to include?' });
+    res.status(200).json({
+      ok: true,
+      answer: 'Ok! What movements would you like to include?',
+      tags: ['Snatch', 'Run', 'Squat Clean', 'Pull-up'],
+    });
   }
 }
 
