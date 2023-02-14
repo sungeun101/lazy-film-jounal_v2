@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, Key } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 //
 import Scrollbar from 'src/components/Scrollbar';
@@ -15,7 +15,7 @@ export default function ChatMessageList() {
 
   const [selectedImage, setSelectedImage] = useState<number>(0);
 
-  const { messages, addMessage } = useMessageStore();
+  const { messages } = useMessageStore();
 
   useEffect(() => {
     const scrollMessagesToBottom = () => {

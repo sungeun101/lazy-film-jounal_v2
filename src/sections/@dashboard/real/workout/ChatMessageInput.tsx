@@ -33,6 +33,7 @@ export interface ChatData {
   answer: string;
   buttons?: string[];
   tags?: string[];
+  saveButtons?: string[];
 }
 
 export default function ChatMessageInput({ disabled }: Props) {
@@ -49,9 +50,8 @@ export default function ChatMessageInput({ disabled }: Props) {
   useEffect(() => {
     if (movementData?.answer) {
       setPrompt('');
-      const answer = movementData.answer.replaceAll('\n', '<br>');
       addMessage({
-        body: answer,
+        body: movementData.answer,
         senderId: 'chatGPT',
       });
     }

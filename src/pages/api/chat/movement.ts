@@ -13,7 +13,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
   const {
     query: { prompt },
   } = req;
+
   console.log('prompt', prompt);
+
   if (!prompt) {
     return res.status(400).json({ ok: false, error: 'Prompt missing!' });
   }
@@ -27,15 +29,22 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     prompt: `Create a sample Crossfit Wod including this movement.\n
         Movement: ${prompt}\n
         Created Wod:`,
-    max_tokens: 100,
+    max_tokens: 200,
     temperature: 1,
     presence_penalty: 0,
     frequency_penalty: 0,
   });
 
-  const wodCreated = `How about this?${completion.data.choices[0].text}`;
+  const wodCreated = `Here's a WOD that includes ${prompt}.<br>${completion.data.choices[0].text?.replaceAll(
+    '\n',
+    '<br>'
+  )}`;
 
-  res.status(200).json({ ok: true, answer: wodCreated });
+  res.status(200).json({
+    ok: true,
+    answer: wodCreated,
+    saveButtons: ['Super! Save This Wod', 'Create A Random Workout', 'Help Me Create One'],
+  });
 }
 
 export default withApiSession(

@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import withHandler, { ResponseType } from 'src/libs/server/withHandler';
-import client from 'src/libs/server/client';
 import { withApiSession } from 'src/libs/server/withSession';
 import { Configuration, OpenAIApi } from 'openai';
 
@@ -23,17 +22,27 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     return res.status(400).json({ ok: false, error: 'Prompt too long' });
   }
 
+  console.log('prompt', prompt);
+
   if (prompt === 'Create A Random Workout') {
     const completion = await openai.createCompletion({
       model: 'text-davinci-003',
       prompt: `Create a random crossfit Wod`,
-      max_tokens: 100,
+      max_tokens: 200,
       temperature: 1,
       presence_penalty: 0,
       frequency_penalty: 0,
     });
-    const wodCreated = completion.data.choices[0].text;
-    res.status(200).json({ ok: true, answer: wodCreated });
+    console.log(completion.data);
+    const wodCreated = `How about this?${completion.data.choices[0].text?.replaceAll(
+      '\n',
+      '<br>'
+    )}`;
+    res.status(200).json({
+      ok: true,
+      answer: wodCreated,
+      saveButtons: ['Super! Save This Wod', 'Create A Random Workout', 'Help Me Create One'],
+    });
   } else {
     res.status(200).json({
       ok: true,

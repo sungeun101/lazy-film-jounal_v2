@@ -11,25 +11,26 @@ export interface Message {
   id: string;
   body: string;
   buttons?: string[];
+  saveButtons?: string[];
   tags?: string[];
   contentType: string;
   createdAt: string;
   senderId: string;
   attachments: string[];
-  answerTo?: number;
 }
 
 interface NewMessage {
+  id?: string;
   body: string;
   buttons?: string[];
+  saveButtons?: string[];
   tags?: string[];
   senderId: string;
-  answerTo?: number;
 }
 interface MessageStore {
   messages: Message[];
   addMessage: (newMessage: NewMessage) => void;
-  deleteMessage: (answerTo: number) => void;
+  hideMessageOptions: (newMessage: NewMessage) => void;
   updateMessage: (newMessage: NewMessage) => void;
 }
 
@@ -46,33 +47,55 @@ export const useMessageStore = create<MessageStore>()((set) => ({
       messages: [
         ...state.messages,
         {
-          id: dayjs().toString(),
+          id: Math.floor(100000 + Math.random() * 900000) + '',
           body: newMessage.body,
           contentType: 'text',
           createdAt: dayjs().toString(),
           senderId: newMessage.senderId,
           attachments: [],
           buttons: newMessage.buttons,
+          saveButtons: newMessage.saveButtons,
           tags: newMessage.tags,
         },
       ],
     }));
   },
-  deleteMessage: (answerTo: number) => {
-    set((state: MessageStore) => ({
-      ...state,
-    }));
-  },
-  updateMessage: (prevMessage: NewMessage) => {
+  hideMessageOptions: (prevMessage: NewMessage) => {
     set((state: MessageStore) => {
+      console.log('prevMessage', prevMessage);
       const answerToIndex = state.messages.findIndex(
-        (message: Message) => message.body === prevMessage.body
+        (message: Message) => message.id === prevMessage.id
       );
+      // const answerToIndex = state.messages.findIndex((message: Message) => {
+      //   console.log('message', message);
+      //   const nMessageBody = message.body.replaceAll('<br>', '\n');
+      //   return nMessageBody === prevMessage.body;
+      // });
       const newArray = [...state.messages];
+      console.log('answerToIndex', answerToIndex);
       newArray[answerToIndex] = {
         ...newArray[answerToIndex],
         buttons: [],
+        saveButtons: [],
         tags: [],
+      };
+      return {
+        ...state,
+        messages: newArray,
+      };
+    });
+  },
+  updateMessage: (prevMessage: NewMessage) => {
+    set((state: MessageStore) => {
+      console.log('prevMessage', prevMessage);
+      const answerToIndex = state.messages.findIndex(
+        (message: Message) => message.id === prevMessage.id
+      );
+      const newArray = [...state.messages];
+      console.log('answerToIndex', answerToIndex);
+      newArray[answerToIndex] = {
+        ...newArray[answerToIndex],
+        ...prevMessage,
       };
       return {
         ...state,

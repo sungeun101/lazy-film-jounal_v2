@@ -95,6 +95,7 @@ export default function MyApp(props: MyAppProps) {
       <SWRConfig
         value={{
           fetcher: (url: string) => fetch(url).then((response) => response.json()),
+          revalidateOnFocus: false,
         }}
       >
         <AuthProvider>

@@ -5,7 +5,7 @@ import { Avatar, Box, Typography, Stack, Button, Chip } from '@mui/material';
 import Iconify from 'src/components/Iconify';
 import { Message, useMessageStore } from 'src/zustand/useStore';
 import { useEffect, useRef, useState } from 'react';
-import useSWR from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 import { ChatData } from './ChatMessageInput';
 
 // ----------------------------------------------------------------------
@@ -49,7 +49,7 @@ type ChatMessageItemProps = {
 
 export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessageItemProps) {
   const senderDetails =
-    message.senderId === 'admin' ? { type: 'admin' } : { name: 'SuperSmartChat' };
+    message.senderId === 'admin' ? { type: 'admin' } : { name: 'AbitDullChatbot' };
 
   const isAdmin = senderDetails.type === 'admin';
   const isImage = message.contentType === 'image';
@@ -59,66 +59,101 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   const [randomOrHelpPrompt, setRandomOrHelpPrompt] = useState('');
   const [movementPrompt, setMovementPrompt] = useState('');
 
-  const { data: randomOrHelpData } = useSWR<ChatData>(
+  const {
+    data: randomOrHelpData,
+    isLoading: isLoadingRandomOrHelp,
+    isValidating,
+  } = useSWR<ChatData>(
     randomOrHelpPrompt ? `/api/chat/randomorhelp?prompt=${randomOrHelpPrompt}` : null
   );
 
-  const { data: movementData } = useSWR<ChatData>(
+  const { data: movementData, isLoading: isLoadingMovement } = useSWR<ChatData>(
     movementPrompt ? `/api/chat/movement?prompt=${movementPrompt}` : null
   );
+  const { cache } = useSWRConfig();
 
-  const { addMessage, updateMessage } = useMessageStore();
+  const { messages, addMessage, hideMessageOptions, updateMessage } = useMessageStore();
 
   const bodyRef = useRef<any>(null);
 
-  const handleButtonClick = (e: any) => {
+  const handleButtonClick = (e: any, id: string) => {
     const { innerText } = e.target;
+    addMessage({
+      body: innerText,
+      senderId: 'admin',
+    });
     setRandomOrHelpPrompt(innerText);
-    addMessage({
-      body: innerText,
-      senderId: 'admin',
-    });
-    hideButtonsOrTags();
+    hidePreviousOptions(id);
   };
 
-  const handleTagClick = (e: any) => {
+  const handleTagClick = (e: any, id: string) => {
     const { innerText } = e.target;
-    setMovementPrompt(innerText);
     addMessage({
       body: innerText,
       senderId: 'admin',
     });
-    hideButtonsOrTags();
+    setMovementPrompt(innerText);
+    hidePreviousOptions(id);
   };
 
-  const hideButtonsOrTags = () => {
+  const handleSaveWod = (e: any, id: string) => {
+    const { innerText } = e.target;
+    addMessage({
+      body: innerText,
+      senderId: 'admin',
+    });
+    if (innerText.includes('Save')) {
+      console.log('save');
+    } else {
+      setRandomOrHelpPrompt(innerText);
+    }
+    hidePreviousOptions(id);
+  };
+
+  const hidePreviousOptions = (id: string) => {
     const parentMessageBody = bodyRef.current.innerText;
-    updateMessage({
+    console.log('parentMessageBody', parentMessageBody);
+    hideMessageOptions({
+      id,
       body: parentMessageBody,
       senderId: 'chatGPT',
     });
   };
 
   useEffect(() => {
-    if (randomOrHelpData?.answer) {
-      setRandomOrHelpPrompt('');
-      const answer = randomOrHelpData.answer.replaceAll('\n', '<br>');
+    console.log('isLoadingRandomOrHelp', isLoadingRandomOrHelp);
+    if (isLoadingRandomOrHelp || isLoadingMovement) {
       addMessage({
-        body: answer,
+        body: 'loading...',
+        senderId: 'chatGPT',
+      });
+    }
+  }, [isLoadingRandomOrHelp, isLoadingMovement]);
+
+  useEffect(() => {
+    if (!isLoadingRandomOrHelp && randomOrHelpData && randomOrHelpData.answer) {
+      setRandomOrHelpPrompt('');
+      updateMessage({
+        id: messages[messages.length - 1].id,
+        body: randomOrHelpData.answer,
+        saveButtons: randomOrHelpData.saveButtons,
         tags: randomOrHelpData.tags,
         senderId: 'chatGPT',
       });
+      cache.delete(`/api/chat/randomorhelp?prompt=${randomOrHelpPrompt}`);
     }
   }, [randomOrHelpData]);
 
   useEffect(() => {
-    if (movementData?.answer) {
+    if (!isLoadingMovement && movementData && movementData.answer) {
       setMovementPrompt('');
-      const answer = movementData.answer.replaceAll('\n', '<br>');
-      addMessage({
-        body: answer,
+      updateMessage({
+        id: messages[messages.length - 1].id,
+        body: movementData.answer,
+        saveButtons: movementData.saveButtons,
         senderId: 'chatGPT',
       });
+      cache.delete(`/api/chat/movement?prompt=${movementPrompt}`);
     }
   }, [movementData]);
 
@@ -194,7 +229,7 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
                     fullWidth
                     variant="outlined"
                     // endIcon={<Iconify icon={'eva:checkmark-circle-2-fill'} />}
-                    onClick={handleButtonClick}
+                    onClick={(e: any) => handleButtonClick(e, message?.id)}
                   >
                     {item}
                   </Button>
@@ -203,10 +238,27 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
                 {message?.tags && (
                   <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.5 }}>
                     {message.tags.map((item: string) => (
-                      <Chip key={item} label={item} variant="outlined" onClick={handleTagClick} />
+                      <Chip
+                        key={item}
+                        label={item}
+                        variant="outlined"
+                        onClick={(e: any) => handleTagClick(e, message?.id)}
+                      />
                     ))}
                   </Stack>
                 )}
+
+                {message?.saveButtons?.map((item: string, index: number) => (
+                  <Button
+                    key={item}
+                    fullWidth
+                    variant={index === 0 ? 'contained' : 'outlined'}
+                    // endIcon={<Iconify icon={'eva:checkmark-circle-2-fill'} />}
+                    onClick={(e: any) => handleSaveWod(e, message?.id)}
+                  >
+                    {item}
+                  </Button>
+                ))}
               </Stack>
             )}
           </ContentStyle>
