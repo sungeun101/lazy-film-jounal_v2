@@ -21,7 +21,6 @@ import { RecordFormValuesProps } from './WodNewRecordForm';
 export type WodFormValuesProps = {
   createDate: Date | null;
   type: 'As Many Rounds As Possible' | 'For Time';
-  title: string;
   content: string;
   records: IRecord[];
 };
@@ -56,14 +55,12 @@ export default function WodNewForm({ onCancel, searchDate }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewWodSchema = Yup.object().shape({
-    title: Yup.string().required('Title is required'),
     content: Yup.string().min(1).required('Content is required'),
   });
 
   const defaultValues = {
     createDate: searchDate,
     type: currentWod?.type || 'As Many Rounds As Possible',
-    title: currentWod?.title || '',
     content: currentWod?.content || '',
   };
 
@@ -142,8 +139,6 @@ export default function WodNewForm({ onCancel, searchDate }: Props) {
               </MenuItem>
             ))}
           </RHFSelect>
-
-          <RHFTextField name="title" label="Title" />
 
           <div>
             <LabelStyle>Content</LabelStyle>

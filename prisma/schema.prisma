@@ -37,7 +37,6 @@ model Wod {
   id           Int      @id @default(autoincrement())
   createDate   String   @unique
   type         String
-  title        String
   content      String   @db.LongText
   records      Record[]
 }

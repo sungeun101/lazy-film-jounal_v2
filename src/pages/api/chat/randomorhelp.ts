@@ -34,7 +34,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
       frequency_penalty: 0,
     });
     console.log(completion.data);
-    const wodCreated = `How about this?${completion.data.choices[0].text?.replaceAll(
+    const wodCreated = `How about this?<br>${completion.data.choices[0].text?.replaceAll(
       '\n',
       '<br>'
     )}`;

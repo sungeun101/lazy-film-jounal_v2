@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import Slider from 'react-slick';
+import { useEffect, useState } from 'react';
 // @mui
-import { useTheme } from '@mui/material/styles';
 import { Card, Stack, Button, CardHeader, Typography, TextField } from '@mui/material';
 // components
 import Iconify from 'src/components/Iconify';
@@ -11,7 +9,7 @@ import useSWR from 'swr';
 import dayjs from 'dayjs';
 import { CarouselArrows } from 'src/components/carousel';
 import { DatePicker } from '@mui/lab';
-import { useMessageStore, useWodStore } from 'src/zustand/useStore';
+import { useDateStore, useMessageStore, useWodStore } from 'src/zustand/useStore';
 
 export interface WodData {
   ok: boolean;
@@ -22,14 +20,14 @@ export interface WodData {
 
 export default function WodBoard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [searchDate, setSearchDate] = useState<Date | null>(new Date());
+
+  const { searchDate, setSearchDate } = useDateStore();
+  const { setWod } = useWodStore();
+  const { addMessage } = useMessageStore();
 
   const { data: wodData } = useSWR<WodData>(
     searchDate ? `/api/wods/${dayjs(searchDate).format('YYYY-MM-DD')}` : null
   );
-
-  const { setWod } = useWodStore();
-  const { addMessage } = useMessageStore();
 
   useEffect(() => {
     addMessage({
@@ -96,15 +94,7 @@ export default function WodBoard() {
 
       <Stack p={4}>
         {wodData?.wod ? (
-          <>
-            <Typography
-              variant="h6"
-              gutterBottom
-              dangerouslySetInnerHTML={{ __html: wodData?.wod?.title }}
-            />
-            <Typography dangerouslySetInnerHTML={{ __html: wodData?.wod?.type + ':' }} />
-            <Typography dangerouslySetInnerHTML={{ __html: wodData?.wod?.content }} />
-          </>
+          <Typography dangerouslySetInnerHTML={{ __html: wodData?.wod?.content }} />
         ) : (
           <Typography>No workout has been registered yet!</Typography>
         )}

@@ -2,11 +2,12 @@ import { formatDistanceToNowStrict } from 'date-fns';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Avatar, Box, Typography, Stack, Button, Chip } from '@mui/material';
-import Iconify from 'src/components/Iconify';
-import { Message, useMessageStore } from 'src/zustand/useStore';
+import { Message, useDateStore, useMessageStore } from 'src/zustand/useStore';
 import { useEffect, useRef, useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import { ChatData } from './ChatMessageInput';
+import useMutation from 'src/libs/client/useMutation';
+import dayjs from 'dayjs';
 
 // ----------------------------------------------------------------------
 
@@ -43,8 +44,6 @@ const MessageImgStyle = styled('img')(({ theme }) => ({
 type ChatMessageItemProps = {
   message: Message;
   onOpenLightbox: (value: string) => void;
-  // message: Message;
-  // onOpenLightbox: (value: string) => void;
 };
 
 export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessageItemProps) {
@@ -55,26 +54,33 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   const isImage = message.contentType === 'image';
   const firstName = senderDetails.name && senderDetails.name.split(' ')[0];
 
-  // console.log('ChatMessageItem message', message);
   const [randomOrHelpPrompt, setRandomOrHelpPrompt] = useState('');
   const [movementPrompt, setMovementPrompt] = useState('');
 
-  const {
-    data: randomOrHelpData,
-    isLoading: isLoadingRandomOrHelp,
-    isValidating,
-  } = useSWR<ChatData>(
+  const { data: randomOrHelpData, isLoading: isLoadingRandomOrHelp } = useSWR<ChatData>(
     randomOrHelpPrompt ? `/api/chat/randomorhelp?prompt=${randomOrHelpPrompt}` : null
   );
 
   const { data: movementData, isLoading: isLoadingMovement } = useSWR<ChatData>(
     movementPrompt ? `/api/chat/movement?prompt=${movementPrompt}` : null
   );
-  const { cache } = useSWRConfig();
+  const { cache, mutate } = useSWRConfig();
 
+  const { searchDate } = useDateStore();
   const { messages, addMessage, hideMessageOptions, updateMessage } = useMessageStore();
 
   const bodyRef = useRef<any>(null);
+
+  const [uploadWod, { data: wodResult }] = useMutation('/api/wods');
+
+  const hidePreviousOptions = (id: string) => {
+    const parentMessageBody = bodyRef.current.innerText;
+    hideMessageOptions({
+      id,
+      body: parentMessageBody,
+      senderId: 'chatGPT',
+    });
+  };
 
   const handleButtonClick = (e: any, id: string) => {
     const { innerText } = e.target;
@@ -102,26 +108,45 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
       body: innerText,
       senderId: 'admin',
     });
-    if (innerText.includes('Save')) {
-      console.log('save');
+    if (innerText.toLowerCase().includes('save')) {
+      onSubmit();
     } else {
       setRandomOrHelpPrompt(innerText);
     }
     hidePreviousOptions(id);
   };
 
-  const hidePreviousOptions = (id: string) => {
+  const onSubmit = async () => {
+    const stringDate = dayjs(searchDate).format('YYYY-MM-DD');
     const parentMessageBody = bodyRef.current.innerText;
-    console.log('parentMessageBody', parentMessageBody);
-    hideMessageOptions({
-      id,
-      body: parentMessageBody,
-      senderId: 'chatGPT',
-    });
+    const wodOnly = parentMessageBody.split('\n').slice(1).join('<br>');
+    try {
+      uploadWod({
+        createDate: stringDate,
+        type:
+          parentMessageBody.toLowerCase().includes('as many rounds as possible') ||
+          parentMessageBody.toLowerCase().includes('amrap')
+            ? 'As Many Rounds As Possible'
+            : 'For Time',
+        content: wodOnly,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
-    console.log('isLoadingRandomOrHelp', isLoadingRandomOrHelp);
+    if (wodResult?.ok) {
+      console.log('wodResult', wodResult);
+      mutate(`/api/wods/${dayjs(searchDate).format('YYYY-MM-DD')}`);
+      addMessage({
+        body: "This WOD is saved for today's workout. Feel free to make any desired edits on the Wod board!",
+        senderId: 'chatGPT',
+      });
+    }
+  }, [wodResult]);
+
+  useEffect(() => {
     if (isLoadingRandomOrHelp || isLoadingMovement) {
       addMessage({
         body: 'loading...',

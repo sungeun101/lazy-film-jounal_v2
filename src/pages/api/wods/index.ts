@@ -5,6 +5,7 @@ import { withApiSession } from 'src/libs/server/withSession';
 
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
   const { body: data } = req;
+  console.log('wod data', data);
   const alreadyExists = await client.wod.findFirst({
     where: {
       createDate: data.createDate,

@@ -2,6 +2,10 @@ import dayjs from 'dayjs';
 import { create } from 'zustand';
 import { WodFormValuesProps } from '../sections/@dashboard/real/workout/WodNewForm';
 
+interface DateStore {
+  searchDate: Date | null;
+  setSearchDate: (searchDate: Date | null) => void;
+}
 interface WodStore {
   wod: WodFormValuesProps | null;
   setWod: (wod: WodFormValuesProps | null) => void;
@@ -33,6 +37,11 @@ interface MessageStore {
   hideMessageOptions: (newMessage: NewMessage) => void;
   updateMessage: (newMessage: NewMessage) => void;
 }
+
+export const useDateStore = create<DateStore>()((set) => ({
+  searchDate: new Date(),
+  setSearchDate: (searchDate: Date | null) => set(() => ({ searchDate })),
+}));
 
 export const useWodStore = create<WodStore>()((set) => ({
   wod: null,
