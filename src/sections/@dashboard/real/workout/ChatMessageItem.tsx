@@ -74,12 +74,14 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   const [uploadWod, { data: wodResult }] = useMutation('/api/wods');
 
   const hidePreviousOptions = (id: string) => {
-    const parentMessageBody = bodyRef.current.innerText;
-    hideMessageOptions({
-      id,
-      body: parentMessageBody,
-      senderId: 'chatGPT',
-    });
+    if (bodyRef && bodyRef.current) {
+      const parentMessageBody = bodyRef.current.innerText;
+      hideMessageOptions({
+        id,
+        body: parentMessageBody,
+        senderId: 'chatGPT',
+      });
+    }
   };
 
   const handleButtonClick = (e: any, id: string) => {
@@ -117,21 +119,23 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   };
 
   const onSubmit = async () => {
-    const stringDate = dayjs(searchDate).format('YYYY-MM-DD');
-    const parentMessageBody = bodyRef.current.innerText;
-    const wodOnly = parentMessageBody.split('\n').slice(1).join('<br>');
-    try {
-      uploadWod({
-        createDate: stringDate,
-        type:
-          parentMessageBody.toLowerCase().includes('as many rounds as possible') ||
-          parentMessageBody.toLowerCase().includes('amrap')
-            ? 'As Many Rounds As Possible'
-            : 'For Time',
-        content: wodOnly,
-      });
-    } catch (error) {
-      console.error(error);
+    if (bodyRef && bodyRef.current) {
+      const parentMessageBody = bodyRef.current.innerText;
+      const stringDate = dayjs(searchDate).format('YYYY-MM-DD');
+      const wodOnly = parentMessageBody.split('\n').slice(1).join('<br>');
+      try {
+        uploadWod({
+          createDate: stringDate,
+          type:
+            parentMessageBody.toLowerCase().includes('as many rounds as possible') ||
+            parentMessageBody.toLowerCase().includes('amrap')
+              ? 'As Many Rounds As Possible'
+              : 'For Time',
+          content: wodOnly,
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -140,7 +144,7 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
       console.log('wodResult', wodResult);
       mutate(`/api/wods/${dayjs(searchDate).format('YYYY-MM-DD')}`);
       addMessage({
-        body: "This WOD is saved for today's workout. Feel free to make any desired edits on the Wod board!",
+        body: "This WOD is saved for today's workout. Feel free to make any edits on the Wod board!",
         senderId: 'chatGPT',
       });
     }

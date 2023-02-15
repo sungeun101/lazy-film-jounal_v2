@@ -132,7 +132,9 @@ export default function WodTopFive() {
                   </TableRow>
                 ))
               ) : (
-                <Typography>No record has been uploaded yet!</Typography>
+                <TableRow>
+                  <TableCell>No record has been uploaded yet!</TableCell>
+                </TableRow>
               )}
             </TableBody>
           </Table>
