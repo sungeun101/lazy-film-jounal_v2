@@ -69,6 +69,7 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   const { searchDate } = useDateStore();
   const { messages, addMessage, hideMessageOptions, updateMessage } = useMessageStore();
 
+  const messagesRef = useRef<any>(null);
   const bodyRef = useRef<any>(null);
 
   const [uploadWod, { data: wodResult }] = useMutation('/api/wods');
@@ -151,39 +152,52 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   }, [wodResult]);
 
   useEffect(() => {
-    if (isLoadingRandomOrHelp || isLoadingMovement) {
-      addMessage({
-        body: 'loading...',
-        senderId: 'chatGPT',
-      });
-    }
-  }, [isLoadingRandomOrHelp, isLoadingMovement]);
+    const timeout = setTimeout(() => {
+      if (randomOrHelpPrompt || movementPrompt) {
+        addMessage({
+          body: 'Loading...',
+          senderId: 'chatGPT',
+        });
+      }
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [randomOrHelpPrompt, movementPrompt]);
 
   useEffect(() => {
-    if (!isLoadingRandomOrHelp && randomOrHelpData && randomOrHelpData.answer) {
-      setRandomOrHelpPrompt('');
-      updateMessage({
-        id: messages[messages.length - 1].id,
-        body: randomOrHelpData.answer,
-        saveButtons: randomOrHelpData.saveButtons,
-        tags: randomOrHelpData.tags,
-        senderId: 'chatGPT',
-      });
-      cache.delete(`/api/chat/randomorhelp?prompt=${randomOrHelpPrompt}`);
-    }
+    messagesRef.current = messages;
+  }, [messages]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!isLoadingRandomOrHelp && randomOrHelpData && randomOrHelpData.answer) {
+        setRandomOrHelpPrompt('');
+        updateMessage({
+          id: messagesRef.current[messagesRef.current.length - 1].id,
+          body: randomOrHelpData.answer,
+          saveButtons: randomOrHelpData.saveButtons,
+          tags: randomOrHelpData.tags,
+          senderId: 'chatGPT',
+        });
+        cache.delete(`/api/chat/randomorhelp?prompt=${randomOrHelpPrompt}`);
+      }
+    }, 500);
+    return () => clearTimeout(timeout);
   }, [randomOrHelpData]);
 
   useEffect(() => {
-    if (!isLoadingMovement && movementData && movementData.answer) {
-      setMovementPrompt('');
-      updateMessage({
-        id: messages[messages.length - 1].id,
-        body: movementData.answer,
-        saveButtons: movementData.saveButtons,
-        senderId: 'chatGPT',
-      });
-      cache.delete(`/api/chat/movement?prompt=${movementPrompt}`);
-    }
+    const timeout = setTimeout(() => {
+      if (!isLoadingMovement && movementData && movementData.answer) {
+        setMovementPrompt('');
+        updateMessage({
+          id: messagesRef.current[messagesRef.current.length - 1].id,
+          body: movementData.answer,
+          saveButtons: movementData.saveButtons,
+          senderId: 'chatGPT',
+        });
+        cache.delete(`/api/chat/movement?prompt=${movementPrompt}`);
+      }
+    }, 500);
+    return () => clearTimeout(timeout);
   }, [movementData]);
 
   return (

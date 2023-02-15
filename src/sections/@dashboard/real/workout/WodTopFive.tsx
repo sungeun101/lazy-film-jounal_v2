@@ -39,7 +39,6 @@ export default function WodTopFive() {
   const [sortedRecords, setSortedRecords] = useState<IRecord[]>([]);
 
   const { wod } = useWodStore();
-  console.log('wod', wod);
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
