@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // @mui
-import { Card, Stack, Button, CardHeader, Typography, TextField } from '@mui/material';
+import { Card, Stack, Button, CardHeader, Typography, TextField, Box } from '@mui/material';
 // components
 import Iconify from 'src/components/Iconify';
 import { DialogAnimate } from 'src/components/animate';
@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 import { CarouselArrows } from 'src/components/carousel';
 import { DatePicker } from '@mui/lab';
 import { useDateStore, useMessageStore, useWodStore } from 'src/zustand/useStore';
+import Scrollbar from 'src/components/Scrollbar';
 
 export interface WodData {
   ok: boolean;
@@ -19,6 +20,8 @@ export interface WodData {
 //----------------------------------------------------------------------
 
 export default function WodBoard() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const { searchDate, setSearchDate } = useDateStore();
@@ -64,7 +67,7 @@ export default function WodBoard() {
   };
 
   return (
-    <Card>
+    <Card sx={{ height: '72vh', display: 'flex', flexDirection: 'column' }}>
       <CardHeader
         title="Workout of the day"
         subheader={
@@ -92,15 +95,15 @@ export default function WodBoard() {
         }}
       />
 
-      <Stack p={4}>
+      <Scrollbar scrollableNodeProps={{ ref: scrollRef }} sx={{ p: 3, height: 1 }}>
         {wodData?.wod ? (
           <Typography dangerouslySetInnerHTML={{ __html: wodData?.wod?.content }} />
         ) : (
           <Typography>No workout has been registered yet!</Typography>
         )}
-      </Stack>
+      </Scrollbar>
 
-      <Stack direction="row" justifyContent="center" pb={2}>
+      <Stack direction="row" justifyContent="center" alignItems="center" sx={{ minHeight: 56 }}>
         <CarouselArrows
           customIcon={'ic:round-keyboard-arrow-right'}
           onNext={handleNext}

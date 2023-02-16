@@ -66,7 +66,7 @@ export default function WodChatWindow() {
           <ChatMessageInput disabled={pathname === PATH_DASHBOARD.chat.new} />
         </Box>
 
-        <ChatRoom participants={displayParticipants} />
+        {/* <ChatRoom participants={displayParticipants} /> */}
 
         {/* {mode === 'DETAIL' && (
           <ChatRoom conversation={conversation} participants={displayParticipants} />

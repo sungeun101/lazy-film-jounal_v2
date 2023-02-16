@@ -31,26 +31,31 @@ export default function RealApp() {
     <Page title="Real: App">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
+            <WodBoard />
+          </Grid>
+
+          <Grid item xs={12} md={6}>
             <Card sx={{ height: '72vh', display: 'flex' }}>
               {/* <WodChatSidebar /> */}
               <WodChatWindow />
             </Card>
           </Grid>
 
-          <Grid item xs={12}>
-            <WodBoard />
-          </Grid>
-
-          {wod && (
-            <Grid item xs={12} md={6} lg={8}>
-              <WodTopFive />
+          {wod ? (
+            <>
+              <Grid item xs={12} md={6} lg={8}>
+                <WodTopFive />
+              </Grid>
+              <Grid item xs={12} md={6} lg={4}>
+                <EcommerceLatestProducts />
+              </Grid>
+            </>
+          ) : (
+            <Grid item xs={12}>
+              <EcommerceLatestProducts />
             </Grid>
           )}
-
-          <Grid item xs={12} md={6} lg={4}>
-            <EcommerceLatestProducts />
-          </Grid>
         </Grid>
       </Container>
     </Page>
