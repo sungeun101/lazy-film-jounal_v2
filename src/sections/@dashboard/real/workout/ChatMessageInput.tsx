@@ -1,14 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Stack, Input, Divider, IconButton, InputAdornment } from '@mui/material';
-// utils
-import uuidv4 from 'src/utils/uuidv4';
-// @types
-import { SendMessage } from 'src/@types/chat';
+import { Stack, Input, Divider, IconButton } from '@mui/material';
+
 // components
 import Iconify from 'src/components/Iconify';
-import EmojiPicker from 'src/components/EmojiPicker';
 import useSWR from 'swr';
 import { useMessageStore } from 'src/zustand/useStore';
 
@@ -24,10 +20,6 @@ const RootStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-type Props = {
-  disabled: boolean;
-};
-
 export interface ChatData {
   ok: boolean;
   answer: string;
@@ -36,22 +28,24 @@ export interface ChatData {
   saveButtons?: string[];
 }
 
-export default function ChatMessageInput({ disabled }: Props) {
-  const fileInputRef = useRef<HTMLInputElement>(null);
+export default function ChatMessageInput() {
   const [prompt, setPrompt] = useState('');
   const [startSearch, setStartSearch] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const { data: movementData } = useSWR<ChatData>(
     startSearch && prompt ? `/api/chat/movement?prompt=${prompt}` : null
   );
 
-  const { addMessage } = useMessageStore();
+  const { messages, addMessage, hideMessageOptions } = useMessageStore();
 
   useEffect(() => {
     if (movementData?.answer) {
+      console.log('movementData', movementData);
       setPrompt('');
       addMessage({
         body: movementData.answer,
+        saveButtons: movementData.saveButtons,
         senderId: 'chatGPT',
       });
     }
@@ -63,9 +57,14 @@ export default function ChatMessageInput({ disabled }: Props) {
     }
   }, [prompt]);
 
-  const handleAttach = () => {
-    fileInputRef.current?.click();
-  };
+  useEffect(() => {
+    console.log('messages', messages);
+    if (messages && messages[messages.length - 1]?.body?.toLowerCase().includes('what movements')) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [messages]);
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -76,6 +75,20 @@ export default function ChatMessageInput({ disabled }: Props) {
   const handleSend = () => {
     if (!prompt) {
       return '';
+    }
+    if (
+      messages &&
+      messages[messages.length - 1] &&
+      messages &&
+      messages[messages.length - 1].id &&
+      messages &&
+      messages[messages.length - 1].body
+    ) {
+      hideMessageOptions({
+        id: messages[messages.length - 1].id,
+        body: messages[messages.length - 1].body,
+        senderId: 'chatGPT',
+      });
     }
     addMessage({
       body: prompt,
@@ -88,27 +101,22 @@ export default function ChatMessageInput({ disabled }: Props) {
   return (
     <RootStyle>
       <Input
-        disabled={disabled}
+        disabled={isDisabled}
         fullWidth
         value={prompt}
         disableUnderline
         onKeyUp={handleKeyUp}
         onChange={(event) => setPrompt(event.target.value)}
-        placeholder="Type any crossfit movement"
-        startAdornment={
-          <InputAdornment position="start">
-            <EmojiPicker disabled={disabled} value={prompt} setValue={setPrompt} />
-          </InputAdornment>
-        }
+        placeholder={isDisabled ? '' : 'Type any crossfit movement'}
         endAdornment={
           <Stack direction="row" spacing={1} sx={{ flexShrink: 0, mr: 1.5 }}>
-            <IconButton disabled={disabled} size="small" onClick={handleAttach}>
+            {/* <IconButton disabled={isDisabled} size="small" onClick={handleAttach}>
               <Iconify icon="ic:round-add-photo-alternate" width={22} height={22} />
             </IconButton>
-            <IconButton disabled={disabled} size="small" onClick={handleAttach}>
+            <IconButton disabled={isDisabled} size="small" onClick={handleAttach}>
               <Iconify icon="eva:attach-2-fill" width={22} height={22} />
-            </IconButton>
-            <IconButton disabled={disabled} size="small">
+            </IconButton> */}
+            <IconButton disabled={isDisabled} size="small">
               <Iconify icon="eva:mic-fill" width={22} height={22} />
             </IconButton>
           </Stack>
@@ -121,7 +129,7 @@ export default function ChatMessageInput({ disabled }: Props) {
         <Iconify icon="ic:round-send" width={22} height={22} />
       </IconButton>
 
-      <input type="file" ref={fileInputRef} style={{ display: 'none' }} />
+      {/* <input type="file" ref={fileInputRef} style={{ display: 'none' }} /> */}
     </RootStyle>
   );
 }

@@ -75,11 +75,6 @@ export const useMessageStore = create<MessageStore>()((set) => ({
       const answerToIndex = state.messages.findIndex(
         (message: Message) => message.id === prevMessage.id
       );
-      // const answerToIndex = state.messages.findIndex((message: Message) => {
-      //   console.log('message', message);
-      //   const nMessageBody = message.body.replaceAll('<br>', '\n');
-      //   return nMessageBody === prevMessage.body;
-      // });
       const newArray = [...state.messages];
       console.log('answerToIndex', answerToIndex);
       newArray[answerToIndex] = {

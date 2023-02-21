@@ -170,6 +170,7 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (!isLoadingRandomOrHelp && randomOrHelpData && randomOrHelpData.answer) {
+        console.log('randomOrHelpData', randomOrHelpData);
         setRandomOrHelpPrompt('');
         updateMessage({
           id: messagesRef.current[messagesRef.current.length - 1].id,
@@ -187,6 +188,7 @@ export default function ChatMessageItem({ message, onOpenLightbox }: ChatMessage
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (!isLoadingMovement && movementData && movementData.answer) {
+        console.log('movementData', movementData);
         setMovementPrompt('');
         updateMessage({
           id: messagesRef.current[messagesRef.current.length - 1].id,

@@ -47,9 +47,8 @@ export default function ChatMessageList() {
 
         <div>2-1. No, please create another one</div>
         <div>2-2. with snatch/clean/...</div>
-        <div>2-3. workout style - amrap/for time</div>
-        <div>2-4. with KB/DB/Barbell/</div>
-        <div>2-5. Focus - gymnastics/cardio/weightlifting</div>
+        <div>2-3. Anything with KB/DB/Barbell/</div>
+        <div>2-4. Focus - gymnastics/cardio/weightlifting</div>
 
         {messages.map((message: Message) => (
           <ChatMessageItem key={message.id} message={message} onOpenLightbox={handleOpenLightbox} />

@@ -28,7 +28,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     const completion = await openai.createCompletion({
       model: 'text-davinci-003',
       prompt: `Create a random crossfit Wod`,
-      max_tokens: 200,
+      max_tokens: 5,
+      // max_tokens: 200,
       temperature: 1,
       presence_penalty: 0,
       frequency_penalty: 0,
