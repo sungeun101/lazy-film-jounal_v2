@@ -26,18 +26,20 @@ export default function WodBoard() {
 
   const { searchDate, setSearchDate } = useDateStore();
   const { setWod } = useWodStore();
-  const { addMessage } = useMessageStore();
+  const { messages, addMessage } = useMessageStore();
 
   const { data: wodData } = useSWR<WodData>(
     searchDate ? `/api/wods/${dayjs(searchDate).format('YYYY-MM-DD')}` : null
   );
 
   useEffect(() => {
-    addMessage({
-      body: "Hi! How would you like me to generate today's workout for you?",
-      buttons: ['Create a random workout', 'Help me create one'],
-      senderId: 'chatGPT',
-    });
+    if (messages && messages.length === 0) {
+      addMessage({
+        body: "Hi! How would you like me to generate today's workout for you?",
+        buttons: ['Create a random workout', 'Help me create one'],
+        senderId: 'chatGPT',
+      });
+    }
   }, []);
 
   useEffect(() => {
