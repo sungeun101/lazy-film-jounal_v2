@@ -1,5 +1,3 @@
-// next
-import NextLink from 'next/link';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -16,15 +14,12 @@ import {
   TableContainer,
   Divider,
   Button,
-  Stack,
 } from '@mui/material';
-// _mock_
-import { _ecommerceBestSalesman } from 'src/_mock';
 // components
 import Label from 'src/components/Label';
 import Scrollbar from 'src/components/Scrollbar';
 import Iconify from 'src/components/Iconify';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { DialogAnimate } from 'src/components/animate';
 import WodNewRecordForm from './WodNewRecordForm';
 import { useWodStore } from 'src/zustand/useStore';
@@ -92,18 +87,19 @@ export default function WodTopFive() {
             <TableBody>
               {sortedRecords && sortedRecords.length > 0 ? (
                 sortedRecords.map((row: IRecord, index: number) => (
-                  <TableRow key={row.user.name}>
+                  <TableRow key={index}>
                     <TableCell>
                       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Avatar alt={row.user.name} src={row.user.avatar ?? ''} />
+                        <Avatar alt={row.user?.name} src={row.user?.avatar ?? ''} />
                         <Box sx={{ ml: 2 }}>
-                          <Typography variant="subtitle2"> {row.user.name}</Typography>
+                          <Typography variant="subtitle2"> {row.user?.name}</Typography>
                           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            {row.user.email}
+                            {row.user?.email}
                           </Typography>
                         </Box>
                       </Box>
                     </TableCell>
+
                     <TableCell>
                       {wod?.type === 'As Many Rounds As Possible'
                         ? `${row.amrapRound} round${
@@ -158,7 +154,11 @@ export default function WodTopFive() {
 
       {/* new record modal */}
       <DialogAnimate open={isOpenModal} onClose={handleCloseModal}>
-        <WodNewRecordForm onCancel={handleCloseModal} />
+        <WodNewRecordForm
+          onCancel={handleCloseModal}
+          sortedRecords={sortedRecords}
+          setSortedRecords={setSortedRecords}
+        />
       </DialogAnimate>
     </Card>
   );

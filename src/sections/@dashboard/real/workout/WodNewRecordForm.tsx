@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 // form
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-
 import {
   Typography,
   Stack,
@@ -18,8 +17,9 @@ import { FormProvider, RHFTextField } from 'src/components/hook-form';
 import { LoadingButton } from '@mui/lab';
 import { useSnackbar } from 'notistack';
 import useMutation from 'src/libs/client/useMutation';
-import { useSWRConfig } from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 import { useWodStore } from 'src/zustand/useStore';
+import { IRecord } from './WodNewForm';
 
 // ----------------------------------------------------------------------
 
@@ -32,11 +32,13 @@ export type RecordFormValuesProps = {
 
 interface Props {
   onCancel: VoidFunction;
+  sortedRecords: IRecord[];
+  setSortedRecords: Dispatch<SetStateAction<IRecord[]>>;
 }
 
 // ----------------------------------------------------------------------
 
-export default function WodNewRecordForm({ onCancel }: Props) {
+export default function WodNewRecordForm({ onCancel, sortedRecords, setSortedRecords }: Props) {
   const { wod: currentWod } = useWodStore();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -83,9 +85,29 @@ export default function WodNewRecordForm({ onCancel }: Props) {
   } = methods;
 
   const { mutate } = useSWRConfig();
+  // post
   const [uploadRecord, { data: recordResult }] = useMutation(
     `/api/wods/${currentWod?.createDate}/record`
   );
+  const [updateFeatured, { data: featuredResult }] = useMutation(
+    `/api/wods/${currentWod?.createDate}/featured`
+  );
+  // get
+  const { data: topFiveRecordsData } = useSWR(
+    recordResult?.ok ? `/api/wods/${currentWod?.createDate}/record` : null
+  );
+
+  useEffect(() => {
+    if (currentWod) {
+      console.log('currentWod', currentWod);
+    }
+  }, [currentWod]);
+
+  useEffect(() => {
+    if (featuredResult) {
+      console.log('featuredResult', featuredResult);
+    }
+  }, [featuredResult]);
 
   useEffect(() => {
     if (recordResult?.ok) {
@@ -96,6 +118,31 @@ export default function WodNewRecordForm({ onCancel }: Props) {
       reset();
     }
   }, [recordResult]);
+
+  useEffect(() => {
+    if (topFiveRecordsData?.ok) {
+      console.log('topFiveRecordsData', topFiveRecordsData);
+      sortRecords();
+    }
+  }, [topFiveRecordsData]);
+
+  const sortRecords = () => {
+    if (currentWod) {
+      let sorted;
+      if (currentWod.type === 'For Time') {
+        sorted = topFiveRecordsData.topFiveRecordsFortheDay.sort((a: IRecord, b: IRecord) =>
+          a.forTimeMinute === b.forTimeMinute ? a.forTimeSecond! - b.forTimeSecond! : 0
+        );
+      } else {
+        sorted = topFiveRecordsData.topFiveRecordsFortheDay.sort((a: IRecord, b: IRecord) =>
+          a.amrapRound === b.amrapRound ? b.amrapRep! - a.amrapRep! : 0
+        );
+      }
+      setSortedRecords(sorted);
+      console.log('update Featured!!');
+      updateFeatured(sorted);
+    }
+  };
 
   const onSubmit = async (data: RecordFormValuesProps) => {
     console.log('submit data', data);

@@ -18,6 +18,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
           create: {
             name,
             email,
+            rank: 0,
+            dailyScoreSubmit: 0,
           },
         },
       },

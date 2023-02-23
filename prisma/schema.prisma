@@ -12,14 +12,17 @@ datasource db {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
-  email     String      @unique
-  name      String
-  avatar    String?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  passwords Password[]
-  records   Record[]
+  id                Int         @id @default(autoincrement())
+  email             String      @unique
+  name              String
+  avatar            String?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  passwords         Password[]
+  records           Record[]
+  rank              Int        
+  dailyScoreSubmit  Int   
+  TopFiveRecord     TopFiveRecord[]
 }
 
 model Password {
@@ -34,14 +37,29 @@ model Password {
 }
 
 model Wod {
-  id           Int      @id @default(autoincrement())
-  createDate   String   @unique
-  type         String
-  content      String   @db.LongText
-  records      Record[]
+  id              Int      @id @default(autoincrement())
+  createDate      String   @unique
+  type            String
+  content         String   @db.LongText
+  records         Record[]
+  topFiveRecords  TopFiveRecord[]
 }
 
 model Record {
+  id            Int      @id @default(autoincrement())
+  amrapRound    Int?
+  amrapRep      Int?
+  forTimeMinute  Int?
+  forTimeSecond  Int?
+  wod           Wod      @relation(fields: [wodId], references: [id], onDelete: Cascade)
+  wodId         Int
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int
+
+  @@index([wodId])
+  @@index([userId])
+}
+model TopFiveRecord {
   id            Int      @id @default(autoincrement())
   amrapRound    Int?
   amrapRep      Int?
