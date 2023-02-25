@@ -86,61 +86,63 @@ export default function WodNewRecordForm({ onCancel, sortedRecords, setSortedRec
 
   const { mutate } = useSWRConfig();
   // post
-  const [uploadRecord, { data: recordResult }] = useMutation(
+  const [uploadRecord, { data: uploadRecordResult }] = useMutation(
     `/api/wods/${currentWod?.createDate}/record`
   );
-  const [updateFeatured, { data: featuredResult }] = useMutation(
+  const [updateFeatured, { data: updateFeaturedResult }] = useMutation(
     `/api/wods/${currentWod?.createDate}/featured`
   );
-  // get
-  const { data: topFiveRecordsData } = useSWR(
-    recordResult?.ok ? `/api/wods/${currentWod?.createDate}/record` : null
-  );
+
+  // useEffect(() => {
+  //   if (currentWod) {
+  //     console.log('currentWod', currentWod);
+  //   }
+  // }, [currentWod]);
 
   useEffect(() => {
-    if (currentWod) {
-      console.log('currentWod', currentWod);
+    if (updateFeaturedResult) {
+      console.log('updateFeaturedResult', updateFeaturedResult);
+      setSortedRecords([]);
     }
-  }, [currentWod]);
+  }, [updateFeaturedResult]);
 
   useEffect(() => {
-    if (featuredResult) {
-      console.log('featuredResult', featuredResult);
-    }
-  }, [featuredResult]);
-
-  useEffect(() => {
-    if (recordResult?.ok) {
-      console.log('recordResult', recordResult);
+    if (uploadRecordResult?.ok && uploadRecordResult?.allForTheDay) {
+      console.log('uploadRecordResult', uploadRecordResult);
       mutate(`/api/wods/${currentWod?.createDate}`);
       enqueueSnackbar('Saved!');
       onCancel();
       reset();
-    }
-  }, [recordResult]);
-
-  useEffect(() => {
-    if (topFiveRecordsData?.ok) {
-      console.log('topFiveRecordsData', topFiveRecordsData);
       sortRecords();
     }
-  }, [topFiveRecordsData]);
+  }, [uploadRecordResult]);
 
   const sortRecords = () => {
     if (currentWod) {
       let sorted;
       if (currentWod.type === 'For Time') {
-        sorted = topFiveRecordsData.topFiveRecordsFortheDay.sort((a: IRecord, b: IRecord) =>
-          a.forTimeMinute === b.forTimeMinute ? a.forTimeSecond! - b.forTimeSecond! : 0
+        sorted = [...uploadRecordResult.allForTheDay].sort((a: IRecord, b: IRecord) =>
+          a.forTimeMinute === b.forTimeMinute
+            ? a.forTimeSecond! - b.forTimeSecond!
+            : a.forTimeMinute! > b.forTimeMinute!
+            ? 1
+            : -1
         );
+        console.log('for time sorting...');
       } else {
-        sorted = topFiveRecordsData.topFiveRecordsFortheDay.sort((a: IRecord, b: IRecord) =>
-          a.amrapRound === b.amrapRound ? b.amrapRep! - a.amrapRep! : 0
+        sorted = [...uploadRecordResult.allForTheDay].sort((a: IRecord, b: IRecord) =>
+          a.amrapRound === b.amrapRound
+            ? b.amrapRep! - a.amrapRep!
+            : a.amrapRound! < b.amrapRound!
+            ? 1
+            : -1
         );
+        console.log('amrap sorting...');
       }
-      setSortedRecords(sorted);
+      console.log('sorted', sorted);
+      setSortedRecords(sorted.slice(0, 5));
       console.log('update Featured!!');
-      updateFeatured(sorted);
+      updateFeatured(sorted.slice(0, 5));
     }
   };
 

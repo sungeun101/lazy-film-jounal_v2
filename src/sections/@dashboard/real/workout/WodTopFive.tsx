@@ -48,14 +48,22 @@ export default function WodTopFive() {
       let sorted;
       if (wod.type === 'For Time') {
         sorted = wod.records.sort((a: IRecord, b: IRecord) =>
-          a.forTimeMinute === b.forTimeMinute ? a.forTimeSecond! - b.forTimeSecond! : 0
+          a.forTimeMinute === b.forTimeMinute
+            ? a.forTimeSecond! - b.forTimeSecond!
+            : a.forTimeMinute! > b.forTimeMinute!
+            ? 1
+            : -1
         );
       } else {
         sorted = wod.records.sort((a: IRecord, b: IRecord) =>
-          a.amrapRound === b.amrapRound ? b.amrapRep! - a.amrapRep! : 0
+          a.amrapRound === b.amrapRound
+            ? b.amrapRep! - a.amrapRep!
+            : a.amrapRound! < b.amrapRound!
+            ? 1
+            : -1
         );
       }
-      setSortedRecords(sorted);
+      setSortedRecords(sorted.slice(0, 5));
     }
   }, [wod]);
 

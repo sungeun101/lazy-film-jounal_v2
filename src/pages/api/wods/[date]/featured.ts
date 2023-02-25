@@ -12,10 +12,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
       session: { user },
       body,
     } = req;
+    console.log('hi');
 
     //1.기존에 저장된 topfive의 user rank 수정
-    const topFives = await client.topFiveRecord.findMany();
-    console.log('기존 topFive -> ', topFives);
+    const topFives = await client.topFiveRecord.findMany({
+      where: {
+        wod: {
+          createDate: date.toString(),
+        },
+      },
+    });
+    console.log('해당 날짜 기존 topFive -> ', topFives);
     if (topFives && topFives.length > 0) {
       const updatePreviousRank = topFives.map(
         async (record: TopFiveRecord, index: number, array: TopFiveRecord[]) => {
@@ -29,14 +36,21 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
               },
             },
           });
+          console.log('기존 user rank 수정중', record.userId);
         }
       );
       await Promise.all(updatePreviousRank);
       console.log('1.기존에 저장된 topfive의 user rank 수정');
 
       // 2. 기존 topfive 전부 삭제
-      await client.topFiveRecord.deleteMany();
-      console.log('2. topfive 전부 삭제');
+      await client.topFiveRecord.deleteMany({
+        where: {
+          wod: {
+            createDate: date.toString(),
+          },
+        },
+      });
+      console.log('2. 기존 topfive 해당 날짜 전부 삭제');
     }
 
     // 3. 새로운 topfive 저장
@@ -74,10 +88,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     console.log('3. topfive 저장', body);
 
     // 4. 새로운 topfive의 user rank 수정
-    const updateUserRank = body.map(async (record: IRecord, index: number) => {
+    const updateUserRank = body.map(async (record: TopFiveRecord, index: number) => {
       const updatedUser = await client.user.update({
         where: {
-          id: record.user.id,
+          id: record.userId,
         },
         data: {
           rank: {
@@ -107,12 +121,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
       ok: true,
     });
   } else if (req.method === 'GET') {
-    // const featured = await client.wod.findMany({
-    //   orderBy: {
-    //     rank: 'asc',
-    //   },
-    //   take: 5,
-    // });
     const scoreSubmitFeatured = await client.user.findMany({
       orderBy: {
         dailyScoreSubmit: 'asc',
@@ -122,7 +130,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     res.json({
       ok: true,
       scoreSubmitFeatured,
-      // featured,
     });
   }
 }
