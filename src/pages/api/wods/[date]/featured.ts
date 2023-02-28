@@ -9,34 +9,37 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
   if (req.method === 'POST') {
     const {
       query: { date },
-      session: { user },
       body,
     } = req;
-    console.log('hi');
-
     //1.기존에 저장된 topfive의 user rank 수정
-    const topFives = await client.topFiveRecord.findMany({
+    const previousTopFives = await client.topFiveRecord.findMany({
       where: {
         wod: {
           createDate: date.toString(),
         },
       },
     });
-    console.log('해당 날짜 기존 topFive -> ', topFives);
-    if (topFives && topFives.length > 0) {
-      const updatePreviousRank = topFives.map(
+    console.log('해당 날짜 기존 topFive -> ', previousTopFives);
+    if (previousTopFives && previousTopFives.length > 0) {
+      const updatePreviousRank = previousTopFives.map(
         async (record: TopFiveRecord, index: number, array: TopFiveRecord[]) => {
-          await client.user.update({
+          const updatedUser = await client.user.update({
             where: {
               id: record.userId,
             },
             data: {
               rank: {
-                increment: index + 1,
+                increment: array.length - index,
               },
             },
           });
-          console.log('기존 user rank 수정중', record.userId);
+          console.log(
+            'rank 수정될 유저 아이디: ',
+            record.userId,
+            ', 더하기: ',
+            array.length - index
+          );
+          console.log('updatedUser', updatedUser);
         }
       );
       await Promise.all(updatePreviousRank);
@@ -54,12 +57,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     }
 
     // 3. 새로운 topfive 저장
-    const saveTopFive = body.map(async (record: IRecord, index: number) => {
+    const saveTopFive = body.map(async (record: any, index: number) => {
       await client.topFiveRecord.create({
         data: {
           user: {
             connect: {
-              id: user?.id,
+              id: record.userId,
             },
           },
           wod: {
@@ -85,37 +88,27 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
       });
     });
     await Promise.all(saveTopFive);
-    console.log('3. topfive 저장', body);
+    console.log('3. 새로운 topfive 저장 => ', body);
 
     // 4. 새로운 topfive의 user rank 수정
-    const updateUserRank = body.map(async (record: TopFiveRecord, index: number) => {
-      const updatedUser = await client.user.update({
-        where: {
-          id: record.userId,
-        },
-        data: {
-          rank: {
-            decrement: index + 1,
+    const updateUserRank = body.map(
+      async (record: TopFiveRecord, index: number, array: TopFiveRecord[]) => {
+        const updatedUser = await client.user.update({
+          where: {
+            id: record.userId,
           },
-        },
-      });
-      console.log('updatedUser', updatedUser);
-    });
+          data: {
+            rank: {
+              decrement: array.length - index,
+            },
+          },
+        });
+        console.log('rank 수정될 유저 아이디: ', record.userId, ', 빼기: ', array.length - index);
+        console.log('updatedUser', updatedUser);
+      }
+    );
     await Promise.all(updateUserRank);
     console.log('4. 새로운 topfive의 user rank 수정');
-
-    // 5. update user score submit
-    await client.user.update({
-      where: {
-        id: user?.id,
-      },
-      data: {
-        dailyScoreSubmit: {
-          decrement: 1,
-        },
-      },
-    });
-    console.log('5. update user score submit');
 
     res.json({
       ok: true,

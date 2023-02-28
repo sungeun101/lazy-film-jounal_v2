@@ -27,6 +27,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
         id: alreadyExists.id,
       },
     });
+  } else {
+    await client.user.update({
+      where: {
+        id: user?.id,
+      },
+      data: {
+        dailyScoreSubmit: {
+          decrement: 1,
+        },
+      },
+    });
   }
 
   const newRecord = await client.record.create({
