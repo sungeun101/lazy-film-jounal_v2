@@ -78,7 +78,9 @@ export default function WodBoard() {
             onChange={(newValue) => {
               setSearchDate(newValue);
             }}
-            renderInput={(params) => <TextField {...params} size="small" helperText={null} />}
+            renderInput={(params) => (
+              <TextField {...params} size="small" helperText={null} sx={{ maxWidth: '80%' }} />
+            )}
           />
         }
         action={
@@ -93,6 +95,9 @@ export default function WodBoard() {
         sx={{
           '& .MuiCardHeader-action': {
             alignSelf: 'center',
+          },
+          '& .MuiOutlinedInput-input': {
+            // padding: 0,
           },
         }}
       />

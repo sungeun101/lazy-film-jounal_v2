@@ -19,7 +19,7 @@ import {
 import Label from 'src/components/Label';
 import Scrollbar from 'src/components/Scrollbar';
 import Iconify from 'src/components/Iconify';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DialogAnimate } from 'src/components/animate';
 import WodNewRecordForm from './WodNewRecordForm';
 import { useWodStore } from 'src/zustand/useStore';
@@ -83,13 +83,13 @@ export default function WodTopFive() {
         }
       />
       <Scrollbar>
-        <TableContainer sx={{ minWidth: 720, minHeight: 300 }}>
+        <TableContainer sx={{ minWidth: 420, minHeight: 300 }}>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Athelete</TableCell>
-                <TableCell>Score</TableCell>
-                <TableCell align="right">Rank</TableCell>
+                <TableCell align="center">Score</TableCell>
+                <TableCell align="center">Rank</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -108,7 +108,7 @@ export default function WodTopFive() {
                       </Box>
                     </TableCell>
 
-                    <TableCell>
+                    <TableCell align="center">
                       {wod?.type === 'As Many Rounds As Possible'
                         ? `${row.amrapRound} round${
                             row.amrapRound && row.amrapRound > 1 ? 's' : ''
@@ -118,7 +118,7 @@ export default function WodTopFive() {
                           }`}
                     </TableCell>
 
-                    <TableCell align="right">
+                    <TableCell align="center">
                       <Label
                         variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
                         color={

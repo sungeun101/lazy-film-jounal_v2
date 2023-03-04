@@ -85,12 +85,11 @@ export default function WodNewRecordForm({ onCancel, sortedRecords, setSortedRec
   } = methods;
 
   const { mutate } = useSWRConfig();
-  // post
   const [uploadRecord, { data: uploadRecordResult }] = useMutation(
     `/api/wods/${currentWod?.createDate}/record`
   );
-  const [updateFeatured, { data: updateFeaturedResult }] = useMutation(
-    `/api/wods/${currentWod?.createDate}/featured`
+  const [updateRank, { data: updateRankResult }] = useMutation(
+    `/api/wods/${currentWod?.createDate}/rank`
   );
 
   // useEffect(() => {
@@ -100,11 +99,11 @@ export default function WodNewRecordForm({ onCancel, sortedRecords, setSortedRec
   // }, [currentWod]);
 
   useEffect(() => {
-    if (updateFeaturedResult) {
-      console.log('updateFeaturedResult', updateFeaturedResult);
+    if (updateRankResult) {
+      console.log('updateRankResult', updateRankResult);
       setSortedRecords([]);
     }
-  }, [updateFeaturedResult]);
+  }, [updateRankResult]);
 
   useEffect(() => {
     if (uploadRecordResult?.ok && uploadRecordResult?.allForTheDay) {
@@ -142,7 +141,7 @@ export default function WodNewRecordForm({ onCancel, sortedRecords, setSortedRec
       console.log('sorted', sorted);
       setSortedRecords(sorted.slice(0, 5));
       console.log('update Featured!!');
-      updateFeatured(sorted.slice(0, 5));
+      updateRank(sorted.slice(0, 5));
     }
   };
 

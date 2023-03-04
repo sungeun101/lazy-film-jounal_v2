@@ -36,25 +36,17 @@ export default function RealApp() {
 
           <Grid item xs={12} md={6}>
             <Card sx={{ height: '72vh', display: 'flex' }}>
-              {/* <WodChatSidebar /> */}
               <WodChatWindow />
             </Card>
           </Grid>
-
-          {wod ? (
-            <>
-              <Grid item xs={12} md={6} lg={8}>
-                <WodTopFive />
-              </Grid>
-              <Grid item xs={12} md={6} lg={4}>
-                <WodFeatured />
-              </Grid>
-            </>
-          ) : (
-            <Grid item xs={12}>
-              <WodFeatured />
+          {wod && (
+            <Grid item xs={12} md={6}>
+              <WodTopFive />
             </Grid>
           )}
+          <Grid item xs={12} md={wod ? 6 : 12}>
+            <WodFeatured />
+          </Grid>
         </Grid>
       </Container>
     </Page>
