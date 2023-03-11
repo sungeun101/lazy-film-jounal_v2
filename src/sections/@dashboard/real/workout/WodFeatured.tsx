@@ -11,10 +11,10 @@ import {
   Typography,
   TableContainer,
 } from '@mui/material';
-import Label from 'src/components/Label';
+import { useEffect } from 'react';
 import Scrollbar from 'src/components/Scrollbar';
+import { useWodStore } from 'src/zustand/useStore';
 import useSWR from 'swr';
-import { IRecord } from './WodNewForm';
 
 // ----------------------------------------------------------------------
 
@@ -28,8 +28,13 @@ export interface IUser {
 }
 
 export default function WodFeatured() {
-  const { data } = useSWR(`/api/users/featured`);
+  const { wod } = useWodStore();
+  const { data, mutate } = useSWR(`/api/users/featured`);
   console.log('featured users data', data);
+
+  useEffect(() => {
+    mutate();
+  }, [wod]);
 
   return (
     <Card>
